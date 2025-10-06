@@ -101,14 +101,6 @@ BrainFlow/
 }
 ```
 
-### Características do Design
-- **Totalmente Responsivo**: Funciona em todos os dispositivos
-- **Animações Suaves**: Transições e efeitos visuais elegantes
-- **Sistema de Grid**: Layout flexível e moderno
-- **Tema Escuro**: Suporte para modo escuro (em desenvolvimento)
-
----
-
 ## Como Executar
 
 ### Pré-requisitos
@@ -166,46 +158,7 @@ BrainFlow/
 
 ---
 
-## Status de Implementação
 
-### Módulos Implementados ✅
-- **Sistema de Usuários e Autenticação (5/6 requisitos)**
-  - Login e registro de usuários (RF1.1, RF1.2, RF1.3)
-  - Redefinição de senha por email (RF1.4)
-  - Gestão de perfil pessoal (RF1.6)
-
-- **Gestão de Cursos (4/4 requisitos)**
-  - CRUD completo de cursos para afiliados (RF2.1, RF2.2)
-  - Sistema de upload e gestão de vídeos (RF2.3)
-  - Marcação de aulas gratuitas (RF2.4)
-
-### Em Desenvolvimento 🔧
-- **Sistema de Pagamentos (0/6 requisitos)**
-  - Modelos criados (BankflowTransacao, PedidoMOD)
-  - Integração PayPal pendente
-  - Sistema de comissões em planejamento
-
-- **Painéis Administrativos (2/4 requisitos)**
-  - Dashboard de afiliados implementado (RF4.1, RF4.2)
-  - Painel administrativo central pendente (RF4.3, RF4.4)
-
-### Planejados 📋
-- **Fórum de Discussões (0/1 requisito)**
-- **Aprovação de Afiliados (0/1 requisito)**
-
-**Total**: 11/18 requisitos funcionais implementados (61%)
-
----
-
-## Roadmap
-
-### Concluído ✅
-- Sistema de autenticação e autorização (ContaController)
-- Interface responsiva com design system completo
-- Sistema de afiliados (modelos e páginas)
-- Estrutura de cursos e módulos
-- Dashboard de afiliados (RF4.1, RF4.2)
-- Modelos de dados completos (Usuário, Curso, Afiliado, Pedido, Transação)
 
 
 ## Status do Projeto
