@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Brain Flow – Painel do Afiliado</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">
+      <img src="C:\Users\Mais que Café\Documents\Ederson Luan\TCC\TCCBrain\BrainFlow.UI.Web\wwwroot\img\logo_branco.png" width="128" height="128">    </div>
+    <nav class="menu">
+      <a href="home.html">Home</a>
+      <a href="cursos.html">Cursos</a>
+      <a href="forum_index.html">Fórum</a>
+      <a href="afiliado_pagina_config.html">Minha Página</a>
+      <a href="index.html">Login</a>
+      <a class="signup" href="cadastro.html">Cadastro</a>
+    </nav>
+  </div>
+</header>
+
+  <main class="page">
+    <div class="grid">
+      <div class="affiliate-header-flex">
+        <div>
+          <h1 class="affiliate-title">Painel do Afiliado</h1>
+          <p class="sub affiliate-sub-margin">Acompanhe suas vendas e comissões.</p>
+        </div>
+        <a class="btn primary" href="curso_form.html">+ Novo Curso</a>
+      </div>
+
+      <!-- Estatísticas -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Vendas (30 dias)</div>
+          <div class="stat-value" id="vendasMes">0</div>
+          <div class="stat-label">Carregando...</div>
+        </div>
+        <div class="stat-card earnings-card">
+          <div class="stat-label">Comissão a receber</div>
+          <div class="stat-value" id="comissaoReceber">R$ 0,00</div>
+          <div class="stat-label">Próximo pagamento: --</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Comissões pagas</div>
+          <div class="stat-value" id="comissaoPaga">R$ 0,00</div>
+          <div class="stat-label">Total acumulado</div>
+        </div>
+      </div>
+
+      <!-- Extrato -->
+      <div class="card">
+        <h2 class="section-title affiliate-section-margin">Extrato de comissões</h2>
+        
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Curso</th>
+              <th>Valor da venda</th>
+              <th>Comissão</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="extratoComissoes">
+            <tr>
+              <td colspan="5" class="affiliate-empty-cell">
+                Nenhuma comissão encontrada
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Links úteis -->
+      <div class="card affiliate-card-top">
+        <h3 class="affiliate-title-top">Links úteis</h3>
+        <p class="sub">Ferramentas para maximizar suas vendas como afiliado.</p>
+        
+        <div class="affiliate-links-flex">
+          <a class="btn secondary" href="afiliado_pagina_config.html">Configurar minha página</a>
+          <a class="btn secondary" href="afiliado_pagina_publica.html">Ver página pública</a>
+          <a class="btn secondary" href="suporte.html">Suporte técnico</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>© Brain Flow</span>
+      <nav class="footer-nav">
+        <a href="sobre.html">Sobre</a>
+        <a href="suporte.html">Suporte</a>
+        <a href="termos.html">Termos</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

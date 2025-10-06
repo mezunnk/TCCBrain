@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Brain Flow – Configurar Página</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header -->
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">
+      <img src="C:\Users\Mais que Café\Documents\Ederson Luan\TCC\TCCBrain\BrainFlow.UI.Web\wwwroot\img\logo_branco.png" width="128" height="128">    </div>
+    <nav class="menu">
+      <a href="home.html">Home</a>
+      <a href="cursos.html">Cursos</a>
+      <a href="forum_index.html">Fórum</a>
+      <a href="afiliado_dashboard.html">Dashboard</a>
+      <a href="index.html">Login</a>
+      <a class="signup" href="cadastro.html">Cadastro</a>
+    </nav>
+  </div>
+</header>
+
+  <main class="page">
+    <div class="grid">
+      <h1>Personalizar Página Pública</h1>
+      <p class="sub">Configure como sua página de afiliado será exibida para seus visitantes.</p>
+
+      <form class="card" action="#" method="post">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px">
+          <div class="form-row">
+            <label for="slug">Slug da página</label>
+            <div style="display:flex; align-items:center">
+              <span style="padding:10px 12px; background:var(--bg); border:1px solid var(--line); border-right:0; border-radius:8px 0 0 8px; color:var(--muted)">/a/</span>
+              <input id="slug" name="slug" type="text" placeholder="maria-silva" style="border-radius:0 8px 8px 0" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="titulo">Título da página</label>
+            <input id="titulo" name="titulo" type="text" placeholder="Cursos da Maria Silva" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="descricao">Descrição</label>
+          <textarea id="descricao" name="descricao" rows="4" class="input-area" placeholder="Conte um pouco sobre você e seus cursos..."></textarea>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px">
+          <div class="form-row">
+            <label for="cor">Cor de destaque</label>
+            <input id="cor" name="cor" type="color" value="#f0b41b" style="height:44px; padding:4px" />
+          </div>
+
+          <div class="form-row">
+            <label for="banner">Banner (URL da imagem)</label>
+            <input id="banner" name="banner" type="url" placeholder="https://exemplo.com/banner.jpg" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="btn secondary" href="afiliado_dashboard.html">Cancelar</a>
+          <button class="btn primary" type="submit">Salvar Alterações</button>
+          <a class="btn dark" href="afiliado_pagina_publica.html" target="_blank">Visualizar página</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>© Brain Flow</span>
+      <nav class="footer-nav">
+        <a href="sobre.html">Sobre</a>
+        <a href="suporte.html">Suporte</a>
+        <a href="termos.html">Termos</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

@@ -6,35 +6,7 @@
   <title>Meu Perfil</title>
   <link rel="stylesheet" href="style.css" />
 
-  <style>
-    /* Radios escondidos controlam as abas */
-    .tabs-input { position: absolute; left: -9999px; }
-    .tabs-labels { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px }
-    .tabs-labels label{ border:1px solid var(--line); background:#fff; padding:10px 14px; border-radius:999px; font-weight:800; cursor:pointer }
-    /* Estado ativo baseado no :checked */
-    #tabcursos:checked  ~ .tabs-labels label[for="tabcursos"],
-    #tabdados:checked   ~ .tabs-labels label[for="tabdados"],
-    #tabseg:checked     ~ .tabs-labels label[for="tabseg"],
-    #tabpref:checked    ~ .tabs-labels label[for="tabpref"],
-    #tabnoti:checked    ~ .tabs-labels label[for="tabnoti"] { background:#eef3f8 }
-    .tabpanel { display:none }
-    #tabcursos:checked ~ #pane-cursos,
-    #tabdados:checked  ~ #pane-dados,
-    #tabseg:checked    ~ #pane-seg,
-    #tabpref:checked   ~ #pane-pref,
-    #tabnoti:checked   ~ #pane-noti { display:block }
 
-    /* Ajustes rápidos do perfil */
-    .profile-row{display:grid; grid-template-columns:160px 1fr; gap:18px}
-    @media (max-width:720px){ .profile-row{grid-template-columns:1fr} }
-    .avatar-wrap{text-align:center; display:flex; flex-direction:column; align-items:center; gap:6px}
-    .avatar{width:96px; height:96px; border-radius:50%; object-fit:cover; border:2px solid var(--line); display:block}
-    .btn.small{height:auto; padding:6px 12px; font-size:14px; border-radius:10px; background:var(--navy); color:#fff; border:0; cursor:pointer; display:inline-block}
-    .fields .two{display:grid; grid-template-columns:1fr 1fr; gap:12px}
-    @media (max-width:720px){ .fields .two{grid-template-columns:1fr} }
-    .input-area{width:100%; border:1px solid var(--line); border-radius:12px; padding:10px; resize:vertical}
-    .switch-row{display:flex; align-items:center; gap:10px}
-  </style>
 </head>
 <body>
 
@@ -43,8 +15,9 @@
     <div class="brand">
       <img src="C:\Users\Mais que Café\Documents\Ederson Luan\TCC\TCCBrain\BrainFlow.UI.Web\wwwroot\img\logo_branco.png" width="128" height="128">    </div>
     <nav class="menu">
-      <a href="index.html">Home</a>
+      <a href="home.html">Home</a>
       <a href="cursos.html">Cursos</a>
+      <a href="forum_index.html">Fórum</a>
       <a href="index.html">Login</a>
       <a class="signup" href="cadastro.html">Cadastro</a>
     </nav>

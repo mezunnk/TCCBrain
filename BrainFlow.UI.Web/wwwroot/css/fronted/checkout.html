@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Brain Flow – Checkout</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">
+      <img src="C:\Users\Mais que Café\Documents\Ederson Luan\TCC\TCCBrain\BrainFlow.UI.Web\wwwroot\img\logo_branco.png" width="128" height="128">    </div>
+    <nav class="menu">
+      <a href="home.html">Home</a>
+      <a href="cursos.html">Cursos</a>
+      <a href="forum_index.html">Fórum</a>
+      <a href="index.html">Login</a>
+      <a class="signup" href="cadastro.html">Cadastro</a>
+    </nav>
+  </div>
+</header>
+
+  <main class="page">
+    <div class="grid">
+      <h1>Finalizar Compra</h1>
+      <p class="sub">Revise seus itens e finalize sua compra.</p>
+
+      <div class="checkout-grid">
+        <!-- Carrinho -->
+        <div>
+          <h2 class="section-title section-title-notop">Seu carrinho</h2>
+          
+          <div id="itensCarrinho">
+            <div class="checkout-empty">
+              <p>Seu carrinho está vazio</p>
+              <a class="btn primary" href="cursos.html">Explorar cursos</a>
+            </div>
+          </div>
+
+          <!-- Formulário de dados -->
+          <div class="card checkout-card-hidden" id="formPagamento">
+            <h3 class="checkout-title-top">Dados de pagamento</h3>
+            <div class="form-row">
+              <label for="email">E-mail</label>
+              <input id="email" name="email" type="email" placeholder="seu@email.com" required />
+            </div>
+            <div class="form-row">
+              <label for="nome">Nome completo</label>
+              <input id="nome" name="nome" type="text" placeholder="Seu nome completo" required />
+            </div>
+          </div>
+        </div>
+
+        <!-- Resumo -->
+        <div class="summary-card">
+          <div class="card checkout-card-hidden" id="resumoCompra">
+            <h3 class="checkout-title-top">Resumo da compra</h3>
+            
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span id="subtotal">R$ 0,00</span>
+            </div>
+            <div class="summary-row">
+              <span>Taxas</span>
+              <span id="taxas">R$ 0,00</span>
+            </div>
+            
+            <div class="summary-row summary-total">
+              <span>Total</span>
+              <span id="total">R$ 0,00</span>
+            </div>
+
+            <div class="actions checkout-actions">
+              <button class="btn primary checkout-btn-full" id="btnPagar" disabled>Pagar com PayPal</button>
+              <p class="sub checkout-disclaimer">
+                Você será redirecionado ao PayPal para finalizar o pagamento.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>© Brain Flow</span>
+      <nav class="footer-nav">
+        <a href="sobre.html">Sobre</a>
+        <a href="suporte.html">Suporte</a>
+        <a href="termos.html">Termos</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

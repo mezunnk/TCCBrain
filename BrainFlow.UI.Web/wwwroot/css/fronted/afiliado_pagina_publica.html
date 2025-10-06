@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Brain Flow – Página do Afiliado</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="nav">
+    <div class="wrap">
+      <div class="brand">
+        <img src="../img/logo_branco.png" width="32" height="32" alt="Brain Flow">
+        Brain Flow
+      </div>
+      <nav class="menu">
+        <a href="home.html">Home</a>
+        <a href="cursos.html">Todos os Cursos</a>
+        <a href="index.html">Login</a>
+        <a class="signup" href="cadastro.html">Cadastro</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Header Hero -->
+  <section class="affiliate-hero">
+    <div class="wrap">
+      <h1 id="affiliateTitle">Página do Afiliado</h1>
+      <p class="sub" id="affiliateDesc">Cursos selecionados especialmente para você</p>
+    </div>
+  </section>
+
+  <main class="page">
+    <div class="grid">
+      <h2 class="section-title">Cursos Disponíveis</h2>
+      
+      <div class="courses-grid" id="affiliateCourses">
+        <div class="affiliate-empty-courses">
+          <h3 class="affiliate-empty-title">Nenhum curso disponível</h3>
+          <p class="affiliate-empty-text">Este afiliado ainda não possui cursos cadastrados.</p>
+        </div>
+      </div>
+
+      <!-- Seção sobre o afiliado -->
+      <div class="card affiliate-card-instructor">
+        <h3 class="affiliate-instructor-title">Sobre o instrutor</h3>
+        <div id="affiliateAbout">
+          <p class="sub">Informações do instrutor serão exibidas aqui.</p>
+        </div>
+      </div>
+      </div>
+
+      <!-- Call to action -->
+      <div class="card affiliate-card-cta">
+        <h3 class="affiliate-cta-title">Comece a aprender hoje!</h3>
+        <p class="affiliate-cta-text">Cadastre-se e tenha acesso a todos os cursos desta página.</p>
+        <a class="btn affiliate-cta-btn" href="cadastro.html">Criar conta grátis</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>© Brain Flow</span>
+      <nav class="footer-nav">
+        <a href="sobre.html">Sobre</a>
+        <a href="suporte.html">Suporte</a>
+        <a href="termos.html">Termos</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Função para renderizar cursos do afiliado
+    function renderCourse(course) {
+      return `
+        <div class="affiliate-course-card">
+          <div class="course-thumb" style="background-image:url('${course.image || '../img/course-placeholder.jpg'}')"></div>
+          <div class="course-info">
+            <span class="course-badge ${course.isFree ? 'badge-free' : 'badge-paid'}">
+              ${course.isFree ? 'Aulas grátis' : 'Curso pago'}
+            </span>
+            <h3>${course.title}</h3>
+            <p class="sub">${course.description}</p>
+            <div class="price">${course.isFree ? 'Grátis' : 'R$ ' + course.price}</div>
+            <a class="btn primary" href="curso_detalhes.html?id=${course.id}">Ver detalhes</a>
+          </div>
+        </div>
+      `;
+    }
+
+    // Função para carregar cursos do afiliado
+    function loadAffiliateCourses() {
+      const coursesContainer = document.getElementById('affiliateCourses');
+      
+      // Exemplo de dados - substituir por chamada à API
+      const courses = [
+        // Exemplo: 
+        // {
+        //   id: 1,
+        //   title: "Introdução ao JavaScript",
+        //   description: "Aprenda os fundamentos da linguagem mais popular da web",
+        //   price: "49.90",
+        //   isFree: false,
+        //   image: "../img/js-course.jpg"
+        // }
+      ];
+
+      if (courses.length > 0) {
+        coursesContainer.innerHTML = courses.map(renderCourse).join('');
+      }
+    }
+
+    // Carregar dados quando a página estiver pronta
+    document.addEventListener('DOMContentLoaded', function() {
+      loadAffiliateCourses();
+    });
+  </script>
+</body>
+</html>

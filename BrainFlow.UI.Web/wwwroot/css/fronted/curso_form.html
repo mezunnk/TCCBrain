@@ -1,23 +1,15 @@
 <!-- curso_form.html (apenas front: estrutura limpa, sem JS e sem dados de exemplo) -->
-<!DOCTYPE html>
+<!DO                    <div class="lesson-link lesson-item-flex">
+                      <span class="icon">📝</span>
+                      <div class="lesson-content-flex">
+                        <div class="lesson-title-bold">Título da aula</div>E html>
 <html lang="pt-br">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Brain Flow – Criar/Editar Curso</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    /* ajustes leves reaproveitando seu style.css */
-    .form-two{display:grid; grid-template-columns:1fr 1fr; gap:12px}
-    @media (max-width: 760px){ .form-two{grid-template-columns:1fr} }
-    .cover-drop{
-      width:100%; aspect-ratio:4/3; border-radius:16px;
-      border:1px solid var(--line); background:#eef3f8; display:flex;
-      align-items:center; justify-content:center; text-align:center; padding:18px;
-    }
-    .cover-drop small{color:var(--muted)}
-    .muted{color:var(--muted)}
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Header -->
@@ -26,8 +18,9 @@
     <div class="brand">
       <img src="C:\Users\Mais que Café\Documents\Ederson Luan\TCC\TCCBrain\BrainFlow.UI.Web\wwwroot\img\logo_branco.png" width="128" height="128">    </div>
     <nav class="menu">
-      <a href="index.html">Home</a>
+      <a href="home.html">Home</a>
       <a href="cursos.html">Cursos</a>
+      <a href="forum_index.html">Fórum</a>
       <a href="index.html">Login</a>
       <a class="signup" href="cadastro.html">Cadastro</a>
     </nav>
@@ -40,7 +33,7 @@
       <p class="sub">Preencha os dados básicos do curso. Os módulos e aulas podem ser organizados abaixo.</p>
 
       <form class="card" action="#" method="post" enctype="multipart/form-data">
-        <h2 class="section-title" style="margin:0 0 10px">Informações gerais</h2>
+        <h2 class="section-title section-title-margin">Informações gerais</h2>
 
         <div class="form-row">
           <label for="titulo">Título do curso</label>
@@ -87,19 +80,19 @@
 
       <!-- Organização de conteúdo -->
       <section class="card" aria-label="Estrutura do curso">
-        <h2 class="section-title" style="margin:0 0 10px">Módulos e aulas</h2>
-        <p class="sub" style="margin-top:-6px">Módulos e Aulas cadastradas.</p>
+        <h2 class="section-title section-title-margin">Módulos e aulas</h2>
+        <p class="sub sub-negative-margin">Módulos e Aulas cadastradas.</p>
 
         <!-- módulos/aulas aqui -->
         <div id="estruturaCurso">
           <!--
-            <article class="module" style="margin-bottom:12px">
-              <header style="display:flex; align-items:center; justify-content:space-between; gap:8px; padding:12px 14px;">
+            <article class="module module-margin">
+              <header class="module-header-flex">
                 <strong>Nome do módulo</strong>
                 <span class="badge">0 aulas</span>
               </header>
-              <div style="padding:0 14px 14px">
-                <ul class="lessons" style="list-style:none; margin:0; padding:0">
+              <div class="module-content-padding">
+                <ul class="lessons lessons-clean">
                   <li class="lesson">
                     <div class="lesson-link" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border:1px solid var(--line); border-radius:10px">
                       <span class="dot"></span>
@@ -117,7 +110,7 @@
         </div>
 
         <!-- Ações gerais do conteúdo -->
-        <div class="actions" style="margin-top:12px">
+        <div class="actions actions-margin">
           <button class="btn primary" type="button" disabled>Adicionar módulo</button>
           <button class="btn dark" type="button" disabled>Adicionar aula</button>
         </div>
@@ -125,9 +118,9 @@
 
       <!-- Materiais/benefícios (itens livres) -->
       <section class="card" aria-label="Benefícios do curso">
-        <h2 class="section-title" style="margin:0 0 10px">Este curso inclui</h2>
-        <p class="sub" style="margin-top:-6px">(ex.: certificado, material de apoio).</p>
-        <ul id="courseIncludes" style="margin:0 0 8px 18px; padding:0">
+        <h2 class="section-title section-title-margin">Este curso inclui</h2>
+        <p class="sub sub-negative-margin">(ex.: certificado, material de apoio).</p>
+        <ul id="courseIncludes" class="course-includes-list">
           <!-- O back deve inserir <li>…</li> aqui -->
         </ul>
       </section>
