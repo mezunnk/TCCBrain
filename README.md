@@ -1,7 +1,7 @@
-# 🧠 Brain Flow - Plataforma de Cursos Online
+# Brain Flow - Plataforma de Cursos Online
 
 <div align="center">
-  <img src="BrainFlow.UI.Web/wwwroot/logo.png" alt="Brain Flow Logo" width="200"/>
+  <img src="BrainFlow.UI.Web/wwwroot/img/logo_branco.png" alt="Brain Flow Logo" width="200"/>
   
   **Plataforma educacional moderna para criação e distribuição de cursos online**
   
@@ -12,72 +12,72 @@
 
 ---
 
-## 📋 Sobre o Projeto
+## Sobre o Projeto
 
 O **Brain Flow** é uma plataforma de ensino online desenvolvida como Trabalho de Conclusão de Curso (TCC), que permite a criação, gerenciamento e distribuição de cursos digitais. A plataforma oferece um ambiente completo para instrutores e estudantes, com sistema de afiliados, pagamentos e acompanhamento de progresso.
 
-### 🎯 Objetivos
+### Objetivos
 
-- 📚 **Educação Acessível**: Democratizar o acesso ao conhecimento através de uma plataforma moderna
-- 💰 **Sistema de Afiliados**: Permitir que criadores de conteúdo monetizem seus cursos
-- 📊 **Analytics Completo**: Fornecer dados detalhados sobre performance dos cursos
-- 🎨 **Interface Moderna**: Experiência de usuário intuitiva e responsiva
-
----
-
-## 🚀 Funcionalidades
-
-### 👨‍🎓 Para Estudantes
-- ✅ Navegação intuitiva de cursos
-- ✅ Sistema de progresso de aulas
-- ✅ Fórum de discussões
-- ✅ Perfil personalizado
-- ✅ Checkout seguro
-
-### 👨‍🏫 Para Instrutores
-- ✅ Criação e edição de cursos
-- ✅ Upload de vídeos e materiais
-- ✅ Dashboard de analytics
-- ✅ Gerenciamento de módulos e aulas
-- ✅ Sistema de comissões
-
-### 🤝 Sistema de Afiliados
-- ✅ Dashboard personalizado para afiliados
-- ✅ Páginas públicas personalizáveis
-- ✅ Tracking de vendas e comissões
-- ✅ Links de afiliado únicos
-
-### 🛠️ Administrativo
-- ✅ Painel administrativo completo
-- ✅ Gestão de usuários e cursos
-- ✅ Relatórios financeiros
-- ✅ Controle de pagamentos
+- **Educação Acessível**: Democratizar o acesso ao conhecimento através de uma plataforma moderna
+- **Sistema de Afiliados**: Permitir que criadores de conteúdo monetizem seus cursos
+- **Analytics Completo**: Fornecer dados detalhados sobre performance dos cursos
+- **Interface Moderna**: Experiência de usuário intuitiva e responsiva
 
 ---
 
-## 🏗️ Arquitetura do Sistema
+## Funcionalidades
+
+### Para Estudantes
+- Navegação intuitiva de cursos
+- Sistema de progresso de aulas
+- Fórum de discussões
+- Perfil personalizado
+- Checkout seguro
+
+### Para Instrutores
+- Criação e edição de cursos
+- Upload de vídeos e materiais
+- Dashboard de analytics
+- Gerenciamento de módulos e aulas
+- Sistema de comissões
+
+### Sistema de Afiliados
+- Dashboard personalizado para afiliados
+- Páginas públicas personalizáveis
+- Tracking de vendas e comissões
+- Links de afiliado únicos
+
+### Administrativo
+- Painel administrativo completo
+- Gestão de usuários e cursos
+- Relatórios financeiros
+- Controle de pagamentos
+
+---
+
+## Arquitetura do Sistema
 
 O projeto segue uma arquitetura em camadas bem definida:
 
 ```
 BrainFlow/
-├── 📁 BrainFlow.Data/           # Modelos de dados e entidades
+├── BrainFlow.Data/           # Modelos de dados e entidades
 │   ├── AfiliadoMOD.cs
 │   ├── CursoMOD.cs
 │   ├── UsuarioMOD.cs
 │   └── ...
-├── 📁 BrainFlow.Repository/     # Camada de acesso a dados
+├── BrainFlow.Repository/     # Camada de acesso a dados
 │   ├── Context/
 │   ├── Interfaces/
 │   └── Repositories/
-└── 📁 BrainFlow.UI.Web/         # Interface web e controllers
+└── BrainFlow.UI.Web/         # Interface web e controllers
     ├── Controllers/
     ├── Views/
     ├── wwwroot/
     └── ViewModels/
 ```
 
-### 🔧 Tecnologias Utilizadas
+### Tecnologias Utilizadas
 
 | Categoria | Tecnologia | Versão |
 |-----------|------------|--------|
@@ -89,9 +89,9 @@ BrainFlow/
 
 ---
 
-## 🎨 Design System
+## Design System
 
-### 🎯 Paleta de Cores
+### Paleta de Cores
 ```css
 :root {
   --navy: #0f2741;           /* Azul principal */
@@ -105,23 +105,23 @@ BrainFlow/
 }
 ```
 
-### ✨ Características do Design
-- 📱 **Totalmente Responsivo**: Funciona em todos os dispositivos
-- 🎭 **Animações Suaves**: Transições e efeitos visuais elegantes
-- 🎨 **Sistema de Grid**: Layout flexível e moderno
-- 🌙 **Tema Escuro**: Suporte para modo escuro (em desenvolvimento)
+### Características do Design
+- **Totalmente Responsivo**: Funciona em todos os dispositivos
+- **Animações Suaves**: Transições e efeitos visuais elegantes
+- **Sistema de Grid**: Layout flexível e moderno
+- **Tema Escuro**: Suporte para modo escuro (em desenvolvimento)
 
 ---
 
-## 🚦 Como Executar
+## Como Executar
 
-### 📋 Pré-requisitos
+### Pré-requisitos
 
 - [.NET 9.0 SDK](https://dotnet.microsoft.com/download)
 - [Visual Studio 2022](https://visualstudio.microsoft.com/) ou [VS Code](https://code.visualstudio.com/)
 - SQL Server (LocalDB ou completo)
 
-### 🔧 Instalação
+### Instalação
 
 1. **Clone o repositório**
    ```bash
@@ -151,41 +151,41 @@ BrainFlow/
 
 ---
 
-## 📁 Estrutura de Páginas
+## Estrutura de Páginas
 
-### 🏠 Páginas Principais
+### Páginas Principais
 - **`/`** - Página inicial com cursos em destaque
 - **`/cursos`** - Catálogo completo de cursos
 - **`/curso/{id}`** - Detalhes e reprodução do curso
 - **`/perfil`** - Perfil do usuário com abas organizadas
 
-### 👨‍💼 Área Administrativa
+### Área Administrativa
 - **`/admin/dashboard`** - Painel administrativo
 - **`/admin/usuarios`** - Gestão de usuários
 - **`/admin/cursos`** - Gestão de cursos
 
-### 🤝 Sistema de Afiliados
+### Sistema de Afiliados
 - **`/afiliado/dashboard`** - Dashboard do afiliado
 - **`/afiliado/{id}`** - Página pública do afiliado
 
 ---
 
-## 🎯 Roadmap
+## Roadmap
 
-### ✅ Concluído
+### Concluído
 - [x] Sistema de autenticação e autorização
 - [x] CRUD completo de cursos
 - [x] Interface responsiva
 - [x] Sistema de afiliados básico
 - [x] Dashboard administrativo
 
-### 🚧 Em Desenvolvimento
+### Em Desenvolvimento
 - [ ] Sistema de pagamentos
 - [ ] Chat em tempo real
 - [ ] Certificados digitais
 - [ ] API REST completa
 
-### 🔮 Planejado
+### Planejado
 - [ ] App mobile (React Native)
 - [ ] Integração com YouTube
 - [ ] Sistema de gamificação
@@ -193,7 +193,7 @@ BrainFlow/
 
 ---
 
-## 🤝 Como Contribuir
+## Como Contribuir
 
 1. **Fork** o projeto
 2. Crie uma **branch** para sua feature (`git checkout -b feature/nova-feature`)
@@ -201,7 +201,7 @@ BrainFlow/
 4. **Push** para a branch (`git push origin feature/nova-feature`)
 5. Abra um **Pull Request**
 
-### 📝 Padrões de Código
+### Padrões de Código
 - Use **PascalCase** para classes e métodos
 - Use **camelCase** para variáveis JavaScript
 - Documente funções complexas
@@ -209,45 +209,45 @@ BrainFlow/
 
 ---
 
-## 📊 Status do Projeto
+## Status do Projeto
 
 | Módulo | Status | Cobertura |
 |--------|--------|-----------|
-| 🔐 Autenticação | ✅ Completo | 100% |
-| 📚 Gestão de Cursos | ✅ Completo | 95% |
-| 🎨 Interface Web | ✅ Completo | 90% |
-| 🤝 Sistema Afiliados | ✅ Completo | 85% |
-| 💰 Pagamentos | 🚧 Em Desenvolvimento | 30% |
-| 📱 Mobile | 📋 Planejado | 0% |
+| Autenticação | Completo | 100% |
+| Gestão de Cursos | Completo | 95% |
+| Interface Web | Completo | 90% |
+| Sistema Afiliados | Completo | 85% |
+| Pagamentos | Em Desenvolvimento | 30% |
+| Mobile | Planejado | 0% |
 
 ---
 
-## 📄 Licença
+## Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
-## 👨‍💻 Autor
+## Autor
 
 **Ederson Luan**
-- 🎓 Trabalho de Conclusão de Curso
-- 📧 Email: [seu-email@exemplo.com]
-- 💼 LinkedIn: [seu-linkedin]
-- 🐙 GitHub: [@mezunnk](https://github.com/mezunnk)
+- Trabalho de Conclusão de Curso
+- Email: [seu-email@exemplo.com]
+- LinkedIn: [seu-linkedin]
+- GitHub: [@mezunnk](https://github.com/mezunnk)
 
 ---
 
-## 🙏 Agradecimentos
+## Agradecimentos
 
-- 🏫 **Instituição de Ensino** - Pelo apoio acadêmico
-- 👨‍🏫 **Orientador** - Pela orientação e suporte
-- 👥 **Colegas** - Pelas contribuições e feedback
-- 🌟 **Comunidade .NET** - Pelos recursos e documentação
+- **Instituição de Ensino** - Pelo apoio acadêmico
+- **Orientador** - Pela orientação e suporte
+- **Colegas** - Pelas contribuições e feedback
+- **Comunidade .NET** - Pelos recursos e documentação
 
 ---
 
 <div align="center">
-  <p><strong>Desenvolvido com ❤️ para democratizar a educação</strong></p>
-  <p>⭐ Se este projeto te ajudou, deixe uma star!</p>
+  <p><strong>Desenvolvido com dedicação para democratizar a educação</strong></p>
+  <p>Se este projeto te ajudou, deixe uma star!</p>
 </div>
