@@ -1,0 +1,39 @@
+﻿@model ModuloViewMOD
+
+<div class="modal fade" id="modalAdicionarEditarModulo" tabindex="-1" aria-labelledby="modalAdicionarEditarModuloLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAdicionarEditarModuloLabel">@ViewBag.ModalTitulo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="formModulo" data-url="@Url.Action("SalvarModulo", "Modulos", new { area = "Afiliado" })">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="CdModulo" />
+                <input type="hidden" asp-for="CdCurso" />
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label asp-for="NoModulo" class="form-label"></label>
+                        <input asp-for="NoModulo" class="form-control" />
+                        <span asp-validation-for="NoModulo" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="TxDescricao" class="form-label"></label>
+                        <textarea asp-for="TxDescricao" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="TxDescricao" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-gray" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar Módulo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

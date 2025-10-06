@@ -1,0 +1,20 @@
+﻿<div class="modal fade" id="modalRemoverModulo" tabindex="-1" aria-labelledby="modalRemoverModuloLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-red text-white">
+                <h5 class="modal-title" id="modalRemoverModuloLabel">Confirmar Remoção</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza de que deseja remover o módulo "<strong id="nomeModuloParaRemover"></strong>"?</p>
+                <p class="text-muted"><small>Esta ação é irreversível e todas as aulas dentro deste módulo também serão removidas.</small></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-gray" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-red" id="btnConfirmarRemocao">
+                    <i class="fas fa-trash-alt me-1"></i> Remover
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

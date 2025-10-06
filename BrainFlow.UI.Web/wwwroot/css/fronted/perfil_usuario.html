@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meu Perfil</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* Radios escondidos controlam as abas */
+    .tabs-input { position: absolute; left: -9999px; }
+    .tabs-labels { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px }
+    .tabs-labels label{ border:1px solid var(--line); background:#fff; padding:10px 14px; border-radius:999px; font-weight:800; cursor:pointer }
+    /* Estado ativo baseado no :checked */
+    #tabcursos:checked  ~ .tabs-labels label[for="tabcursos"],
+    #tabdados:checked   ~ .tabs-labels label[for="tabdados"],
+    #tabseg:checked     ~ .tabs-labels label[for="tabseg"],
+    #tabpref:checked    ~ .tabs-labels label[for="tabpref"],
+    #tabnoti:checked    ~ .tabs-labels label[for="tabnoti"] { background:#eef3f8 }
+    .tabpanel { display:none }
+    #tabcursos:checked ~ #pane-cursos,
+    #tabdados:checked  ~ #pane-dados,
+    #tabseg:checked    ~ #pane-seg,
+    #tabpref:checked   ~ #pane-pref,
+    #tabnoti:checked   ~ #pane-noti { display:block }
+
+    /* Ajustes rápidos do perfil */
+    .profile-row{display:grid; grid-template-columns:160px 1fr; gap:18px}
+    @media (max-width:720px){ .profile-row{grid-template-columns:1fr} }
+    .avatar-wrap{text-align:center; display:flex; flex-direction:column; align-items:center; gap:6px}
+    .avatar{width:96px; height:96px; border-radius:50%; object-fit:cover; border:2px solid var(--line); display:block}
+    .btn.small{height:auto; padding:6px 12px; font-size:14px; border-radius:10px; background:var(--navy); color:#fff; border:0; cursor:pointer; display:inline-block}
+    .fields .two{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    @media (max-width:720px){ .fields .two{grid-template-columns:1fr} }
+    .input-area{width:100%; border:1px solid var(--line); border-radius:12px; padding:10px; resize:vertical}
+    .switch-row{display:flex; align-items:center; gap:10px}
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">
+      <img src="logo_branco.png" width="128" height="128">
+    </div>
+    <nav class="menu">
+      <a href="index.html">Home</a>
+      <a href="cursos.html">Cursos</a>
+      <a href="index.html">Login</a>
+      <a class="signup" href="cadastro.html">Cadastro</a>
+    </nav>
+  </div>
+</header>
+
+  <main class="page">
+    <div class="grid">
+      <h1>Meu Perfil</h1>
+      <p class="sub">Gerencie seus dados, preferências e segurança da conta.</p>
+
+      <!-- Radios (controlam as abas via CSS) -->
+      <input class="tabs-input" type="radio" name="tabs" id="tabcursos" checked>
+      <input class="tabs-input" type="radio" name="tabs" id="tabdados">
+      <input class="tabs-input" type="radio" name="tabs" id="tabseg">
+      <input class="tabs-input" type="radio" name="tabs" id="tabpref">
+      <input class="tabs-input" type="radio" name="tabs" id="tabnoti">
+
+      <!-- Rótulos das abas -->
+      <div class="tabs-labels">
+        <label for="tabcursos">Meus cursos</label>
+        <label for="tabdados">Dados pessoais</label>
+        <label for="tabseg">Segurança</label>
+        <label for="tabpref">Preferências</label>
+        <label for="tabnoti">Notificações</label>
+      </div>
+
+      <!-- Pane: Meus cursos (somente estrutura; back renderiza os cards) -->
+      <section class="tabpanel" id="pane-cursos" aria-label="Meus cursos">
+        <h2 class="section-title">Cursos comprados</h2>
+        <div class="hscroll">
+          <div class="hcards" id="meusCursos">
+            <!-- O back deve inserir <article class="course-card h"> aqui -->
+          </div>
+        </div>
+        <p class="sub" style="margin-top:10px">Você ainda não possui cursos.</p>
+      </section>
+
+      <!-- Pane: Dados pessoais -->
+      <section class="tabpanel" id="pane-dados" aria-label="Dados pessoais">
+        <form class="card" id="formDados" action="#" method="post" enctype="multipart/form-data">
+          <h3 style="margin:0 0 10px">Informações básicas</h3>
+
+          <div class="profile-row">
+            <div class="avatar-wrap">
+              <img id="avatarPreview" src="https://via.placeholder.com/96x96.png?text=Avatar" alt="Avatar" class="avatar">
+              <label class="btn small" for="avatarInput">Trocar foto</label>
+              <input id="avatarInput" name="avatar" type="file" accept="image/*" style="display:none">
+              <p class="hint">PNG/JPG até 2MB</p>
+            </div>
+
+            <div class="fields">
+              <div class="form-row">
+                <label for="nome">Nome</label>
+                <input id="nome" name="nome" type="text" placeholder="Seu nome" required />
+              </div>
+
+              <div class="form-row">
+                <label for="emailAtual">Email atual</label>
+                <input id="emailAtual" name="emailAtual" type="email" placeholder="seuemail@exemplo.com" readonly />
+              </div>
+
+              <div class="form-row two">
+                <div>
+                  <label for="novoEmail">Novo e-mail</label>
+                  <input id="novoEmail" name="novoEmail" type="email" placeholder="novoemail@exemplo.com" />
+                </div>
+                <div>
+                  <label for="senhaConfirm">Senha atual</label>
+                  <input id="senhaConfirm" name="senhaConfirm" type="password" placeholder="Confirme sua senha" />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <label for="bio">Bio</label>
+                <textarea id="bio" name="bio" rows="3" placeholder="Fale um pouco sobre você" class="input-area"></textarea>
+              </div>
+
+              <div class="form-row two">
+                <div>
+                  <label for="site">Website</label>
+                  <input id="site" name="site" type="url" placeholder="https://..." />
+                </div>
+                <div>
+                  <label for="twitter">Twitter</label>
+                  <input id="twitter" name="twitter" type="text" placeholder="@seuuser" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn primary" type="submit">Salvar dados</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Pane: Segurança -->
+      <section class="tabpanel" id="pane-seg" aria-label="Segurança">
+        <form class="card" id="formSenha" action="#" method="post">
+          <h3 style="margin:0 0 10px">Trocar senha</h3>
+          <div class="form-row">
+            <label for="atual">Senha atual</label>
+            <input id="atual" name="atual" type="password" placeholder="Sua senha atual" required />
+          </div>
+          <div class="form-row two">
+            <div>
+              <label for="nova">Nova senha</label>
+              <input id="nova" name="nova" type="password" placeholder="Nova senha" required />
+            </div>
+            <div>
+              <label for="confirmar">Confirmar nova senha</label>
+              <input id="confirmar" name="confirmar" type="password" placeholder="Repita a nova senha" required />
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn primary" type="submit">Atualizar senha</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Pane: Preferências -->
+      <section class="tabpanel" id="pane-pref" aria-label="Preferências">
+        <form class="card" id="formPrefs" action="#" method="post">
+          <h3 style="margin:0 0 10px">Aparência e idioma</h3>
+          <div class="form-row two">
+            <div class="switch-row">
+              <input type="checkbox" id="tema" />
+              <label for="tema">Tema escuro</label>
+            </div>
+            <div>
+              <label for="idioma">Idioma</label>
+              <select id="idioma" name="idioma">
+                <option value="pt-BR" selected>Português (Brasil)</option>
+                <option value="en">English</option>
+              </select>
+            </div>
+          </div>
+
+          <h3 style="margin:18px 0 10px">Privacidade</h3>
+          <div class="form-row">
+            <div class="switch-row">
+              <input type="checkbox" id="perfilPublico" />
+              <label for="perfilPublico">Permitir que meu perfil seja público</label>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn primary" type="submit">Salvar preferências</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Pane: Notificações -->
+      <section class="tabpanel" id="pane-noti" aria-label="Notificações">
+        <form class="card" id="formNotifs" action="#" method="post">
+          <h3 style="margin:0 0 10px">Configurar notificações</h3>
+          <div class="form-row">
+            <div class="switch-row">
+              <input type="checkbox" id="notifEmail" />
+              <label for="notifEmail">Receber notificações por e-mail</label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="switch-row">
+              <input type="checkbox" id="notifMarketing" />
+              <label for="notifMarketing">Receber dicas, promoções e novidades</label>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn primary" type="submit">Salvar notificações</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>© Brain Flow</span>
+      <nav class="footer-nav">
+        <a href="#">Sobre</a>
+        <a href="#">Suporte</a>
+        <a href="#">Termos</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

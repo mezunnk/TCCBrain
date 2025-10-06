@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Curso</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header -->
+    <header class="nav">
+        <div class="wrap">
+            <div class="brand">
+                <img src="logo_branco.png" width="128" height="128">
+            </div>
+            <nav class="menu">
+                <a href="index.html">Home</a>
+                <a href="cursos.html">Cursos</a>
+                <a href="index.html">Login</a>
+                <a class="signup" href="#">Cadastro</a>
+            </nav>
+        </div>
+    </header>
+
+  <!-- Conteúdo -->
+  <main class="page">
+    <div class="grid">
+      <!-- Cabeçalho do curso -->
+      <section class="course-hero">
+        <h1 class="title" id="courseTitle">Título do curso</h1>
+        <p class="sub">Progresso: <span id="progressPct">—</span></p>
+      </section>
+
+      <!-- Layout: player + sidebar -->
+      <section class="course-layout">
+        <div class="player-area">
+          <!-- Área do vídeo -->
+          <div class="video-frame">
+            <!--
+         
+              <iframe src="URL-DO-VIDEO" title="Aula atual" frameborder="0" allowfullscreen></iframe>
+            -->
+          </div>
+
+          <!-- Cabeçalho/descrição da aula atual -->
+          <div class="lesson-header">
+            <h2 class="lesson-title" id="lessonTitle">Título da aula</h2>
+            <p class="desc" id="lessonDesc">Descrição breve da aula.</p>
+          </div>
+
+          <!-- Ações da aula (deixe os botões; o back decide habilitar/ação) -->
+          <div class="lesson-actions">
+            <button class="btn dark" disabled>← Aula anterior</button>
+            <button class="btn dark" disabled>Próxima aula →</button>
+          </div>
+        </div>
+
+        <!-- Sidebar: módulos e aulas (o back deve renderizar a lista) -->
+        <aside class="syllabus" id="syllabus">
+          <!--
+    
+            <details class="module" open>
+              <summary>
+                <strong>NOME DO MÓDULO</strong>
+                <span class="badge">0/0</span>
+              </summary>
+              <ul class="lessons">
+                <li class="lesson">
+                  <a class="lesson-link" href="curso.html?course_id=ID&lesson_id=ID-DA-AULA">
+                    <span class="dot"></span>
+                    Título da aula
+                  </a>
+                </li>
+              </ul>
+            </details>
+          -->
+        </aside>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>© Brain Flow</span>
+      <nav class="footer-nav">
+        <a href="#">Sobre</a>
+        <a href="#">Suporte</a>
+        <a href="#">Termos</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

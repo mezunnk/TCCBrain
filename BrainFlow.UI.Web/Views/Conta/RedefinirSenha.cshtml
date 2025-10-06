@@ -1,0 +1,55 @@
+﻿@model RedefinirSenhaViewMOD
+
+@{
+    ViewData["Title"] = "RedefinirSenha";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div class="row ms-lg-0" style="margin-left: 2em;">
+    <div class="col-12 ">
+        <div class="login-box py-4 animate__animated animate__fadeInDownBig">
+            <div class="login-logo fw-bold text-primary">
+                <span class="fas fa-robot text-primary animate__animated animate__infinite animate__pulse"></span>
+                <b class="text-white">Redefinir Senha</b>
+            </div>
+            <div class="card shadow rounded-2">
+                <div class="card-body login-card-body rounded-2">
+                    <div class="card-header">
+                        <div class="card-img-top">
+                            <img class="img img-fluid" src="/logo.png" alt="BrainFlow">
+                        </div>
+                    </div>
+                    <div class=" card-body">
+                        <form asp-action="RedefinirSenha">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <input asp-for="Token" type="hidden" class="form-control" />
+                            <span asp-validation-for="Token" class="text-danger"></span>
+
+                            <div class="mb-2">
+                                <label class="form-label" for="NovaSenha">Nova Senha</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    <input asp-for="NovaSenha" class="form-control" type="password" placeholder="Digite sua nova senha" />
+                                </div>
+                                <span asp-validation-for="NovaSenha" class="text-danger small"></span>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label" for="ConfirmacaoSenha">Confirmação Nova Senha</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    <input asp-for="ConfirmacaoNovaSenha" class="form-control" type="password" placeholder="Confirme sua nova senha" />
+                                </div>
+                                <span asp-validation-for="ConfirmacaoNovaSenha" class="text-danger small"></span>
+                            </div>
+                            <div class="d-grid mb-2">
+                                <button type="submit" class="btn btn-md btn-green text-white rounded-pill">
+                                    <span class="fas fa-save me-2"></span>Salvar Alteração</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

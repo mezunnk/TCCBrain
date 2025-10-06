@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">
+      <img src="logo_branco.png" width="128" height="128">
+    </div>
+    <nav class="menu">
+      <a href="home.html">Home</a>
+      <a href="cursos.html">Cursos</a>
+      <a href="index.html">Login</a>
+      <a class="signup" href="#">Cadastro</a>
+    </nav>
+  </div>
+</header>
+
+
+  <main class="page">
+    <div class="grid">
+      <h1>Seja Bem-Vindo!</h1>
+      <p class="sub">Não tem conta? <a href="cadastro.html">Clique aqui.</a></p>
+
+      <form class="card" action="#" method="post">
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="Email" required />
+        </div>
+        <div class="form-row">
+          <label for="password">Senha</label>
+          <input id="password" name="password" type="password" placeholder="Senha" required />
+          <a class="forgot" href="recuperar.html">Esqueceu a senha?</a>
+        </div>
+        <div class="actions">
+          <button class="btn primary" type="submit">Entrar</button>
+        </div>
+      </form>
+
+      <h2 class="section-title">Buscar Cursos</h2>
+      <div class="search-wrap">
+        <input class="search" type="search" placeholder="Buscar cursos..." />
+      </div>
+
+      <article class="course-card">
+        <div class="thumb"></div>
+        <div class="course-main">
+          <h3 class="title">Título do Curso</h3>
+          <p class="desc">Descrição breve do curso</p>
+        </div>
+        <div class="price">R$ Preço</div>
+        <div class="course-actions">
+          <button class="btn dark" type="button">Detalhes</button>
+        </div>
+      </article>
+    </div>
+  </main>
+</body>
+    <footer class="footer">
+        <div class="wrap footer-inner">
+            <span>© Brain Flow</span>
+            <nav class="footer-nav">
+                <a href="sobre.html">Sobre</a>
+                <a href="suporte.html">Suporte</a>
+                <a href="termos.html">Termos</a>
+            </nav>
+        </div>
+    </footer>
+</html>

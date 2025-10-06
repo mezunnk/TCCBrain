@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Home";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Brain Flow</title>
+    <link rel="stylesheet" href="~/css/fronted/style.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="nav">
+        <div class="wrap">
+            <div class="brand">
+                <img src="~/img/logo_branco.png" width="128" height="128" alt="Brain Flow">
+            </div>
+            <nav class="menu">
+                <a href="@Url.Action("Index", "Home")">Home</a>
+                <a href="@Url.Action("Cursos", "Home")">Cursos</a>
+                <a href="@Url.Action("Login", "Conta")">Login</a>
+                <a class="signup" href="@Url.Action("Cadastro", "Conta")">Cadastro</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="wrap hero-inner">
+            <h1>Aprenda com cursos que cabem no seu tempo</h1>
+            <p class="sub">Busque por tema, professor ou palavra-chave.</p>
+            <div class="search-wrap hero-search">
+                <input class="search" type="search" name="q" placeholder="Ex.: programação, design, marketing..." />
+            </div>
+        </div>
+    </section>
+
+    <main class="page">
+        <div class="grid">
+            <!-- Destaques -->
+            <h2 class="section-title">Cursos em destaque</h2>
+
+            <div class="hscroll" aria-label="Cursos em destaque">
+                <div class="hcards" id="destaques">
+                    <!-- Aqui serão renderizados os cursos em destaque do banco de dados -->
+                </div>
+            </div>
+
+            <!-- Mensagem de estado vazio (remover quando houver destaques) -->
+            <p class="sub" style="margin-top:10px">Nenhum curso em destaque no momento.</p>
+
+            <!-- Banner simples -->
+            <section class="promo">
+                <div class="promo-card">
+                    <div>
+                        <h3>Vire afiliado do Brain Flow</h3>
+                        <p class="desc">Monetize divulgando cursos e acompanhe suas comissões.</p>
+                    </div>
+                    <a class="btn primary" href="@Url.Action("Cadastro", "Conta")">Criar conta</a>
+                </div>
+            </section>
+
+            <!-- Categorias -->
+            <h2 class="section-title">Categorias</h2>
+            <div class="cat-grid" id="categorias">
+                <!-- Aqui serão renderizadas as categorias do banco de dados -->
+            </div>
+
+            <!-- Mensagem de estado vazio (remover quando houver categorias) -->
+            <p class="sub" style="margin-top:10px">Categorias indisponíveis no momento.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="wrap footer-inner">
+            <span>© Brain Flow</span>
+            <nav class="footer-nav">
+                <a href="#sobre">Sobre</a>
+                <a href="#suporte">Suporte</a>
+                <a href="#termos">Termos</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

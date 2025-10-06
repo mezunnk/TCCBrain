@@ -1,0 +1,62 @@
+﻿@model CursoDetalhesViewMOD
+
+<div class="tab-pane fade show active" id="curso" role="tabpanel" aria-labelledby="curso-tab">
+    <h4 class="text-dark-gray mb-3">Informações Principais</h4>
+
+    @using (Html.BeginForm("SalvarDetalhesCurso", "Cursos", new { area = "Afiliado" }, FormMethod.Post, true, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Curso.CdCurso)
+        @Html.HiddenFor(m => m.Curso.SnAtivo)
+        @Html.HiddenFor(m => m.Curso.CdAfiliado)
+        @Html.HiddenFor(m => m.Curso.CdAfiliadoNavigation)
+        @Html.HiddenFor(m => m.Curso.TxCaminhoImagem)
+        <div class="row g-3">
+            <div class="col-md-8">
+                @Html.LabelFor(m => m.Curso.NoCurso, new { @class = "form-label text-gray-medium" })
+                @Html.TextBoxFor(m => m.Curso.NoCurso, new { @class = "form-control", placeholder = "Informe o nome do curso", maxlength = "100" })
+                @Html.ValidationMessageFor(m => m.Curso.NoCurso, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(m => m.Curso.DcValor, new { @class = "form-label text-dark-gray" })
+                @Html.TextBoxFor(m => m.Curso.DcValor, new { @class = "form-control", placeholder = "Informe o valor do curso.", maxlength = "10" })
+                @Html.ValidationMessageFor(m => m.Curso.DcValor, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-12">
+                @Html.LabelFor(m => m.Curso.TxDescricao, new { @class = "form-label text-gray-medium" })
+                @Html.TextAreaFor(m => m.Curso.TxDescricao, new { @class = "form-control", placeholder = "Informe a descrição do curso", maxlength = "500" })
+                @Html.ValidationMessageFor(m => m.Curso.TxDescricao, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-8 mt-3">
+                <label class="form-label text-gray-medium">Preview da Imagem</label>
+                <div class="border p-2 rounded text-center">
+                    <img id="imagemPreview"
+                         src="@(string.IsNullOrEmpty(Model.Curso.TxCaminhoImagem) ? "/images/default_course.png" : Model.Curso.TxCaminhoImagem)"
+                         alt="Preview da Imagem do Curso" class="img-fluid rounded" style="max-height: 100px; object-fit: cover;">
+                    @if (!string.IsNullOrEmpty(Model.Curso.TxCaminhoImagem))
+                    {
+                        <button type="button" class="btn btn-sm btn-outline-red mt-2" id="btnRemoverImagem">
+                            <i class="fas fa-times-circle me-1"></i> Remover Imagem
+                        </button>
+                    }
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label text-gray-medium">Imagem de Capa</label>
+                <div class="input-group">
+                    <input type="file" class="form-control" id="imagemUpload" name="ImagemUpload" accept="image/*">
+                    <label class="input-group-text text-gray-medium" for="imagemUpload"><i class="fas fa-upload me-2"></i>Upload</label>
+                </div>
+                <small class="form-text text-muted">Formatos: JPG, PNG. Tamanho máximo: 2MB. Recomendado: 1200x675px.</small>
+                @Html.ValidationMessageFor(m => m.ImagemUpload, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12 text-end">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save me-1"></i> Salvar Alterações
+                </button>
+            </div>
+        </div>
+    }
+</div>

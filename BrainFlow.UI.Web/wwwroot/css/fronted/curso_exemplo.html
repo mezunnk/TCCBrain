@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Curso</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="nav">
+        <div class="wrap">
+            <div class="brand">
+                <img src="logo_branco.png" width="128" height="128">
+            </div>
+            <nav class="menu">
+                <a href="index.html">Home</a>
+                <a href="cursos.html">Cursos</a>
+                <a href="index.html">Login</a>
+                <a class="signup" href="#">Cadastro</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo -->
+    <main class="page">
+        <div class="grid">
+            <!-- Cabeçalho do curso -->
+            <section class="course-hero">
+                <h1 id="courseTitle">UI Design do Zero</h1>
+                <p class="sub">Progresso: <span id="progressPct">0%</span></p>
+            </section>
+
+            <!-- Layout player + sidebar -->
+            <section class="course-layout">
+                <div class="player-area">
+                    <!-- Mock de vídeo: trocável por embed real (YouTube/Vimeo) -->
+                    <div class="video-frame" id="videoFrame">
+                        <iframe id="videoIframe" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Aula atual" frameborder="0" allowfullscreen></iframe>
+                    </div>
+
+                    <!-- Título/descrição da aula atual -->
+                    <div class="lesson-header">
+                        <h2 id="lessonTitle">Boas-vindas e visão geral</h2>
+                        <p class="desc" id="lessonDesc">O que você vai aprender no curso e como tirar o máximo proveito.</p>
+                    </div>
+
+                    <!-- Ações da aula -->
+                    <div class="lesson-actions">
+                        <button class="btn dark" id="prevBtn">← Aula anterior</button>
+                        <button class="btn dark" id="nextBtn">Próxima aula →</button>
+                    </div>
+                </div>
+
+                <!-- Sidebar de módulos/aulas -->
+                <aside class="syllabus" id="syllabus">
+                    <!-- conteúdo gerado via JS abaixo -->
+                </aside>
+            </section>
+        </div>
+    </main>
+
+        <footer class="footer">
+        <div class="wrap footer-inner">
+            <span>© Brain Flow</span>
+            <nav class="footer-nav">
+                <a href="#">Sobre</a>
+                <a href="#">Suporte</a>
+                <a href="#">Termos</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        // ---- Dados mockados (depois viram JSON da API) ----
+        const courseId = 'curso_ui_design_001';
+        const course = {
+            id: courseId,
+            title: 'UI Design do Zero',
+            modules: [{
+                id: 'm1',
+                title: 'Começando',
+                lessons: [{
+                    id: 'l1',
+                    title: 'Boas-vindas e visão geral',
+                    desc: 'Panorama do curso.',
+                    video: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+                }, {
+                    id: 'l2',
+                    title: 'Configuração de ferramentas',
+                    desc: 'Instalação e setup.',
+                    video: 'https://www.youtube.com/embed/ysz5S6PUM-U'
+                }, ]
+            }, {
+                id: 'm2',
+                title: 'Fundamentos de UI',
+                lessons: [{
+                    id: 'l3',
+                    title: 'Tipografia',
+                    desc: 'Hierarquia e legibilidade.',
+                    video: 'https://www.youtube.com/embed/aqz-KE-bpKQ'
+                }, {
+                    id: 'l4',
+                    title: 'Cores e contraste',
+                    desc: 'Paletas e acessibilidade.',
+                    video: 'https://www.youtube.com/embed/5qap5aO4i9A'
+                }, {
+                    id: 'l5',
+                    title: 'Grid e espaçamento',
+                    desc: 'Ritmo visual.',
+                    video: 'https://www.youtube.com/embed/hHW1oY26kxQ'
+                }, ]
+            }, {
+                id: 'm3',
+                title: 'Projeto Guiado',
+                lessons: [{
+                    id: 'l6',
+                    title: 'Wireframe',
+                    desc: 'Estruturando telas.',
+                    video: 'https://www.youtube.com/embed/ScMzIvxBSi4'
+                }, {
+                    id: 'l7',
+                    title: 'Protótipo',
+                    desc: 'Fluxos navegáveis.',
+                    video: 'https://www.youtube.com/embed/jfKfPfyJRdk'
+                }, {
+                    id: 'l8',
+                    title: 'Handoff',
+                    desc: 'Do design para o dev.',
+                    video: 'https://www.youtube.com/embed/ysz5S6PUM-U'
+                }, ]
+            }]
+        };
+
+        // ---- Estado / progresso (localStorage só pra demo) ----
+        const keyProgress = `progress:${course.id}`;
+        const keyCurrent = `current:${course.id}`;
+        const getProgress = () => JSON.parse(localStorage.getItem(keyProgress) || '{}'); // { lessonId: true }
+        const setProgress = (obj) => localStorage.setItem(keyProgress, JSON.stringify(obj));
+        const setCurrent = (lessonId) => localStorage.setItem(keyCurrent, lessonId);
+        const getCurrent = () => localStorage.getItem(keyCurrent);
+
+        // Flatten das aulas pra navegar anterior/próxima
+        const flatLessons = course.modules.flatMap(m => m.lessons.map(l => ({...l,
+            moduleId: m.id
+        })));
+
+        // Render da sidebar/módulos
+        function renderSyllabus() {
+            const wrap = document.getElementById('syllabus');
+            const progress = getProgress();
+            wrap.innerHTML = course.modules.map(m => {
+                        const count = m.lessons.length;
+                        const done = m.lessons.filter(l => progress[l.id]).length;
+                        return `
+        <details class="module" open>
+          <summary>
+            <strong>${m.title}</strong>
+            <span class="badge">${done}/${count}</span>
+          </summary>
+          <ul class="lessons">
+            ${m.lessons.map(l => `
+              <li class="lesson ${progress[l.id] ? 'done' : ''}">
+                <button data-lesson="${l.id}" class="lesson-link">
+                  <span class="dot"></span>
+                  ${l.title}
+                </button>
+              </li>
+            `).join('')}
+          </ul>
+        </details>
+      `;
+    }).join('');
+    wrap.querySelectorAll('.lesson-link').forEach(btn=>{
+      btn.addEventListener('click', ()=> loadLesson(btn.dataset.lesson));
+    });
+  }
+
+  // Carrega uma aula no player
+  function loadLesson(lessonId){
+    const lesson = flatLessons.find(l => l.id === lessonId) || flatLessons[0];
+    if(!lesson) return;
+
+    document.getElementById('lessonTitle').textContent = lesson.title;
+    document.getElementById('lessonDesc').textContent  = lesson.desc || '';
+    document.getElementById('videoIframe').src = lesson.video;
+
+    setCurrent(lesson.id);
+    renderSyllabus();
+    updateProgressPct();
+
+    // Habilita/Desabilita navegação
+    const idx = flatLessons.findIndex(l => l.id === lesson.id);
+    document.getElementById('prevBtn').disabled = idx <= 0;
+    document.getElementById('nextBtn').disabled = idx >= flatLessons.length-1;
+  }
+
+  // Marca como concluída
+  function completeCurrent(){
+    const cur = getCurrent() || flatLessons[0].id;
+    const prog = getProgress();
+    prog[cur] = true;
+    setProgress(prog);
+    renderSyllabus();
+    updateProgressPct();
+  }
+
+  // Avançar/voltar
+  function go(step){
+    const cur = getCurrent() || flatLessons[0].id;
+    const idx = flatLessons.findIndex(l => l.id === cur);
+    const target = flatLessons[idx + step];
+    if(target) loadLesson(target.id);
+  }
+
+  // Atualiza % de progresso
+  function updateProgressPct(){
+    const prog = getProgress();
+    const done = flatLessons.filter(l => prog[l.id]).length;
+    const pct  = Math.round((done / flatLessons.length) * 100);
+    document.getElementById('progressPct').textContent = isNaN(pct) ? '0%' : `${pct}%`;
+  }
+
+  // Inicialização
+  document.addEventListener('DOMContentLoaded', ()=>{
+    document.getElementById('courseTitle').textContent = course.title;
+    renderSyllabus();
+    loadLesson(getCurrent() || flatLessons[0].id);
+    document.getElementById('completeBtn').addEventListener('click', completeCurrent);
+    document.getElementById('nextBtn').addEventListener('click', ()=> go(+1));
+    document.getElementById('prevBtn').addEventListener('click', ()=> go(-1));
+  });
+    </script>
+</body>
+
+</html>

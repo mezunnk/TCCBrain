@@ -1,0 +1,230 @@
+﻿/*
+ * Arquivo de estilo personalizado para a plataforma BrainFlow.
+*/
+
+:root {
+    /* Cor Primária de Ação (VS Code Blue) */
+    --primary: #007ACC;
+    --primary-rgb: 0, 122, 204;
+    --primary-darker: #005a9e;
+    /* Cores de Estado e Destaque */
+    --green: #00995d;
+    --green-darker: #007a4a;
+    --red: #dc3545;
+    --red-darker: #b02a37;
+    --yellow: #FFC107;
+    --yellow-darker: #d39e00;
+    /* Paleta Neutra / Grayscale */
+    --bg-light: #F2F4F7; /* Cor de fundo predominante (cinza claro) */
+    --dark-gray: #3c3c3b; /* Cor secundária para painéis e texto principal */
+    --gray-medium: #808080; /* Cinza médio para subtítulos e detalhes */
+    --gray-light: #cccccc; /* Cinza claro para bordas e divisores */
+    --white: #FFFFFF;
+    --black: #000000;
+}
+
+/* --- Estilos Gerais e Body --- */
+body {
+    background-color: var(--bg-light);
+    color: var(--dark-gray);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* --- Utilitários de Cores de Texto --- */
+.text-primary {
+    color: var(--primary) !important;
+}
+
+.text-green {
+    color: var(--green) !important;
+}
+
+.text-red {
+    color: var(--red) !important;
+}
+
+.text-yellow {
+    color: var(--yellow) !important;
+}
+
+.text-dark-gray {
+    color: var(--dark-gray) !important;
+}
+
+.text-gray-medium {
+    color: var(--gray-medium) !important;
+}
+
+.text-white {
+    color: var(--white) !important;
+}
+
+/* --- Utilitários de Cores de Fundo --- */
+.bg-primary {
+    background-color: var(--primary) !important;
+}
+
+.bg-green {
+    background-color: var(--green) !important;
+}
+
+.bg-red {
+    background-color: var(--red) !important;
+}
+
+.bg-yellow {
+    background-color: var(--yellow) !important;
+}
+
+.bg-dark-gray {
+    background-color: var(--dark-gray) !important;
+}
+
+.bg-white {
+    background-color: var(--white) !important;
+}
+
+.bg-light {
+    background-color: var(--bg-light) !important;
+}
+
+/* --- Estilos Base para Botões --- */
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid transparent;
+}
+
+/* --- Estilos para Botões Sólidos --- */
+
+/* Botão Primário (Azul) */
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+    box-shadow: 0 0.5rem 1rem rgba(var(--primary-rgb), 0.15);
+}
+
+    .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+        background-color: var(--primary-darker);
+        border-color: var(--primary-darker);
+        color: var(--white);
+        box-shadow: 0 0.5rem 1rem rgba(var(--primary-rgb), 0.25);
+    }
+
+/* Botão Verde (Success) */
+.btn-green {
+    background-color: var(--green);
+    border-color: var(--green);
+    color: var(--white);
+}
+
+    .btn-green:hover, .btn-green:focus, .btn-green:active {
+        background-color: var(--green-darker);
+        border-color: var(--green-darker);
+        color: var(--white);
+    }
+
+/* Botão Vermelho (Danger) */
+.btn-red {
+    background-color: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+}
+
+    .btn-red:hover, .btn-red:focus, .btn-red:active {
+        background-color: var(--red-darker);
+        border-color: var(--red-darker);
+        color: var(--white);
+    }
+
+/* --- Estilos para Botões Outline --- */
+
+/* Botão Outline Primário (Azul) */
+.btn-outline-primary {
+    color: var(--primary);
+    border-color: var(--primary);
+    background-color: transparent;
+}
+
+    .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active {
+        background-color: var(--primary);
+        color: var(--white);
+    }
+
+/* Botão Outline Verde */
+.btn-outline-green {
+    color: var(--green);
+    border-color: var(--green);
+    background-color: transparent;
+}
+
+    .btn-outline-green:hover, .btn-outline-green:focus, .btn-outline-green:active {
+        background-color: var(--green);
+        color: var(--white);
+    }
+
+/* Botão Outline Vermelho */
+.btn-outline-red {
+    color: var(--red);
+    border-color: var(--red);
+    background-color: transparent;
+}
+
+    .btn-outline-red:hover, .btn-outline-red:focus, .btn-outline-red:active {
+        background-color: var(--red);
+        color: var(--white);
+    }
+
+/* Botão Outline Cinza */
+.btn-outline-gray {
+    color: var(--dark-gray);
+    border-color: var(--gray-light);
+    background-color: transparent;
+}
+
+    .btn-outline-gray:hover, .btn-outline-gray:focus, .btn-outline-gray:active {
+        background-color: var(--dark-gray);
+        border-color: var(--dark-gray);
+        color: var(--white);
+    }
+
+/* --- Estilos para a Navbar e Logo --- */
+.navbar-nav .user-menu {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+    .navbar-nav .user-menu > a {
+        display: flex;
+        align-items: center;
+        padding: 0.25rem 0.5rem; 
+    }
+
+/* Estilo principal para a imagem do logo */
+.brand-logo {
+    max-height: 40px; 
+    width: auto; 
+    transition: transform 0.3s ease-in-out, opacity 0.3s; 
+}
+
+/* Efeito de hover no logo */
+.navbar-nav .user-menu > a:hover .brand-logo {
+    transform: scale(1.05); 
+    opacity: 0.9;
+}
+
+/* NAV-LINK */
+.nav-tabs .nav-link {
+    color: var(--primary);
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+
+    .nav-tabs .nav-link.active {
+        color: #fff;
+        background-color: var(--primary);
+        border-color: #dee2e6 #dee2e6 #fff;
+    }

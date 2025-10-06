@@ -1,0 +1,117 @@
+@model LoginViewMOD
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Brain Flow</title>
+    <link rel="stylesheet" href="~/css/fronted/style.css" />
+</head>
+<body>
+<header class="nav">
+    <div class="wrap">
+        <div class="brand">
+            <img src="~/img/logo_branco.png" width="128" height="128" alt="Brain Flow">
+        </div>
+        <nav class="menu">
+            <a href="@Url.Action("Index", "Home")">Home</a>
+            <a href="@Url.Action("Cursos", "Home")">Cursos</a>
+            <a href="@Url.Action("Login", "Conta")">Login</a>
+            <a class="signup" href="@Url.Action("Cadastro", "Conta")">Cadastro</a>
+        </nav>
+    </div>
+</header>
+
+<main class="page">
+    <div class="grid">
+        <h1>Seja Bem-Vindo!</h1>
+        <p class="sub">Não tem conta? <a href="@Url.Action("Cadastro", "Conta")">Clique aqui.</a></p>
+
+        <form class="card" asp-action="Login" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-row">
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" type="email" placeholder="Email" required />
+                <span asp-validation-for="Email" class="text-danger small"></span>
+            </div>
+            
+            <div class="form-row">
+                <label asp-for="Senha">Senha</label>
+                <input asp-for="Senha" type="password" placeholder="Senha" required />
+                <a class="forgot" href="@Url.Action("SolicitarRedefinicaoSenha", "Conta")">Esqueceu a senha?</a>
+                <span asp-validation-for="Senha" class="text-danger small"></span>
+            </div>
+            
+            <div class="actions">
+                <button class="btn primary" type="submit">Entrar</button>
+            </div>
+        </form>
+
+        <h2 class="section-title">Buscar Cursos</h2>
+        <div class="search-wrap">
+            <input class="search" type="search" placeholder="Buscar cursos..." id="searchCursos" />
+        </div>
+
+        <div class="hscroll" aria-label="Cursos em destaque" id="cursosContainer">
+            <div class="hcards">
+                @if (ViewBag.Cursos != null && ((List<BrainFlow.Data.Models.CursoMOD>)ViewBag.Cursos).Any())
+                {
+                    @await Html.PartialAsync("_CursosPartial", (List<BrainFlow.Data.Models.CursoMOD>)ViewBag.Cursos)
+                }
+                else
+                {
+                    <div class="no-courses">
+                        <p>Nenhum curso disponível no momento.</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="wrap footer-inner">
+        <span>© Brain Flow</span>
+        <nav class="footer-nav">
+            <a href="#">Sobre</a>
+            <a href="#">Suporte</a>
+            <a href="#">Termos</a>
+        </nav>
+    </div>
+</footer>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    let searchTimeout;
+    
+    $('#searchCursos').on('input', function() {
+        const termo = $(this).val();
+        
+        // Limpa o timeout anterior
+        clearTimeout(searchTimeout);
+        
+        // Aguarda 500ms após parar de digitar para fazer a busca
+        searchTimeout = setTimeout(function() {
+            $.get('@Url.Action("BuscarCursos", "Conta")', { termo: termo })
+                .done(function(data) {
+                    $('#cursosContainer .hcards').html(data);
+                })
+                .fail(function() {
+                    $('#cursosContainer .hcards').html('<div class="no-courses"><p>Erro ao buscar cursos.</p></div>');
+                });
+        }, 500);
+    });
+});
+</script>
+</body>
+</html>

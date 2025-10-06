@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header -->
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">
+      <img src="logo_branco.png" width="128" height="128">
+    </div>
+    <nav class="menu">
+      <a href="index.html">Home</a>
+      <a href="cursos.html">Cursos</a>
+      <a href="index.html">Login</a>
+      <a class="signup" href="cadastro.html">Cadastro</a>
+    </nav>
+  </div>
+</header>
+
+  <!-- Page content -->
+  <main class="page">
+    <div class="grid">
+      <h1>Criar Conta</h1>
+      <p class="sub">Já tem conta? <a href="index.html">Entrar</a></p>
+
+      <form class="card" action="#" method="post">
+        <div class="form-row">
+          <label for="nome">Nome completo</label>
+          <input id="nome" name="nome" type="text" placeholder="Seu nome" required />
+        </div>
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="Seu email" required />
+        </div>
+        <div class="form-row">
+          <label for="senha">Senha</label>
+          <input id="senha" name="senha" type="password" placeholder="Crie uma senha" required />
+        </div>
+        <div class="form-row">
+          <label for="confirmar">Confirmar senha</label>
+          <input id="confirmar" name="confirmar" type="password" placeholder="Repita a senha" required />
+        </div>
+        <div class="actions">
+          <button class="btn primary" type="submit">Cadastrar</button>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+    <footer class="footer">
+        <div class="wrap footer-inner">
+            <span>© Brain Flow</span>
+            <nav class="footer-nav">
+                <a href="sobre.html">Sobre</a>
+                <a href="suporte.html">Suporte</a>
+                <a href="termos.html">Termos</a>
+            </nav>
+        </div>
+    </footer>
+</html>

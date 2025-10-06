@@ -1,0 +1,54 @@
+﻿<aside class="app-sidebar bg-dark-gray shadow">
+    <div class="sidebar-brand text-center">
+        <a href="#" class="brand-link">
+            <span class="fas fa-handshake text-white ms-2"></span>
+        </a>
+    </div>
+    <div class="sidebar-wrapper overflow-hidden">
+        <div>
+            <nav class="mt-1">
+                <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
+                    <li class="nav-item mt-2">
+                        <div href="#" class="nav-item">
+                            <a asp-action="Index" asp-controller="Cursos" asp-area="Afiliado" class="nav-link">
+                                <i class="nav-icon fas fa-graduation-cap text-primary"></i>
+                                <p class="text-primary">Cursos</p>
+                            </a>
+                        </div>
+                    </li>
+                    <hr class="text-gray-medium" />
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-chart-line text-primary"></i>
+                            <p class="text-primary">
+                                Analytics
+                                <i class="nav-arrow bi bi-chevron-right text-primary"></i>
+                                <i class="nav-arrow fa fa-chevron-right text-primary"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-action="" asp-controller="" asp-area="" class="nav-link">
+                                    <i class="nav-icon fas fa-wallet text-white"></i>
+                                    <p class="text-white">Vendas</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-action="" asp-controller="" asp-area="" class="nav-link">
+                                    <i class="nav-icon fas fa-money-bill-trend-up text-white"></i>
+                                    <p class="text-white">Comissões</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-action="" asp-controller="" asp-area="" class="nav-link">
+                                    <i class="nav-icon fas fa-users text-white"></i>
+                                    <p class="text-white">Alunos</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</aside> 

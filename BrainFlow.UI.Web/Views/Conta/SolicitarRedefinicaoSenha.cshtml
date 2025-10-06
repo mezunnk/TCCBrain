@@ -1,0 +1,58 @@
+﻿@model SolicitarRedefinicaoSenhaViewMOD
+
+@{
+    ViewData["Title"] = "SolicitarRedefinicaoSenha";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div class="row ms-lg-0" style="margin-left: 2em;">
+    <div class="col-12 ">
+        <div class="login-box py-4 animate__animated animate__fadeInDownBig">
+            <div class="login-logo fw-bold text-primary">
+                <span class="fas fa-robot text-primary animate__animated animate__infinite animate__pulse"></span>
+                <b class="text-white">Solicitar Nova Senha</b>
+            </div>
+            <div class="card shadow rounded-2">
+                <div class="card-body login-card-body rounded-2">
+                    <div class="card-header">
+                        <div class="card-img-top">
+                            <img class="img img-fluid" src="/logo.png" alt="BrainFlow">
+                        </div>
+                    </div>
+                    <div class=" card-body">
+                        <form asp-action="SolicitarRedefinicaoSenha">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="mb-4">
+                                <label class="form-label" for="Email">E-mail</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    <input asp-for="Email" class="form-control" placeholder="Digite seu e-mail" />
+                                </div>
+                                <span asp-validation-for="Email" class="text-danger small"></span>
+                            </div>
+                            <div class="d-grid mb-3">
+                                <button type="submit" class="btn btn-md btn-green text-white rounded-pill">
+                                    <span class="fas fa-paper-plane me-2"></span>Solicitar</button>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 text-start">
+                                    <div class="form-group mt-2">
+                                        <a asp-action="Index" asp-controller="Home" class="btn btn-sm btn-outline-gray">
+                                            <span class="fas fa-chevron-left me-2"></span>Voltar
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-7 text-end">
+                                    <div class="form-group mt-2">
+                                        <a asp-action="Login" class="btn btn-sm btn-outline-primary">
+                                            <span class="fas fa-check me-2"></span>Realizar login</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

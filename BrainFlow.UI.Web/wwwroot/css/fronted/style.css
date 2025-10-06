@@ -1,0 +1,327 @@
+/* =====================================================
+   Brain Flow – CSS unificado e organizado
+   Paleta e tokens
+   ===================================================== */
+:root{
+  --navy:#0f2741;
+  --navy-600:#173652;
+  --ink:#0b1726;
+  --text:#1f2b3a;
+  --muted:#6b7a90;
+  --line:#e4e9f0;
+  --bg:#f7f9fc;
+  --white:#ffffff;
+  --accent:#f0b41b;
+  --accent-600:#d59f14;
+  --radius:14px;
+  --shadow:0 10px 20px rgba(15,39,65,.06);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto;
+  color:var(--text);
+  background:var(--bg);
+}
+
+/* =====================================================
+   Header / Navegação
+   ===================================================== */
+.nav{
+  background:var(--navy);
+  color:var(--white);
+  height:72px;
+  display:flex;
+  align-items:center;
+}
+.wrap{max-width:1100px; margin:0 auto; padding:0 24px; width:100%}
+.nav .wrap{display:flex; justify-content:space-between; align-items:center}
+
+.brand{display:flex; align-items:center; gap:12px; font-weight:700; font-size:22px; color:var(--white)}
+.brand img{display:block}
+
+.menu{display:flex; gap:28px; align-items:center}
+.menu a{color:#dbe6f3; text-decoration:none; font-weight:600}
+.menu a:hover{color:#fff}
+
+/* Botão “Cadastro” alinhado à direita */
+.menu .signup{
+  margin-left:auto;
+  display:inline-flex;
+  align-items:center; justify-content:center;
+  height:40px; padding:0 16px;
+  border-radius:12px; font-weight:800;
+  background:#f7c53a; color:#1a2a3f;
+}
+
+/* =====================================================
+   Layout geral / Títulos
+   ===================================================== */
+.page{padding:40px 24px 80px}
+.grid{max-width:1100px; margin:0 auto}
+h1{font-size:40px; margin:16px 0 8px}
+.section-title{font-size:32px; margin:40px 0 12px}
+.sub{color:var(--muted); margin-bottom:28px}
+.sub a{color:var(--navy-600); font-weight:800; text-decoration:none}
+
+/* =====================================================
+   Componentes de formulário / Cartões
+   ===================================================== */
+.card{
+  background:linear-gradient(0deg,#fff,#fff),var(--white);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:22px;
+  max-width:760px;
+}
+
+.form-row{display:grid; gap:8px; margin:18px 0}
+.form-row label{font-weight:800; color:var(--ink); letter-spacing:.2px}
+
+input[type=email],
+input[type=password],
+input[type=text],
+input[type=url],
+input[type=number],
+select,
+textarea,
+.search{
+  width:100%;
+  height:48px;
+  padding:0 14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fbfcfe;
+  color:var(--text);
+  font-size:16px;
+  line-height:1.2;
+}
+textarea{min-height:120px; padding:10px 12px; resize:vertical}
+input::placeholder, .search::placeholder, textarea::placeholder{color:#9aa7b7}
+
+input:focus, select:focus, textarea:focus, .search:focus{
+  outline:none;
+  border-color:#c9d6e6;
+  box-shadow:0 0 0 3px rgba(15,39,65,.08);
+  background:#fff;
+}
+
+/* Select com seta custom */
+select{
+  padding-right:36px;
+  appearance:none;
+  background-image:
+    linear-gradient(45deg,transparent 50%,#6b7a90 50%),
+    linear-gradient(135deg,#6b7a90 50%,transparent 50%);
+  background-position:calc(100% - 18px) 20px, calc(100% - 12px) 20px;
+  background-size:6px 6px,6px 6px;
+  background-repeat:no-repeat;
+}
+
+.actions{display:grid; gap:14px; margin-top:8px}
+
+/* Botões */
+.btn, a.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  height:48px; padding:0 16px;
+  border:0; border-radius:12px;
+  font-weight:800; font-size:16px;
+  cursor:pointer; text-decoration:none;
+}
+.btn.primary{background:var(--accent); color:#1a2a3f}
+.btn.primary:hover{background:var(--accent-600)}
+.btn.dark{background:var(--navy); color:#fff}
+.btn.dark:hover{background:#102f50}
+.btn.small{height:36px; padding:0 12px; font-size:14px; border-radius:10px}
+.forgot{text-align:right; display:block; color:var(--navy-600); font-weight:700}
+
+.hint,.muted{color:var(--muted); font-size:14px}
+
+/* =====================================================
+   Home / Vitrine / Cards de curso
+   ===================================================== */
+.hero{background:linear-gradient(0deg,rgba(15,39,65,.02),rgba(15,39,65,.02)); padding:36px 0}
+.hero-inner{max-width:1100px; margin:0 auto; padding:0 24px}
+.hero h1{font-size:44px; line-height:1.1; margin:8px 0}
+.hero-search{max-width:760px; margin-top:12px}
+.pill-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+.pill{border:1px solid var(--line); background:#fff; padding:10px 14px; border-radius:999px; font-weight:700; cursor:pointer}
+.pill:hover{background:#f3f7fb}
+
+.cards-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; max-width:1100px}
+@media (max-width:960px){ .cards-grid{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:640px){ .cards-grid{grid-template-columns:1fr} }
+
+.course-card{
+  margin-top:18px; display:flex; gap:20px;
+  border:1px solid var(--line); background:#fff; border-radius:16px;
+  padding:16px; max-width:760px; box-shadow:var(--shadow);
+  align-items:center;
+}
+.thumb{width:96px; height:96px; border-radius:12px; background:#eef3f8}
+.title{font-size:22px; font-weight:800; margin:0 0 6px}
+.desc{color:var(--muted)}
+.price{font-weight:900; margin-left:auto; display:flex; align-items:center}
+.course-actions{margin-left:auto; display:flex; align-items:center; gap:8px}
+
+/* Vitrine horizontal */
+.hscroll{
+  position:relative; overflow-x:auto; -webkit-overflow-scrolling:touch;
+  scroll-snap-type:x mandatory; padding-bottom:8px;
+  mask-image:linear-gradient(to right,transparent 0,#000 24px,#000 calc(100% - 24px),transparent 100%);
+}
+.hscroll::-webkit-scrollbar{height:8px}
+.hscroll::-webkit-scrollbar-thumb{background:#d7dee8; border-radius:8px}
+.hscroll::-webkit-scrollbar-track{background:#f1f4f8}
+
+.hcards{
+  display:grid; grid-auto-flow:column; grid-auto-columns:minmax(280px,360px);
+  gap:16px; padding:4px 4px 4px 0;
+}
+.course-card.h{scroll-snap-align:start; min-height:136px; width:100%}
+@media (max-width:420px){ .hcards{grid-auto-columns:minmax(220px,280px)} }
+
+/* Banner / promo */
+.promo{margin:34px 0}
+.promo-card{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:20px; border:1px solid var(--line); background:#fff; border-radius:16px; box-shadow:var(--shadow)}
+
+/* Categorias */
+.cat-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; max-width:900px}
+@media (max-width:720px){ .cat-grid{grid-template-columns:repeat(2,1fr)} }
+.cat-card{display:flex; align-items:center; justify-content:center; border:1px solid var(--line); background:#fff; border-radius:14px; padding:22px; text-decoration:none; font-weight:800; color:var(--navy-600); box-shadow:var(--shadow)}
+.cat-card:hover{transform:translateY(-1px); transition:.15s ease}
+
+/* =====================================================
+   Páginas de Curso (player + syllabus)
+   ===================================================== */
+.course-hero h1{margin-bottom:4px}
+.course-layout{display:grid; grid-template-columns:1fr 340px; gap:20px; align-items:start}
+@media (max-width:980px){ .course-layout{grid-template-columns:1fr} }
+
+.player-area .video-frame{position:relative; width:100%; aspect-ratio:16/9; background:#000; border-radius:16px; overflow:hidden; box-shadow:var(--shadow)}
+.player-area iframe{position:absolute; inset:0; width:100%; height:100%}
+.lesson-header{margin-top:14px}
+.lesson-actions{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px}
+
+.syllabus{position:sticky; top:20px}
+.module{border:1px solid var(--line); background:#fff; border-radius:14px; box-shadow:var(--shadow); margin-bottom:12px; overflow:hidden}
+.module>summary{display:flex; justify-content:space-between; align-items:center; gap:8px; padding:12px 14px; cursor:pointer; font-weight:800; color:var(--ink)}
+.module .badge{background:#eef3f8; border:1px solid var(--line); border-radius:999px; padding:4px 10px; font-size:12px; color:#4a5668}
+.lessons{list-style:none; margin:0; padding:8px}
+.lesson{display:block}
+.lesson + .lesson{margin-top:6px}
+.lesson-link{width:100%; text-align:left; display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; border:1px solid transparent; background:#fff; cursor:pointer; font-weight:600; color:var(--text)}
+.lesson-link:hover{background:#f6f9fc; border-color:var(--line)}
+.lesson.done .lesson-link{opacity:.8}
+.dot{width:10px; height:10px; border-radius:50%; background:#cdd6e3}
+.lesson.done .dot{background:#34c759}
+
+/* =====================================================
+   Perfil / Abas / Campos auxiliares
+   ===================================================== */
+.tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px}
+.tab{border:1px solid var(--line); background:#fff; padding:10px 14px; border-radius:999px; font-weight:800; cursor:pointer}
+.tab.active{background:#eef3f8}
+.tabpanel{display:none}
+.tabpanel.active{display:block}
+
+.profile-row{display:grid; grid-template-columns:160px 1fr; gap:18px}
+@media (max-width:720px){ .profile-row{grid-template-columns:1fr} }
+.avatar-wrap{text-align:center; display:flex; flex-direction:column; align-items:center; gap:6px}
+.avatar{width:96px; height:96px; border-radius:50%; object-fit:cover; border:2px solid var(--line); display:block}
+.fields .two{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+@media (max-width:720px){ .fields .two{grid-template-columns:1fr} }
+.input-area{width:100%; border:1px solid var(--line); border-radius:12px; padding:10px; resize:vertical}
+.switch-row{display:flex; align-items:center; gap:10px}
+.switch-row input[type=checkbox]{width:18px; height:18px}
+
+/* Destaques visuais específicos */
+#novoEmail, #senhaConfirm{ border-color:#f0b41b }
+
+/* =====================================================
+   Footer
+   ===================================================== */
+.footer{margin-top:40px; border-top:1px solid var(--line); background:#fff}
+.footer-inner{height:70px; display:flex; align-items:center; justify-content:space-between}
+.footer-nav{display:flex; gap:18px}
+.footer a{color:#6b7a90; text-decoration:none; font-weight:600}
+.footer a:hover{color:#1f2b3a}
+
+
+/* =====================================================
+   Tema escuro (aplicado ao <html class="theme-dark">)
+   ===================================================== */
+.theme-dark body{background:#0d1623; color:#e8eef7}
+.theme-dark .card, .theme-dark .cat-card, .theme-dark .course-card, .theme-dark .promo-card{background:#0f1d30; border-color:#21364f}
+.theme-dark .sub{color:#aebcd0}
+.theme-dark .tab{background:#0f1d30; border-color:#21364f; color:#e8eef7}
+.theme-dark .tab.active{background:#15263f}
+.theme-dark .course-card .desc{color:#aebcd0}
+.theme-dark label,
+.theme-dark .switch-row label,
+.theme-dark select,
+.theme-dark option,
+.theme-dark .form-row,
+.theme-dark .hint { color:#f1f4f8 }
+.theme-dark input, .theme-dark textarea, .theme-dark select{
+  background:#0f1d30; border:1px solid #21364f; color:#f1f4f8;
+}
+.theme-dark input::placeholder, .theme-dark textarea::placeholder{ color:#aebcd0 }
+
+/* =====================================================
+   Responsivo
+   ===================================================== */
+@media (max-width:1024px){
+  h1{font-size:40px}
+  .section-title{font-size:32px}
+  .wrap{padding:0 18px}
+}
+@media (max-width:820px){
+  .nav{height:auto; padding:10px 0}
+  .nav .wrap{flex-direction:column; align-items:flex-start; gap:10px}
+  .menu{flex-wrap:wrap; gap:14px}
+  .menu a{line-height:1}
+  .menu .signup{height:40px; padding:0 14px}
+}
+@media (max-width:768px){
+  h1{font-size:34px}
+  .section-title{font-size:26px}
+  .page{padding:28px 18px 64px}
+  .hero h1{font-size:34px}
+  .card{max-width:100%}
+  .actions .btn, .actions a.btn{width:100%}     /* botões full-width em forms */
+}
+@media (max-width:760px){
+  .course-card{display:grid; grid-template-columns:96px 1fr; align-items:center}
+  .course-actions{grid-column:1 / -1; justify-content:flex-end}
+  .price{margin-left:0}
+}
+@media (max-width:480px){
+  .course-card{grid-template-columns:72px 1fr; padding:12px; gap:12px}
+  .thumb{width:72px; height:72px}
+  .title{font-size:18px}
+  .desc{font-size:14px}
+  .course-actions .btn{width:100%}
+}
+@media (max-width:980px){
+  .syllabus{position:static}
+  .lesson-actions{justify-content:space-between}
+  .player-area .video-frame{border-radius:12px}
+}
+/* Grids específicos das páginas de detalhes do curso */
+@media (max-width:880px){ .course-hero-grid{grid-template-columns:1fr !important} }
+@media (max-width:980px){ .course-layout-grid{grid-template-columns:1fr !important} }
+
+/* Banner/promo e categorias */
+@media (max-width:768px){
+  .promo-card{flex-direction:column; align-items:flex-start; gap:10px}
+  .cat-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:460px){ .cat-grid{grid-template-columns:1fr} }
+
+/* Footer compacto */
+@media (max-width:640px){
+  .footer-inner{flex-direction:column; gap:8px; height:auto; padding:12px 0}
+}

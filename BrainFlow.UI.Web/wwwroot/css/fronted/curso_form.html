@@ -1,0 +1,149 @@
+<!-- curso_form.html (apenas front: estrutura limpa, sem JS e sem dados de exemplo) -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Brain Flow – Criar/Editar Curso</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ajustes leves reaproveitando seu style.css */
+    .form-two{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    @media (max-width: 760px){ .form-two{grid-template-columns:1fr} }
+    .cover-drop{
+      width:100%; aspect-ratio:4/3; border-radius:16px;
+      border:1px solid var(--line); background:#eef3f8; display:flex;
+      align-items:center; justify-content:center; text-align:center; padding:18px;
+    }
+    .cover-drop small{color:var(--muted)}
+    .muted{color:var(--muted)}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">
+      <img src="logo_branco.png" width="128" height="128">
+    </div>
+    <nav class="menu">
+      <a href="index.html">Home</a>
+      <a href="cursos.html">Cursos</a>
+      <a href="index.html">Login</a>
+      <a class="signup" href="cadastro.html">Cadastro</a>
+    </nav>
+  </div>
+</header>
+
+  <main class="page">
+    <div class="grid">
+      <h1>Novo curso</h1>
+      <p class="sub">Preencha os dados básicos do curso. Os módulos e aulas podem ser organizados abaixo.</p>
+
+      <form class="card" action="#" method="post" enctype="multipart/form-data">
+        <h2 class="section-title" style="margin:0 0 10px">Informações gerais</h2>
+
+        <div class="form-row">
+          <label for="titulo">Título do curso</label>
+          <input id="titulo" name="titulo" type="text" placeholder="Ex.: Programação em Python" required />
+        </div>
+
+        <div class="form-row">
+          <label for="descricao">Descrição</label>
+          <textarea id="descricao" name="descricao" rows="5" class="input-area" placeholder="Descrição do curso" required></textarea>
+        </div>
+
+        <div class="form-row form-two">
+          <div>
+            <label for="preco">Preço</label>
+            <input id="preco" name="preco" type="number" step="0.01" placeholder="Ex.: R$ 99,90" />
+          </div>
+          <div>
+            <label for="status">Status</label>
+            <select id="status" name="status">
+              <option value="draft" selected>Rascunho</option>
+              <option value="published">Publicado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label>Imagem de capa</label>
+        
+          <div class="cover-drop">
+            <div>
+              <strong>Selecione uma imagem</strong>
+              <p class="muted">PNG/JPG, recomendado 1200×900.</p>
+
+              <!-- <input type="file" name="cover" accept="image/*"> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" type="submit">Salvar curso</button>
+          <button class="btn dark" type="button" disabled>Pré-visualizar</button>
+        </div>
+      </form>
+
+      <!-- Organização de conteúdo -->
+      <section class="card" aria-label="Estrutura do curso">
+        <h2 class="section-title" style="margin:0 0 10px">Módulos e aulas</h2>
+        <p class="sub" style="margin-top:-6px">Módulos e Aulas cadastradas.</p>
+
+        <!-- módulos/aulas aqui -->
+        <div id="estruturaCurso">
+          <!--
+            <article class="module" style="margin-bottom:12px">
+              <header style="display:flex; align-items:center; justify-content:space-between; gap:8px; padding:12px 14px;">
+                <strong>Nome do módulo</strong>
+                <span class="badge">0 aulas</span>
+              </header>
+              <div style="padding:0 14px 14px">
+                <ul class="lessons" style="list-style:none; margin:0; padding:0">
+                  <li class="lesson">
+                    <div class="lesson-link" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border:1px solid var(--line); border-radius:10px">
+                      <span class="dot"></span>
+                      <div style="flex:1">
+                        <div style="font-weight:700">Título da aula</div>
+                        <div class="muted">Campo “is_free” define se é gratuita</div>
+                      </div>
+                      <span class="muted">00:00</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </article>
+          -->
+        </div>
+
+        <!-- Ações gerais do conteúdo -->
+        <div class="actions" style="margin-top:12px">
+          <button class="btn primary" type="button" disabled>Adicionar módulo</button>
+          <button class="btn dark" type="button" disabled>Adicionar aula</button>
+        </div>
+      </section>
+
+      <!-- Materiais/benefícios (itens livres) -->
+      <section class="card" aria-label="Benefícios do curso">
+        <h2 class="section-title" style="margin:0 0 10px">Este curso inclui</h2>
+        <p class="sub" style="margin-top:-6px">(ex.: certificado, material de apoio).</p>
+        <ul id="courseIncludes" style="margin:0 0 8px 18px; padding:0">
+          <!-- O back deve inserir <li>…</li> aqui -->
+        </ul>
+      </section>
+    </div>
+  </main>
+  </body>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>© Brain Flow</span>
+      <nav class="footer-nav">
+        <a href="sobre.html">Sobre</a>
+        <a href="suporte.html">Suporte</a>
+        <a href="termos.html">Termos</a>
+      </nav>
+    </div>
+  </footer>
+</html>

@@ -1,0 +1,236 @@
+﻿@model CursoDetalhesViewMOD
+@{
+    ViewData["Title"] = "Detalhes do Curso";
+}
+<div class="container-fluid mt-4 mb-5">
+    <div class="row mb-4">
+        <div class="col-8 text-start">
+            <h2 class="mb-0 text-dark-gray">
+                <i class="fas fa-graduation-cap text-primary me-2"></i>
+                Curso: <span class="text-primary">@Model.Curso.NoCurso</span>
+            </h2> 
+        </div>
+        <div class="col-4 text-end">
+            <a class="btn btn-outline-gray" asp-action="Index" asp-controller="Cursos" asp-area="Afiliado">
+                <span class="fas fa-chevron-left me-2"></span>Voltar
+            </a>
+        </div>
+    </div>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="curso-tab" data-bs-toggle="tab" data-bs-target="#curso" type="button" role="tab" aria-controls="curso" aria-selected="true">
+                <i class="fas fa-book me-2"></i>Detalhes Curso
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="modulos-tab" data-bs-toggle="tab" data-bs-target="#modulos" type="button" role="tab" aria-controls="modulos" aria-selected="true">
+                <i class="fas fa-hand-point-up me-2"></i>Módulos
+            </button>
+        </li>
+    </ul>
+    <div class="tab-content border border-top-0 rounded-2 bg-white p-3 shadow-sm" id="myTabContent">
+        @await Html.PartialAsync("_PartialDetalhesCurso", Model)
+        @await Html.PartialAsync("_PartialListaModulos", Model.Modulos)
+    </div>
+</div>
+@await Html.PartialAsync("_ModalAdicionarEditarModulo", new ModuloViewMOD { CdCurso = Model.Curso.CdCurso })
+@await Html.PartialAsync("_ModalRemoverModulo")
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+            $('#imagemUpload').on('change', function (e) {
+            var file = e.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imagemPreview').attr('src', e.target.result);
+                    $('#btnRemoverImagem').show();
+                };
+                reader.readAsDataURL(file);
+            } else {
+                var currentImagePath = '@(string.IsNullOrEmpty(Model.Curso.TxCaminhoImagem) ? "/images/default_course.png" : Model.Curso.TxCaminhoImagem)';
+                $('#imagemPreview').attr('src', currentImagePath);
+                if (currentImagePath === "/images/default_course.png") {
+                    $('#btnRemoverImagem').hide();
+                }
+            }
+        });
+
+        // --- Lógica para Remover Imagem Existente via AJAX ---
+        $('#btnRemoverImagem').on('click', function (e) {
+            e.preventDefault();
+
+            if (!confirm('Tem certeza que deseja remover a imagem de capa deste curso?')) {
+                return;
+            }
+
+            $('.loader').show();
+            var cursoId = @Model.Curso.CdCurso;
+            var token = $('input[name="__RequestVerificationToken"]').val();
+
+            $.ajax({
+                url: '/Afiliado/Cursos/RemoverImagemCurso/' + cursoId,
+                type: 'POST',
+                headers: {
+                    'RequestVerificationToken': token
+                },
+                success: function (response) {
+                    if (response.success) {
+                        $('#imagemPreview').attr('src', '/images/default_course.png');
+                        $('#TxCaminhoImagem').val('');
+                        $('#btnRemoverImagem').hide();
+                        $('#imagemUpload').val('');
+                        toastr.success('Imagem removida com sucesso!');
+                    } else {
+                        toastr.error('Erro ao remover imagem: ' + response.message);
+                    }
+                },
+                error: function () {
+                    toastr.error('Não foi possível conectar ao servidor para remover a imagem.');
+                },
+                complete: function () {
+                    $('.loader').hide();
+                }
+            });
+        });
+
+        $(document).ready(function () {
+
+            var modal = new bootstrap.Modal(document.getElementById('modalAdicionarEditarModulo'));
+            var form = $('#formModulo');
+
+            $('#btnAdicionarModulo').on('click', function () {
+                $('#modalAdicionarEditarModuloLabel').text('Adicionar Novo Módulo');
+                form.trigger('reset');
+                $('#CdModulo').val(0);
+                $('#CdCurso').val(@Model.Curso.CdCurso);
+                modal.show();
+            });
+
+            $('#listaModulosContainer').on('click', '.btn-editar-modulo', function () {
+                var botao = $(this);
+                $('#modalAdicionarEditarModuloLabel').text('Editar Módulo');
+                form.trigger('reset');
+                $('#CdModulo').val(botao.data('id'));
+                $('#NoModulo').val(botao.data('nome'));
+                $('#TxDescricao').val(botao.data('descricao'));
+                $('#CdCurso').val(@Model.Curso.CdCurso);
+            });
+
+            form.on('submit', function (e) {
+                e.preventDefault();
+
+                if (form.valid()) {
+                    $('.loader').show();
+
+                    var dados = {
+                        CdModulo: parseInt($('#CdModulo').val()),
+                        CdCurso: parseInt($('#CdCurso').val()),
+                        NoModulo: $('#NoModulo').val(),
+                        TxDescricao: $('#TxDescricao').val()
+                    };
+
+                    var token = $('input[name="__RequestVerificationToken"]').val();
+                    var url = form.attr('data-url');
+
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(dados),
+                        headers: {
+                            'RequestVerificationToken': token 
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                modal.hide();
+                                recarregarListaModulos();
+                            } else {
+                                alert('Ocorreu um erro: ' + response.message);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error("Status: " + textStatus + ", Erro: " + errorThrown);
+                            alert('Não foi possível conectar ao servidor. Verifique o console (F12) para mais detalhes.');
+                        },
+                        complete: function () {
+                            $('.loader').hide();
+                        }
+                    });
+                }
+            });
+
+            var idModuloParaRemover = 0;
+            // --- LÓGICA PARA REMOVER MÓDULO ---
+            $('#listaModulosContainer').on('click', '.btn-remover-modulo', function () {
+                var botao = $(this);
+                idModuloParaRemover = botao.data('id');
+                $('#nomeModuloParaRemover').text(botao.data('nome'));
+            });
+
+            $('#btnConfirmarRemocao').on('click', function () {
+                $('.loader').show();
+                var token = $('input[name="__RequestVerificationToken"]').val();
+
+                $.ajax({
+                    url: '/Afiliado/Modulos/RemoverModulo/' + idModuloParaRemover,
+                    type: 'POST',
+                    headers: {
+                        'RequestVerificationToken': token
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            $('#modalRemoverModulo').modal('hide');
+                            recarregarListaModulos();
+                            toastr.success('Módulo removido com sucesso!');
+                        } else {
+                            alert('Erro: ' + response.message);
+                        }
+                    },
+                    error: function () {
+                        alert('Não foi possível conectar ao servidor.');
+                    },
+                    complete: function () {
+                        $('.loader').hide();
+                    }
+                });
+            });
+
+            // --- LÓGICA PARA REORDENAR (DRAG & DROP) ---
+            function inicializarSortable() {
+                $("#modulosSortable").sortable({
+                    handle: '.fa-bars',
+                    update: function (event, ui) {
+                        var modulosIds = $(this).sortable('toArray', { attribute: 'data-id' });
+                        var cursoId = @Model.Curso.CdCurso;
+                        var token = $('input[name="__RequestVerificationToken"]').val();
+
+                        $.ajax({
+                            url: '/Afiliado/Modulos/ReordenarModulos?cursoId=' + cursoId,
+                            type: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify(modulosIds),
+                            headers: { 'RequestVerificationToken': token },
+                            success: function (response) {
+                                if (response.success) {
+                                    recarregarListaModulos();
+                                    toastr.success('Ordem dos módulos salva com sucesso!');
+                                }
+                            }
+                        });
+                    }
+                }).disableSelection();
+            }
+            inicializarSortable();
+            function recarregarListaModulos() {
+                var cursoId = @Model.Curso.CdCurso;
+                $('#listaModulosContainer').load('/Afiliado/Cursos/_ListaModulos?cursoId=' + cursoId, function() {
+                    inicializarSortable();
+                });
+            }
+        });
+    </script>
+}

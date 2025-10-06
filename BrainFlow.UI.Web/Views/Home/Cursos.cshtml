@@ -1,0 +1,81 @@
+@{
+    ViewData["Title"] = "Cursos";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Brain Flow</title>
+    <link rel="stylesheet" href="~/css/fronted/style.css" />
+</head>
+<body>
+    <header class="nav">
+        <div class="wrap">
+            <div class="brand">
+                <img src="~/img/logo_branco.png" width="128" height="128" alt="Brain Flow">
+            </div>
+            <nav class="menu">
+                <a href="@Url.Action("Index", "Home")">Home</a>
+                <a href="@Url.Action("Cursos", "Home")">Cursos</a>
+                <a href="@Url.Action("Login", "Conta")">Login</a>
+                <a class="signup" href="@Url.Action("Cadastro", "Conta")">Cadastro</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- os grids -->
+    <main class="page">
+        <div class="grid">
+            <h1>Todos os cursos</h1>
+            <p class="sub">Busque por tema, professor ou palavra-chave.</p>
+
+            <!-- Busca (somente visual; integração futura no back) -->
+            <div class="search-wrap" style="max-width:880px">
+                <input class="search" type="search" name="q" placeholder="Ex.: programação, design, marketing..." />
+            </div>
+
+            <!-- Grid de cards com dados do backend -->
+            <section style="margin-top:18px">
+                <div class="cards-grid" id="cursosGrid" aria-live="polite">
+                    @if (ViewBag.Cursos != null && ((List<BrainFlow.Data.Models.CursoMOD>)ViewBag.Cursos).Any())
+                    {
+                        @foreach (var curso in (List<BrainFlow.Data.Models.CursoMOD>)ViewBag.Cursos)
+                        {
+                            <article class="course-card">
+                                <div class="thumb" style="background-image:url('@curso.TxCaminhoImagem'); background-size:cover; background-position:center"></div>
+                                <div class="course-main">
+                                    <h3 class="title">@curso.NoCurso</h3>
+                                    <p class="desc">@curso.TxDescricao</p>
+                                </div>
+                                <div class="price">R$ @curso.DcValor.ToString("F2")</div>
+                                <div class="course-actions">
+                                    <a class="btn dark" href="#curso-@curso.CdCurso">Ver detalhes</a>
+                                </div>
+                            </article>
+                        }
+                    }
+                    else
+                    {
+                        <!-- mostra quando não houver cursos -->
+                        <p class="sub" style="margin-top:14px; text-align:center">Nenhum curso disponível no momento.</p>
+                    }
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="wrap footer-inner">
+            <span>© Brain Flow</span>
+            <nav class="footer-nav">
+                <a href="#sobre">Sobre</a>
+                <a href="#suporte">Suporte</a>
+                <a href="#termos">Termos</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

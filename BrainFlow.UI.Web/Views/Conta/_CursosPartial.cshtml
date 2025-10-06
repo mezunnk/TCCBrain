@@ -1,0 +1,32 @@
+@model List<BrainFlow.Data.Models.CursoMOD>
+
+@if (Model != null && Model.Any())
+{
+    @foreach (var curso in Model)
+    {
+        <article class="course-card">
+            @if (!string.IsNullOrEmpty(curso.TxCaminhoImagem))
+            {
+                <div class="thumb" style="background-image: url('@curso.TxCaminhoImagem')"></div>
+            }
+            else
+            {
+                <div class="thumb"></div>
+            }
+            <div class="course-main">
+                <h3 class="title">@curso.NoCurso</h3>
+                <p class="desc">@(curso.TxDescricao.Length > 100 ? curso.TxDescricao.Substring(0, 100) + "..." : curso.TxDescricao)</p>
+            </div>
+            <div class="price">@(curso.DcValor > 0 ? $"R$ {curso.DcValor:F2}" : "Gratuito")</div>
+            <div class="course-actions">
+                <button class="btn dark" type="button" onclick="window.location.href='#'">Detalhes</button>
+            </div>
+        </article>
+    }
+}
+else
+{
+    <div class="no-courses">
+        <p>Nenhum curso encontrado.</p>
+    </div>
+}
