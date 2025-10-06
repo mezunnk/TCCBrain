@@ -207,35 +207,6 @@ BrainFlow/
 - Dashboard de afiliados (RF4.1, RF4.2)
 - Modelos de dados completos (Usuário, Curso, Afiliado, Pedido, Transação)
 
-### Em Desenvolvimento 🔧
-- **Sistema de Pagamentos PayPal (RF3.1, RF3.2, RF3.3)** - Checkout e processamento
-- **Sistema de Comissões (RF3.4, RF3.5, RF3.6)** - Cálculo e repasse para afiliados
-- **Painel Administrativo Central (RF4.3, RF4.4)** - Controle empresarial completo
-- **Sistema de Navegação de Cursos (RF2.5, RF2.6, RF2.7)** - Interface para estudantes
-
-### Planejado 📋
-- **Fórum de Discussões (RF5.1)** - Interação entre estudantes
-- **Aprovação de Afiliados (RF1.5)** - Validação administrativa
-- **API REST completa** - Integração externa
-- **Certificados digitais** - Validação de conclusão
-
----
-
-## Como Contribuir
-
-1. **Fork** o projeto
-2. Crie uma **branch** para sua feature (`git checkout -b feature/nova-feature`)
-3. **Commit** suas mudanças (`git commit -m 'Adiciona nova feature'`)
-4. **Push** para a branch (`git push origin feature/nova-feature`)
-5. Abra um **Pull Request**
-
-### Padrões de Código
-- Use **PascalCase** para classes e métodos
-- Use **camelCase** para variáveis JavaScript
-- Documente funções complexas
-- Mantenha consistência com o design system
-
----
 
 ## Status do Projeto
 
@@ -256,24 +227,6 @@ BrainFlow/
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
----
-
-## Autor
-
-**Ederson Luan**
-- Trabalho de Conclusão de Curso
-- Email: [seu-email@exemplo.com]
-- LinkedIn: [seu-linkedin]
-- GitHub: [@mezunnk](https://github.com/mezunnk)
-
----
-
-## Agradecimentos
-
-- **Instituição de Ensino** - Pelo apoio acadêmico
-- **Orientador** - Pela orientação e suporte
-- **Colegas** - Pelas contribuições e feedback
-- **Comunidade .NET** - Pelos recursos e documentação
 
 ---
 
