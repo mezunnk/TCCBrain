@@ -173,19 +173,25 @@ BrainFlow/
 ## Roadmap
 
 ### Concluído
-- [x] Sistema de autenticação e autorização
-- [x] CRUD completo de cursos
-- [x] Interface responsiva
-- [x] Sistema de afiliados básico
-- [x] Dashboard administrativo
+- [x] Sistema de autenticação e autorização (ContaController)
+- [x] Interface responsiva com design system completo
+- [x] Sistema de afiliados (modelos e páginas)
+- [x] Estrutura de cursos e módulos
+- [x] Dashboard administrativo (interface)
+- [x] Fórum de discussões (interface)
+- [x] Sistema de checkout (interface)
+- [x] Modelos de dados completos (Usuário, Curso, Afiliado, Pedido, Transação)
 
 ### Em Desenvolvimento
-- [ ] Sistema de pagamentos
-- [ ] Chat em tempo real
-- [ ] Certificados digitais
-- [ ] API REST completa
+- [ ] Integração com gateway de pagamento (estrutura criada)
+- [ ] Implementação completa dos controllers de negócio
+- [ ] Sistema de vídeos e upload de conteúdo
+- [ ] Relatórios e analytics avançados
 
 ### Planejado
+- [ ] API REST completa
+- [ ] Chat em tempo real
+- [ ] Certificados digitais
 - [ ] App mobile (React Native)
 - [ ] Integração com YouTube
 - [ ] Sistema de gamificação
@@ -211,13 +217,15 @@ BrainFlow/
 
 ## Status do Projeto
 
-| Módulo | Status | Cobertura |
-|--------|--------|-----------|
+| Módulo | Status | Implementação |
+|--------|--------|---------------|
 | Autenticação | Completo | 100% |
-| Gestão de Cursos | Completo | 95% |
-| Interface Web | Completo | 90% |
-| Sistema Afiliados | Completo | 85% |
-| Pagamentos | Em Desenvolvimento | 30% |
+| Models/Entidades | Completo | 100% |
+| Interface Web | Completo | 95% |
+| Sistema Afiliados | Interface Completa | 80% |
+| Sistema de Pagamentos | Estrutura Criada | 40% |
+| Controllers de Negócio | Em Desenvolvimento | 60% |
+| Upload de Conteúdo | Planejado | 0% |
 | Mobile | Planejado | 0% |
 
 ---

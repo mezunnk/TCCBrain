@@ -1,15 +1,15 @@
-# 🤝 Guia de Contribuição - Brain Flow
+# Guia de Contribuição - Brain Flow
 
 Obrigado por considerar contribuir com o Brain Flow! Este documento fornece diretrizes para contribuições efetivas ao projeto.
 
-## 📋 Antes de Começar
+## Antes de Começar
 
-### 🔍 Verifique Issues Existentes
+### Verifique Issues Existentes
 - Procure por issues similares antes de criar uma nova
 - Comente na issue se planeja trabalhar nela
 - Para grandes mudanças, abra uma issue para discussão primeiro
 
-### 🛠️ Configuração do Ambiente
+### Configuração do Ambiente
 
 1. **Fork e Clone**
    ```bash
@@ -27,35 +27,35 @@ Obrigado por considerar contribuir com o Brain Flow! Este documento fornece dire
    dotnet ef database update --project BrainFlow.Repository
    ```
 
-## 🎯 Tipos de Contribuição
+## Tipos de Contribuição
 
-### 🐛 Correção de Bugs
+### Correção de Bugs
 - Descreva o bug claramente
 - Inclua passos para reproduzir
 - Indique versão/ambiente
 - Forneça screenshots se visual
 
-### ✨ Novas Funcionalidades
+### Novas Funcionalidades
 - Discuta a proposta em uma issue primeiro
 - Siga os padrões de design existentes
 - Inclua testes quando aplicável
 - Documente mudanças significativas
 
-### 📚 Documentação
+### Documentação
 - Corrija typos e erros
 - Melhore exemplos existentes
 - Adicione documentação faltante
 - Traduções são bem-vindas
 
-### 🎨 Melhorias de UI/UX
+### Melhorias de UI/UX
 - Mantenha consistência com o design system
 - Teste em diferentes tamanhos de tela
 - Considere acessibilidade
 - Inclua screenshots das mudanças
 
-## 📝 Padrões de Código
+## Padrões de Código
 
-### 🏗️ Arquitetura
+### Arquitetura
 ```
 - Controllers: Lógica de apresentação
 - Repository: Acesso a dados
@@ -63,7 +63,7 @@ Obrigado por considerar contribuir com o Brain Flow! Este documento fornece dire
 - ViewModels: DTOs para views
 ```
 
-### 🎨 Frontend
+### Frontend
 ```css
 /* Use variáveis CSS */
 color: var(--navy);
@@ -74,7 +74,7 @@ color: var(--navy);
 .stats-grid { }
 ```
 
-### 🔧 Backend
+### Backend
 ```csharp
 // PascalCase para classes e métodos
 public class CursoRepository
@@ -88,9 +88,9 @@ public class CursoRepository
 }
 ```
 
-## 🔄 Processo de Pull Request
+## Processo de Pull Request
 
-### 1. 🌿 Crie uma Branch
+### 1. Crie uma Branch
 ```bash
 git checkout -b feature/nova-funcionalidade
 # ou
@@ -99,12 +99,12 @@ git checkout -b fix/correcao-bug
 git checkout -b docs/melhoria-readme
 ```
 
-### 2. 💻 Desenvolva
+### 2. Desenvolva
 - Faça commits pequenos e frequentes
 - Use mensagens descritivas
 - Teste suas mudanças localmente
 
-### 3. 📝 Commit Messages
+### 3. Commit Messages
 ```bash
 # Use o padrão:
 git commit -m "tipo: descrição breve
@@ -123,42 +123,42 @@ Fixes #123"
 - `test:` Adição/correção de testes
 - `chore:` Tarefas de build, configuração
 
-### 4. 🚀 Abra o Pull Request
+### 4. Abra o Pull Request
 
 **Template do PR:**
 ```markdown
-## 📋 Descrição
+## Descrição
 Breve descrição das mudanças
 
-## 🎯 Tipo de Mudança
+## Tipo de Mudança
 - [ ] Bug fix
 - [ ] Nova funcionalidade
 - [ ] Breaking change
 - [ ] Documentação
 
-## 🧪 Como Testar
+## Como Testar
 1. Passo 1
 2. Passo 2
 3. Resultado esperado
 
-## 📸 Screenshots
+## Screenshots
 (Se aplicável)
 
-## ✅ Checklist
+## Checklist
 - [ ] Código segue os padrões do projeto
 - [ ] Testei as mudanças localmente
 - [ ] Documentação atualizada
 - [ ] Não quebra funcionalidades existentes
 ```
 
-## 🧪 Testes
+## Testes
 
-### 🏃‍♂️ Executar Testes
+### Executar Testes
 ```bash
 dotnet test
 ```
 
-### ✍️ Escrever Testes
+### Escrever Testes
 ```csharp
 [Test]
 public async Task ObterCurso_DeveRetornarCursoCorreto()
@@ -175,9 +175,9 @@ public async Task ObterCurso_DeveRetornarCursoCorreto()
 }
 ```
 
-## 🎨 Design System
+## Design System
 
-### 🎯 Cores
+### Cores
 ```css
 --navy: #0f2741;        /* Primária */
 --accent: #f0b41b;      /* Destaque */
@@ -185,7 +185,7 @@ public async Task ObterCurso_DeveRetornarCursoCorreto()
 --muted: #6b7a90;       /* Secundário */
 ```
 
-### 📏 Espaçamentos
+### Espaçamentos
 ```css
 gap: 8px;   /* Pequeno */
 gap: 12px;  /* Médio */
@@ -193,7 +193,7 @@ gap: 18px;  /* Grande */
 gap: 24px;  /* Extra grande */
 ```
 
-### 🔘 Componentes
+### Componentes
 ```css
 .btn { /* Base */ }
 .btn.primary { /* Ação principal */ }
@@ -204,26 +204,26 @@ gap: 24px;  /* Extra grande */
 .card.stats { /* Cartão de estatística */ }
 ```
 
-## 🚫 O que NÃO Fazer
+## O que NÃO Fazer
 
-- ❌ Não faça PRs enormes (quebrem em partes menores)
-- ❌ Não altere estilos globais sem discussão
-- ❌ Não remova funcionalidades sem deprecation
-- ❌ Não commite arquivos de configuração pessoal
-- ❌ Não use `!important` no CSS sem justificativa
+- Não faça PRs enormes (quebrem em partes menores)
+- Não altere estilos globais sem discussão
+- Não remova funcionalidades sem deprecation
+- Não commite arquivos de configuração pessoal
+- Não use `!important` no CSS sem justificativa
 
-## 📞 Dúvidas e Suporte
+## Dúvidas e Suporte
 
-- 📧 **Email**: [email-do-mantenedor]
-- 💬 **Issues**: Para discussões técnicas
-- 📖 **Wiki**: Para documentação detalhada
+- **Email**: [email-do-mantenedor]
+- **Issues**: Para discussões técnicas
+- **Wiki**: Para documentação detalhada
 
-## 🎉 Reconhecimento
+## Reconhecimento
 
 Todos os contribuidores serão reconhecidos no README principal. Obrigado por ajudar a tornar o Brain Flow melhor!
 
 ---
 
 <div align="center">
-  <p><strong>Juntos construímos uma plataforma melhor! 🚀</strong></p>
+  <p><strong>Juntos construímos uma plataforma melhor!</strong></p>
 </div>
