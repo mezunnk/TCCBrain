@@ -11,8 +11,7 @@
   <header class="nav">
     <div class="wrap">
       <div class="brand">
-        <img src="../img/logo_branco.png" width="32" height="32" alt="Brain Flow">
-        Brain Flow
+        <img src="../../img/logo_branco.png" width="128" height="128" alt="Brain Flow">
       </div>
       <nav class="menu">
         <a href="home.html">Home</a>
@@ -76,7 +75,7 @@
     function renderCourse(course) {
       return `
         <div class="affiliate-course-card">
-          <div class="course-thumb" style="background-image:url('${course.image || '../img/course-placeholder.jpg'}')"></div>
+          <div class="course-thumb" style="background-image:url('${course.image || '../../img/course-placeholder.jpg'}')"></div>
           <div class="course-info">
             <span class="course-badge ${course.isFree ? 'badge-free' : 'badge-paid'}">
               ${course.isFree ? 'Aulas grátis' : 'Curso pago'}
@@ -103,7 +102,7 @@
         //   description: "Aprenda os fundamentos da linguagem mais popular da web",
         //   price: "49.90",
         //   isFree: false,
-        //   image: "../img/js-course.jpg"
+        //   image: "../../img/js-course.jpg"
         // }
       ];
 
@@ -111,11 +110,12 @@
         coursesContainer.innerHTML = courses.map(renderCourse).join('');
       }
     }
-
-    // Carregar dados quando a página estiver pronta
     document.addEventListener('DOMContentLoaded', function() {
       loadAffiliateCourses();
     });
   </script>
+
+  <!-- Header scroll effect -->
+  <script src="header-scroll.js"></script>
 </body>
 </html>

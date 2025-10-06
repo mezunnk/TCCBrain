@@ -41,8 +41,22 @@ body{
   height:72px;
   display:flex;
   align-items:center;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Header scrolled state */
+.nav.scrolled {
+  height: 60px;
+  box-shadow: 0 2px 20px rgba(15, 39, 65, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.nav.scrolled .brand {
+  font-size: 20px;
 }
 
 .nav::before {
@@ -713,7 +727,7 @@ select{
 .badge-paid{background:var(--line); color:var(--muted)}
 
 /* Affiliate Public Page Inline Styles Converted to Classes */
-.affiliate-empty-courses{text-align:center; padding:60px 20px; color:var(--muted); grid-column:1/-1}
+.affiliate-empty-courses{text-align:center; padding:60px 20px; color:var(--muted); grid-column:1/-1; display:flex; flex-direction:column; align-items:center; justify-content:center}
 .affiliate-empty-title{margin:0 0 12px}
 .affiliate-empty-text{margin:0}
 .affiliate-card-instructor{margin-top:40px}
