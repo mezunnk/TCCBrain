@@ -1,0 +1,87 @@
+
+1
+
+Automatic Zoom
+⚙
+REQUISITOS FUNCIONAIS
+Requisitos Funcionais do Projeto: BrainFlow
+Este documento descreve os requisitos funcionais da plataforma de vendas de 
+cursos BrainFlow, organizados por módulos. O foco é garantir que cada 
+funcionalidade atenda às necessidades do negócio e dos três tipos de usuário: 
+Comum, Afiliado e Administrador.
+Módulo 1: Usuários e Autenticação
+Este módulo gerencia o acesso e os perfis de todos os usuários da plataforma.
+RF1.1  Cadastro de Usuário Comum) O sistema deve permitir que um 
+novo usuário se cadastre fornecendo nome, e-mail e senha.
+RF1.2  Cadastro de Usuário Afiliado) O sistema deve oferecer um 
+formulário de cadastro específico para afiliados, que inclua dados pessoais 
+e dados de pessoa jurídica CNPJ/MEI, razão social).
+RF1.3  Login de Usuário O sistema deve permitir que usuários registrados 
+façam login com e-mail e senha.
+RF1.4  Recuperação de Senha O sistema deve permitir que um usuário 
+solicite a recuperação de senha, enviando um link para redefinir a senha 
+para o e-mail cadastrado.
+RF1.5  Aprovação de Afiliados Admin) O sistema deve fornecer uma tela 
+administrativa onde o administrador possa visualizar, aprovar ou reprovar 
+cadastros de afiliados.
+RF1.6  Gestão de Perfis de Usuário O sistema deve permitir que os 
+usuários visualizem e editem suas informações de perfil.
+Módulo 2: Gerenciamento de Cursos e Conteúdo
+Este módulo é dedicado à criação, organização e exibição dos cursos.REQUISITOS FUNCIONAIS1
+RF2.1  Cadastro e Edição de Cursos Afiliado) O sistema deve permitir 
+que um afiliado aprovado crie um novo curso, fornecendo título, descrição, 
+valor, imagem de capa e status ( Rascunho/ Publicado).
+RF2.2  Organização em Módulos e Aulas Afiliado) O sistema deve 
+permitir que o afiliado organize o conteúdo do curso em uma estrutura 
+hierárquica de módulos e aulas.
+RF2.3  Adição de Aulas Afiliado) O sistema deve permitir que o afiliado 
+adicione aulas a um módulo, especificando o título, a descrição e o link do 
+vídeo.
+RF2.4  Marcação de Aulas Gratuitas Afiliado) O sistema deve permitir 
+que o afiliado marque uma ou mais aulas como gratuitas para 
+demonstração.
+RF2.5  Visualização de Cursos Comum) O sistema deve exibir os cursos 
+disponíveis em uma tela principal, com a opção de filtrar e buscar.
+RF2.6  Visualização Detalhada do Curso Comum) O sistema deve exibir 
+a página detalhada de um curso, mostrando a estrutura de módulos e 
+aulas. Apenas aulas gratuitas devem ser acessíveis para usuários não-
+pagantes.
+RF2.7  Rastreamento de Progresso do Aluno O sistema deve rastrear e 
+exibir o progresso de cada aluno em um curso, marcando as aulas como 
+concluídas.
+Módulo 3: Fluxo de Pagamentos e Comissões
+Este módulo abrange todas as funcionalidades financeiras, da compra ao 
+repasse.
+RF3.1  Processo de Compra Comum) O sistema deve permitir que um 
+usuário adicione um curso ao carrinho e inicie o processo de checkout.
+RF3.2  Integração com PayPal Sandbox O sistema deve se integrar com a 
+API do PayPal Sandbox para processar pagamentos, direcionando o 
+usuário para a página de pagamento.
+RF3.3  Registro de Pagamento Centralizado O sistema deve registrar 
+todo o valor de uma venda na conta principal da plataforma após a 
+confirmação do PayPal.REQUISITOS FUNCIONAIS2
+RF3.4  Cálculo de Comissão O sistema deve calcular automaticamente a 
+comissão da plataforma e o valor a ser repassado ao afiliado após cada 
+venda.
+RF3.5  Registro Detalhado de Comissões O sistema deve registrar cada 
+cálculo de comissão em uma tabela específica, com o status inicial  Pendente.
+RF3.6  Repasse de Comissões Admin) O sistema deve fornecer uma 
+interface para o administrador visualizar as comissões pendentes e 
+processar o repasse aos afiliados.
+Módulo 4: Painéis e Áreas Administrativas
+Este módulo contém as telas de gestão e visualização de dados para o 
+administrador e os afiliados.
+RF4.1  Painel de Afiliado O sistema deve fornecer um painel para o 
+afiliado visualizar suas vendas, comissões geradas e status dos repasses.
+RF4.2  Páginas Personalizadas Afiliado) O sistema deve permitir que o 
+afiliado personalize uma página exclusiva para exibir seus cursos.
+RF4.3  Painel de Administração Admin) O sistema deve fornecer um 
+painel central para o administrador gerenciar usuários, cursos, banners e 
+visualizar indicadores empresariais.
+RF4.4  Tela de Indicadores Empresariais Admin) O sistema deve exibir 
+indicadores como faturamento total, faturamento líquido da plataforma, 
+total de comissões pagas e cursos mais vendidos.
+Módulo 5: Funcionalidades Adicionais
+RF5.1  Fórum para Discussões O sistema deve incluir um fórum onde os 
+usuários possam criar tópicos e postar mensagens para interagir uns com 
+os outros.REQUISITOS FUNCIONAIS3

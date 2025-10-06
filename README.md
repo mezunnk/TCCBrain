@@ -27,31 +27,27 @@ O **Brain Flow** é uma plataforma de ensino online desenvolvida como Trabalho d
 
 ## Funcionalidades
 
-### Para Estudantes
-- Navegação intuitiva de cursos
-- Sistema de progresso de aulas
-- Fórum de discussões
-- Perfil personalizado
-- Checkout seguro
+### Para Estudantes (Usuário Comum)
+- **RF2.5**: Navegação e busca de cursos disponíveis
+- **RF2.6**: Visualização detalhada com acesso a aulas gratuitas
+- **RF2.7**: Acompanhamento de progresso das aulas
+- **RF3.1**: Processo de compra e checkout
+- **RF5.1**: Participação em fórum de discussões
+- **RF1.6**: Gestão de perfil pessoal
 
-### Para Instrutores
-- Criação e edição de cursos
-- Upload de vídeos e materiais
-- Dashboard de analytics
-- Gerenciamento de módulos e aulas
-- Sistema de comissões
+### Para Afiliados
+- **RF2.1**: Criação e edição de cursos próprios
+- **RF2.2**: Organização em módulos e aulas hierárquicas
+- **RF2.3**: Adição de conteúdo em vídeo
+- **RF2.4**: Marcação de aulas gratuitas para demonstração
+- **RF4.1**: Dashboard com vendas e comissões
+- **RF4.2**: Página pública personalizada para seus cursos
 
-### Sistema de Afiliados
-- Dashboard personalizado para afiliados
-- Páginas públicas personalizáveis
-- Tracking de vendas e comissões
-- Links de afiliado únicos
-
-### Administrativo
-- Painel administrativo completo
-- Gestão de usuários e cursos
-- Relatórios financeiros
-- Controle de pagamentos
+### Para Administradores
+- **RF1.5**: Aprovação/reprovação de cadastros de afiliados
+- **RF4.3**: Painel central de administração
+- **RF4.4**: Visualização de indicadores empresariais
+- **RF3.6**: Gestão de repasses de comissões
 
 ---
 
@@ -170,32 +166,58 @@ BrainFlow/
 
 ---
 
+## Status de Implementação
+
+### Módulos Implementados ✅
+- **Sistema de Usuários e Autenticação (5/6 requisitos)**
+  - Login e registro de usuários (RF1.1, RF1.2, RF1.3)
+  - Redefinição de senha por email (RF1.4)
+  - Gestão de perfil pessoal (RF1.6)
+
+- **Gestão de Cursos (4/4 requisitos)**
+  - CRUD completo de cursos para afiliados (RF2.1, RF2.2)
+  - Sistema de upload e gestão de vídeos (RF2.3)
+  - Marcação de aulas gratuitas (RF2.4)
+
+### Em Desenvolvimento 🔧
+- **Sistema de Pagamentos (0/6 requisitos)**
+  - Modelos criados (BankflowTransacao, PedidoMOD)
+  - Integração PayPal pendente
+  - Sistema de comissões em planejamento
+
+- **Painéis Administrativos (2/4 requisitos)**
+  - Dashboard de afiliados implementado (RF4.1, RF4.2)
+  - Painel administrativo central pendente (RF4.3, RF4.4)
+
+### Planejados 📋
+- **Fórum de Discussões (0/1 requisito)**
+- **Aprovação de Afiliados (0/1 requisito)**
+
+**Total**: 11/18 requisitos funcionais implementados (61%)
+
+---
+
 ## Roadmap
 
-### Concluído
-- [x] Sistema de autenticação e autorização (ContaController)
-- [x] Interface responsiva com design system completo
-- [x] Sistema de afiliados (modelos e páginas)
-- [x] Estrutura de cursos e módulos
-- [x] Dashboard administrativo (interface)
-- [x] Fórum de discussões (interface)
-- [x] Sistema de checkout (interface)
-- [x] Modelos de dados completos (Usuário, Curso, Afiliado, Pedido, Transação)
+### Concluído ✅
+- Sistema de autenticação e autorização (ContaController)
+- Interface responsiva com design system completo
+- Sistema de afiliados (modelos e páginas)
+- Estrutura de cursos e módulos
+- Dashboard de afiliados (RF4.1, RF4.2)
+- Modelos de dados completos (Usuário, Curso, Afiliado, Pedido, Transação)
 
-### Em Desenvolvimento
-- [ ] Integração com gateway de pagamento (estrutura criada)
-- [ ] Implementação completa dos controllers de negócio
-- [ ] Sistema de vídeos e upload de conteúdo
-- [ ] Relatórios e analytics avançados
+### Em Desenvolvimento 🔧
+- **Sistema de Pagamentos PayPal (RF3.1, RF3.2, RF3.3)** - Checkout e processamento
+- **Sistema de Comissões (RF3.4, RF3.5, RF3.6)** - Cálculo e repasse para afiliados
+- **Painel Administrativo Central (RF4.3, RF4.4)** - Controle empresarial completo
+- **Sistema de Navegação de Cursos (RF2.5, RF2.6, RF2.7)** - Interface para estudantes
 
-### Planejado
-- [ ] API REST completa
-- [ ] Chat em tempo real
-- [ ] Certificados digitais
-- [ ] App mobile (React Native)
-- [ ] Integração com YouTube
-- [ ] Sistema de gamificação
-- [ ] IA para recomendações
+### Planejado 📋
+- **Fórum de Discussões (RF5.1)** - Interação entre estudantes
+- **Aprovação de Afiliados (RF1.5)** - Validação administrativa
+- **API REST completa** - Integração externa
+- **Certificados digitais** - Validação de conclusão
 
 ---
 
