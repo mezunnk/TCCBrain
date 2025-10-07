@@ -1,3 +1,4 @@
+@model BrainFlow.UI.Web.ViewModels.CursoIndexViewMOD
 @{
     ViewData["Title"] = "Cursos";
     Layout = null;
@@ -40,9 +41,9 @@
             <!-- Grid de cards com dados do backend -->
             <section style="margin-top:18px">
                 <div class="cards-grid" id="cursosGrid" aria-live="polite">
-                    @if (ViewBag.Cursos != null && ((List<BrainFlow.Data.Models.CursoMOD>)ViewBag.Cursos).Any())
+                    @if (Model?.Cursos != null && Model.Cursos.Any())
                     {
-                        @foreach (var curso in (List<BrainFlow.Data.Models.CursoMOD>)ViewBag.Cursos)
+                        @foreach (var curso in Model.Cursos)
                         {
                             <article class="course-card">
                                 <div class="thumb" style="background-image:url('@curso.TxCaminhoImagem'); background-size:cover; background-position:center"></div>

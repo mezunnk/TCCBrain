@@ -10,3 +10,15 @@ C:\Users\Mais que Café\Documents\Ederson Luan\TCC\BrainTCC\BrainFlow.Data\obj\D
 C:\Users\Mais que Café\Documents\Ederson Luan\TCC\BrainTCC\BrainFlow.Data\obj\Debug\net9.0\refint\BrainFlow.Data.dll
 C:\Users\Mais que Café\Documents\Ederson Luan\TCC\BrainTCC\BrainFlow.Data\obj\Debug\net9.0\BrainFlow.Data.pdb
 C:\Users\Mais que Café\Documents\Ederson Luan\TCC\BrainTCC\BrainFlow.Data\obj\Debug\net9.0\ref\BrainFlow.Data.dll
+C:\Users\Mais que Café\Documents\Ederson Luan\TCC\TCCBrain\BrainFlow.Data\bin\Debug\net9.0\BrainFlow.Data.deps.json
+C:\Users\Mais que Café\Documents\Ederson Luan\TCC\TCCBrain\BrainFlow.Data\bin\Debug\net9.0\BrainFlow.Data.dll
+C:\Users\Mais que Café\Documents\Ederson Luan\TCC\TCCBrain\BrainFlow.Data\bin\Debug\net9.0\BrainFlow.Data.pdb
+C:\Users\Mais que Café\Documents\Ederson Luan\TCC\TCCBrain\BrainFlow.Data\obj\Debug\net9.0\BrainFlow.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mais que Café\Documents\Ederson Luan\TCC\TCCBrain\BrainFlow.Data\obj\Debug\net9.0\BrainFlow.Data.AssemblyInfoInputs.cache
+C:\Users\Mais que Café\Documents\Ederson Luan\TCC\TCCBrain\BrainFlow.Data\obj\Debug\net9.0\BrainFlow.Data.AssemblyInfo.cs
+C:\Users\Mais que Café\Documents\Ederson Luan\TCC\TCCBrain\BrainFlow.Data\obj\Debug\net9.0\BrainFlow.Data.csproj.CoreCompileInputs.cache
+C:\Users\Mais que Café\Documents\Ederson Luan\TCC\TCCBrain\BrainFlow.Data\obj\Debug\net9.0\BrainFlow.Data.sourcelink.json
+C:\Users\Mais que Café\Documents\Ederson Luan\TCC\TCCBrain\BrainFlow.Data\obj\Debug\net9.0\BrainFlow.Data.dll
+C:\Users\Mais que Café\Documents\Ederson Luan\TCC\TCCBrain\BrainFlow.Data\obj\Debug\net9.0\refint\BrainFlow.Data.dll
+C:\Users\Mais que Café\Documents\Ederson Luan\TCC\TCCBrain\BrainFlow.Data\obj\Debug\net9.0\BrainFlow.Data.pdb
+C:\Users\Mais que Café\Documents\Ederson Luan\TCC\TCCBrain\BrainFlow.Data\obj\Debug\net9.0\ref\BrainFlow.Data.dll

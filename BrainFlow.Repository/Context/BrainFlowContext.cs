@@ -1,5 +1,6 @@
 ﻿using BrainFlow.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace BrainFlow.Repository.Context;
 
@@ -43,8 +44,16 @@ public partial class BrainFlowContext : DbContext
     public virtual DbSet<UsuarioTipoMOD> UsuarioTipos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost;Database=BRAINFLOW;Trusted_Connection=True;TrustServerCertificate=true");
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            // Configuração padrão para MySQL (será sobrescrita pela injeção de dependência)
+            optionsBuilder.UseMySql(
+                "Server=localhost;Database=brainflow;User=root;Password=;Port=3306;",
+                ServerVersion.AutoDetect("Server=localhost;Database=brainflow;User=root;Password=;Port=3306;")
+            );
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -52,7 +61,7 @@ public partial class BrainFlowContext : DbContext
         {
             entity.HasKey(e => e.CdAfiliado);
 
-            entity.ToTable("AFILIADO", tb => tb.HasComment("Armazena dados específicos dos usuários que são afiliados (instrutores)."));
+            entity.ToTable("afiliados", tb => tb.HasComment("Armazena dados específicos dos usuários que são afiliados (instrutores)."));
 
             entity.Property(e => e.CdAfiliado)
                 .HasComment("Código único do afiliado. PK.")
@@ -151,7 +160,7 @@ public partial class BrainFlowContext : DbContext
         {
             entity.HasKey(e => e.CdAula);
 
-            entity.ToTable("AULA", tb => tb.HasComment("Armazena os dados de cada aula individualmente."));
+            entity.ToTable("aulas", tb => tb.HasComment("Armazena os dados de cada aula individualmente."));
 
             entity.Property(e => e.CdAula)
                 .HasComment("Código único da aula. PK.")
@@ -264,7 +273,7 @@ public partial class BrainFlowContext : DbContext
         {
             entity.HasKey(e => e.CdComissao);
 
-            entity.ToTable("COMISSAO", tb => tb.HasComment("Registra o cálculo e o status das comissões geradas por venda."));
+            entity.ToTable("comissoes", tb => tb.HasComment("Registra o cálculo e o status das comissões geradas por venda."));
 
             entity.Property(e => e.CdComissao)
                 .HasComment("Código único da comissão. PK.")
@@ -315,7 +324,7 @@ public partial class BrainFlowContext : DbContext
         {
             entity.HasKey(e => e.CdCurso);
 
-            entity.ToTable("CURSO", tb => tb.HasComment("Armazena os dados dos cursos criados pelos afiliados."));
+            entity.ToTable("cursos", tb => tb.HasComment("Armazena os dados dos cursos criados pelos afiliados."));
 
             entity.Property(e => e.CdCurso)
                 .HasComment("Código único do curso. PK.")
@@ -336,16 +345,17 @@ public partial class BrainFlowContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("DT_AVALIACAO_ADMIN");
             entity.Property(e => e.DtCadastro)
-                .HasDefaultValueSql("(getdate())")
+                .HasDefaultValueSql("current_timestamp()")
                 .HasComment("Data de criação do registro do curso.")
                 .HasColumnType("datetime")
                 .HasColumnName("DT_CADASTRO");
             entity.Property(e => e.NoCurso)
-                .HasMaxLength(255)
+                .HasMaxLength(150)
                 .IsUnicode(false)
                 .HasComment("Nome do curso.")
                 .HasColumnName("NO_CURSO");
             entity.Property(e => e.SnAprovado)
+                .HasDefaultValue(false)
                 .HasComment("Flag que indica se o curso foi aprovado (1) pelo admin para publicação.")
                 .HasColumnName("SN_APROVADO");
             entity.Property(e => e.SnAtivo)
@@ -372,7 +382,7 @@ public partial class BrainFlowContext : DbContext
         {
             entity.HasKey(e => e.CdModulo);
 
-            entity.ToTable("MODULO", tb => tb.HasComment("Organiza o conteúdo de um curso em módulos ou seções."));
+            entity.ToTable("modulos", tb => tb.HasComment("Organiza o conteúdo de um curso em módulos ou seções."));
 
             entity.Property(e => e.CdModulo)
                 .HasComment("Código único do módulo. PK.")
@@ -417,7 +427,7 @@ public partial class BrainFlowContext : DbContext
         {
             entity.HasKey(e => e.CdPedido);
 
-            entity.ToTable("PEDIDO", tb => tb.HasComment("Armazena os cabeçalhos dos pedidos de compra de cursos."));
+            entity.ToTable("pagamentos", tb => tb.HasComment("Armazena os cabeçalhos dos pedidos de compra de cursos."));
 
             entity.Property(e => e.CdPedido)
                 .HasComment("Código único do pedido. PK.")
@@ -483,7 +493,7 @@ public partial class BrainFlowContext : DbContext
         {
             entity.HasKey(e => e.CdUsuario);
 
-            entity.ToTable("USUARIO", tb => tb.HasComment("Armazena os dados cadastrais de todos os usuários da plataforma."));
+            entity.ToTable("usuarios", tb => tb.HasComment("Armazena os dados cadastrais de todos os usuários da plataforma."));
 
             entity.Property(e => e.CdUsuario)
                 .HasComment("Código único do usuário. PK.")
@@ -530,7 +540,7 @@ public partial class BrainFlowContext : DbContext
         {
             entity.HasKey(e => e.CdUsuarioAula);
 
-            entity.ToTable("USUARIO_AULA", tb => tb.HasComment("Tabela de associação que registra o progresso de um usuário em um curso."));
+            entity.ToTable("progresso", tb => tb.HasComment("Tabela de associação que registra o progresso de um usuário em um curso."));
 
             entity.Property(e => e.CdUsuarioAula)
                 .HasComment("Código único do registro de progresso. PK.")
@@ -564,7 +574,7 @@ public partial class BrainFlowContext : DbContext
         {
             entity.HasKey(e => e.CdLogin);
 
-            entity.ToTable("USUARIO_LOGIN", tb => tb.HasComment("Armazena as credenciais de acesso e informações de segurança do usuário."));
+            entity.ToTable("usuario_login", tb => tb.HasComment("Armazena as credenciais de acesso e informações de segurança do usuário."));
 
             entity.Property(e => e.CdLogin)
                 .HasComment("Código único do registro de login. PK.")

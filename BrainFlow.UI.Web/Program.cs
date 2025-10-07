@@ -10,7 +10,7 @@ var connectionString = builder.Configuration.GetConnectionString("BrainFlowConne
 
 // Add DbContext
 builder.Services.AddDbContext<BrainFlowContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // Add e-mail settings
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
