@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BrainFlow.Repository")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+49694d71c611da037a7138c4b91d2b3c23cdf4f6")]
 [assembly: System.Reflection.AssemblyProductAttribute("BrainFlow.Repository")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BrainFlow.Repository")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
