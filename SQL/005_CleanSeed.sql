@@ -1,0 +1,34 @@
+-- Clean minimal seed for BrainFlow schema (MySQL)
+-- Objetivo: apenas dados estruturais mínimos sem emails de teste em massa.
+-- Execute após aplicar as migrations.
+
+USE brainflow;
+
+-- 1. Tipos de usuário (se ainda não existirem)
+INSERT INTO USUARIO_TIPO (NO_TIPO_USUARIO)
+SELECT 'ALUNO' FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM USUARIO_TIPO WHERE NO_TIPO_USUARIO = 'ALUNO');
+INSERT INTO USUARIO_TIPO (NO_TIPO_USUARIO)
+SELECT 'AFILIADO' FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM USUARIO_TIPO WHERE NO_TIPO_USUARIO = 'AFILIADO');
+INSERT INTO USUARIO_TIPO (NO_TIPO_USUARIO)
+SELECT 'ADMIN' FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM USUARIO_TIPO WHERE NO_TIPO_USUARIO = 'ADMIN');
+
+-- 2. Usuário administrador padrão (apenas se não existir)
+INSERT INTO usuarios (CD_TIPO_USUARIO, NO_USUARIO, TX_EMAIL, SN_ATIVO)
+SELECT (SELECT CD_TIPO_USUARIO FROM USUARIO_TIPO WHERE NO_TIPO_USUARIO = 'ADMIN'), 'Administrador', 'admin@brainflow.local', 1
+WHERE NOT EXISTS (SELECT 1 FROM usuarios WHERE TX_EMAIL = 'admin@brainflow.local');
+
+-- 3. Login do administrador (senha hash BCrypt de "password")
+INSERT INTO usuario_login (CD_USUARIO, TX_SENHA_HASH)
+SELECT u.CD_USUARIO, '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'
+FROM usuarios u
+INNER JOIN USUARIO_TIPO t ON t.CD_TIPO_USUARIO = u.CD_TIPO_USUARIO AND t.NO_TIPO_USUARIO = 'ADMIN'
+WHERE NOT EXISTS (SELECT 1 FROM usuario_login l WHERE l.CD_USUARIO = u.CD_USUARIO);
+
+-- 4. Comentários: Adicionar outros seeds de domínio (ex: tipos de transação) se necessário
+-- Exemplo (descomente se quiser):
+-- INSERT INTO BANKFLOW_TRANSACAO_TIPO (NO_TIPO_TRANSACAO)
+-- SELECT 'PIX' FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM BANKFLOW_TRANSACAO_TIPO WHERE NO_TIPO_TRANSACAO='PIX');
+-- INSERT INTO BANKFLOW_TRANSACAO_TIPO (NO_TIPO_TRANSACAO)
+-- SELECT 'CARTAO' FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM BANKFLOW_TRANSACAO_TIPO WHERE NO_TIPO_TRANSACAO='CARTAO');
+
+-- Fim do seed limpo.

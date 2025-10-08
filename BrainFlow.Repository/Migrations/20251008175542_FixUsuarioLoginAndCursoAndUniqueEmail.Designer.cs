@@ -4,6 +4,7 @@ using BrainFlow.Repository.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BrainFlow.Repository.Migrations
 {
     [DbContext(typeof(BrainFlowContext))]
-    partial class BrainFlowContextModelSnapshot : ModelSnapshot
+    [Migration("20251008175542_FixUsuarioLoginAndCursoAndUniqueEmail")]
+    partial class FixUsuarioLoginAndCursoAndUniqueEmail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -334,8 +334,8 @@ public partial class BrainFlowContext : DbContext
             entity.Property(e => e.CdCurso)
                 .HasComment("Código único do curso. PK.")
                 .HasColumnName("CD_CURSO");
-            entity.Property(e => e.DtCadastro)
-                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+            entity.Property(e => e.CdAfiliado)
+                .HasComment("FK para a tabela AFILIADO, indicando o autor do curso.")
                 .HasColumnName("CD_AFILIADO");
             entity.Property(e => e.DcValor)
                 .HasComment("Valor de venda do curso. 0 para cursos gratuitos.")
@@ -594,7 +594,7 @@ public partial class BrainFlowContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("DT_ALTERACAO");
             entity.Property(e => e.DtCadastro)
-                .HasDefaultValueSql("(getdate())")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasComment("Data de criação do registro.")
                 .HasColumnType("datetime")
                 .HasColumnName("DT_CADASTRO");
@@ -619,8 +619,7 @@ public partial class BrainFlowContext : DbContext
                 .HasConstraintName("FK_LOGIN_USUARIO");
         });
 
-        modelBuilder.Entity<UsuarioTipoMOD>(entity =>
-        {
+        // AulaAnexo
         modelBuilder.Entity<AulaAnexoMOD>(entity =>
         {
             entity.HasKey(e => e.CdAulaAnexo);
@@ -654,16 +653,24 @@ public partial class BrainFlowContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ANEXO_AULA");
         });
+
+        // UsuarioTipo
+        modelBuilder.Entity<UsuarioTipoMOD>(entity =>
+        {
             entity.HasKey(e => e.CdTipoUsuario);
-
             entity.ToTable("USUARIO_TIPO");
-
             entity.Property(e => e.CdTipoUsuario).HasColumnName("CD_TIPO_USUARIO");
             entity.Property(e => e.NoTipoUsuario)
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("NO_TIPO_USUARIO");
         });
+
+        // Índice único de email em usuarios (garante unicidade de TX_EMAIL)
+        modelBuilder.Entity<UsuarioMOD>()
+            .HasIndex(u => u.TxEmail)
+            .IsUnique()
+            .HasDatabaseName("UX_USUARIO_EMAIL");
 
         OnModelCreatingPartial(modelBuilder);
     }
