@@ -63,4 +63,7 @@ public partial class AulaMOD
     public virtual ModuloMOD CdModuloNavigation { get; set; } = null!;
 
     public virtual ICollection<UsuarioAulaMOD> UsuarioAulas { get; set; } = new List<UsuarioAulaMOD>();
+
+    // Anexos de materiais relacionados à aula
+    public virtual ICollection<AulaAnexoMOD> AulaAnexos { get; set; } = new List<AulaAnexoMOD>();
 }

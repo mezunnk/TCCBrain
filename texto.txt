@@ -1,0 +1,252 @@
+
+Anhembi Morumbi - Campus ATHON
+Análise e Desenvolvimento de Sistemas
+Ederson Luan de Souza Barros
+Ilanio Alves Freitas
+Luiz Vitor Monteiro da Silva
+Moisés Henrique Frois Francisco
+Paulo Gabriel Oliveira
+Vinicius Felipe Grando Santiago
+BRAINFLOW - PLATAFORMA DE GESTÃO E VENDA DE CURSOS ON-LINE
+Sorocaba-SP
+2025
+Ederson Luan De Souza Barros
+Ilanio Alves Freitas
+Luiz Vitor Monteiro Da Silva
+Moisés Henrique Frois Francisco
+Paulo Gabriel Oliveira
+Vinicius Felipe Grando Santiago
+07/10/25, 20:24
+Page 1 of 44
+BRAINFLOW - PLATAFORMA DE GESTÃO E VENDA DE CURSOS ON-LINE
+Projeto de Graduação - Trabalho
+apresentado como exigência parcial para
+obtenção do título de Tecnólogo em
+Análise e Desenvolvimento de Sistemas
+Orientador: Prof. Anderson Campos
+Sorocaba-SP
+2025
+Ederson Luan De Souza Barros
+Ilanio Alves Freitas
+Luiz Vitor Monteiro Da Silva
+Moisés Henrique Frois Francisco
+Paulo Gabriel Oliveira
+Vinicius Felipe Grando Santiago
+BRAINFLOW - PLATAFORMA DE GESTÃO E VENDA DE CURSOS ON-LINE
+Projeto de Graduação - Trabalho
+apresentado como exigência parcial para
+obtenção do título de Tecnólogo em
+Análise e Desenvolvimento de Sistemas
+Orientador: Prof. Anderson Campos
+Sorocaba, ___ de _____________ de 2025.
+Banca Examinadora:
+07/10/25, 20:24
+Page 2 of 44
+Examinador Título/Instituição
+Examinador Título/Instituição
+Examinador Título/Instituição
+LISTA DE FIGURAS
+Figura 1 - Diagrama de Caso e Uso        9
+Figura 2 - Diagrama de Entidade-Relacionamento        19
+Figura 3 - Tela Home        30
+Fonte: Autor        30
+Figura 4 - Tela de Cadastro        31
+Figura 5 - Tela de Login        31
+Figura 6 - Tela de Solicitação de Recuperação de Senha        32
+Figura 7 - E-mail de Recuperação de Senha        32
+Figura 8 - Tela de Recuperação de Senha        33
+Figura 9 - Tela de Cursos        33
+Figura 10 - Tela de Detalhes do Curso        34
+Figura 11 - Tela do Carrinho        34
+Figura 12 - Tela de Finalização da Compra        35
+Figura 13 - Tela de Player das Aulas        35
+Figura 14 - Tela dos Cursos Adquiridos        36
+Figura 15 - Tela dos Cursos Adquiridos        36
+Figura 16 - Cabeçalho de Acesso Afiliado        37
+Figura 17 - Tela da Home do Afiliado        37
+Figura 18 - Tela dos Cursos do Afiliado        37
+Figura 19 - Tela Detalhes do Curso do Afiliado        38
+Figura 20 - Tela de Gestão das Aulas do Módulo        38
+Figura 21 - Tela Analytics do Afiliado        39
+Figura 22 - Tela Comissões Afiliado        39
+Figura 23 - Cabeçalho de Acesso Administrador        40
+Figura 24 -Tela do Painel Administrativo        40
+Figura 25 -Tela de Gestão de Afiliados        40
+Figura 26 -Tela de Gestão de Cursos        41
+Figura 27 -Tela de Analytics da Plataforma        41
+Figura 28 -Tela de Gestão de Comissões        42
+SUMÁRIO
+1. INTRODUÇÃO        1
+1.1 Problema        2
+07/10/25, 20:24
+Page 3 of 44
+1.2 Objetivo        2
+1.3 Justificativa        3
+1.4 Metodologia        3
+2. DESENVOLVIMENTO        4
+2.1 Requisitos Funcionais        5
+2.1.1 Módulo 1: Usuários e Autenticação        5
+2.1.2 Módulo 2: Gerenciamento de Cursos e Conteúdo        6
+2.1.3 Módulo 3: Fluxo de Pagamentos e Comissões        7
+2.1.4 Módulo 4: Painéis e Áreas Administrativas        7
+2.2 Requisitos Não Funcionais        8
+2.3 Diagrama de Caso e Uso        9
+2.4 Tabela do Caso de Uso        10
+2.5 Diagrama E.R. (Entidade Relacionamento)        19
+2.5.1 Tabelas        20
+2.6 Protótipo de Interface do Usuário        30
+2.6.1 Comum        30
+2.6.2 Afiliado        37
+2.6.3 Administrador        40
+REFERÊNCIAS BIBLIOGRÁFICAS        43
+1. INTRODUÇÃO
+A tecnologia tem transformado profundamente a educação e o acesso ao conhecimento,
+consolidando a Educação a Distância (EAD) como uma modalidade de ensino de grande relevância global.
+Nesse  cenário  de  crescente  democratização  da  informação  e  do  acesso  à  internet,  plataformas  de  ensino
+online  têm  se  destacado  por  oferecerem  flexibilidade  e  a  possibilidade  de  conciliar  estudos  com  a  rotina
+pessoal e profissional. Contudo, o crescimento acelerado desse mercado também evidencia desafios, como
+a falta de soluções que ofereçam, de forma integrada, a gestão de conteúdo, a monetização transparente e
+um ambiente de interação social robusto para todos os participantes.
+O  presente  projeto  de  Trabalho  de  Conclusão  de  Curso  (TCC)  tem  como  principal  motivação  a
+criação  de  uma  plataforma  que  enderece  essas  lacunas.  A  plataforma  BrainFlow  surge  da  observação  de
+que,  apesar  da  vasta  oferta  de  conteúdo  digital,  ainda  há  um  espaço  significativo  para  um  ecossistema
+digital que integre, de forma coesa e transparente, a criação, a venda e o consumo de conteúdo
+07/10/25, 20:24
+Page 4 of 44
+educacional.  O  objetivo  central  é  construir  uma  aplicação  web  completa,  que  sirva  como  um  ambiente
+virtual que empodere tanto os produtores de conteúdo quanto os estudantes.
+1.1 Problema
+O problema central que motiva este projeto reside na fragmentação do mercado de cursos online.
+Atualmente, criadores de conteúdo e especialistas em diversas áreas enfrentam barreiras significativas para
+monetizar  seus  conhecimentos,  muitas  vezes  dependendo  de  plataformas  com  altas  taxas  de  comissão  e
+pouca  flexibilidade.  Por  outro  lado,  o  público-alvo,  em  busca  de  capacitação  contínua,  depara-se  com
+plataformas que, embora abundantes, carecem de funcionalidades integradas de afiliação e de ferramentas
+de engajamento social robustas, como fóruns de discussão. A ausência de um sistema que otimize o ciclo
+de  vida  do  conteúdo,  do  criador  ao  consumidor,  de  forma  transparente  e  lucrativa,  gera  ineficiências  e
+limita o potencial de crescimento tanto para os produtores quanto para a plataforma.
+1.2 Objetivo
+O  principal  objetivo  deste  trabalho  é  desenvolver  uma  plataforma  web  para  venda  de  cursos,
+denominada BrainFlow, que resolva a fragmentação do mercado. A solução será focada em fornecer uma
+ferramenta completa para afiliados, permitindo-lhes criar e comercializar seus próprios cursos.
+Simultaneamente, a plataforma oferecerá aos usuários finais uma experiência de aprendizado
+enriquecedora,  com  um  catálogo  diversificado  de  conteúdo  e  um  ambiente  interativo.  A  resolução  do
+problema  se  dará  pela  criação  de  um  ecossistema  digital  que  integre,  de  maneira  fluida,  o  cadastro  e  a
+gestão  de  usuários  com  perfis  distintos  (Comum,  Afiliado  e  Administrador),  a  criação  de  cursos  em  uma
+estrutura  modular,  um  sistema  de  pagamentos  transparente  e  um  ambiente  colaborativo  via  fóruns  de
+discussão, garantindo, assim, uma proposta de valor superior para todas as partes envolvidas.
+07/10/25, 20:24
+Page 5 of 44
+1.3 Justificativa
+A escolha de uma aplicação web para a plataforma BrainFlow justifica-se pela sua acessibilidade
+universal,  permitindo  que  usuários  e  afiliados  acessem  o  sistema  de  qualquer  dispositivo  com  um
+navegador e conexão à internet. Além disso, a arquitetura web oferece escalabilidade e
+manutenibilidade  superiores,  características  essenciais  para  uma  aplicação  de  e-commerce  e  educação.  A
+resolução do problema da fragmentação do mercado é crucial, pois, ao fornecer uma plataforma unificada
+e  otimizada,  este  projeto  contribui  para  o  empoderamento  de  criadores  de  conteúdo,  oferece  novas
+oportunidades  de  aprendizado  para  o  público  e  demonstra  a  aplicação  prática  de  conceitos  avançados  de
+Engenharia de Software em um contexto de negócio real. A decisão de seguir um modelo de afiliação, em
+particular, abre portas para um crescimento orgânico e sustentável da plataforma, incentivando a
+colaboração e a inovação.
+1.4 Metodologia
+O  desenvolvimento  desta  plataforma  será  conduzido  de  forma  estruturada.  Inicialmente,  o  Visual
+Studio será empregado como o ambiente de desenvolvimento integrado (IDE) para a edição do código. A
+linguagem  de  programação  C#  será  utilizada  para  implementar  toda  a  lógica  do  projeto.  A  arquitetura  da
+aplicação foi concebida em camadas, utilizando o padrão Repository Pattern para garantir a separação de
+responsabilidades. Para a persistência de dados, será utilizado o banco de dados SQL Server, com o Dapper
+como  micro-ORM  para  otimizar  o  acesso  a  dados  e  a  performance  das  consultas.  A  segurança  das
+credenciais dos usuários será garantida por meio da biblioteca BCrypt.Net-Next. No front-end, a interface
+da  plataforma  será  construída  com  HTML,  CSS  e  JavaScript,  utilizando  o  framework  Bootstrap  para  um
+design responsivo, o template AdminLTE para as áreas administrativas, e a biblioteca Font Awesome para
+os ícones.
+2. DESENVOLVIMENTO
+07/10/25, 20:24
+Page 6 of 44
+A  plataforma  utilizará  ferramentas  e  tecnologias  específicas  para  cada  etapa  do  processo.  A
+linguagem  de  programação  C#  será  empregada  para  implementar  toda  a  lógica  do  projeto,  operando  em
+um ambiente integrado de desenvolvimento (IDE) Visual Studio. A arquitetura de software adotada será a
+Arquitetura em Camadas, composta por três projetos distintos: BrainFlow.Model, BrainFlow.Repository e
+BrainFlow.UI.Web.  Essa  separação  lógica  de  responsabilidades  é  fundamental  para  o  desacoplamento  do
+código,  facilitando  a  manutenção  e  a  evolução  do  sistema.  A  comunicação  entre  as  camadas  será
+gerenciada por um sistema de Injeção de Dependência, que promoverá a flexibilidade e a testabilidade das
+classes.
+No  Front-end,  o  desenvolvimento  será  pautado  na  utilização  do  padrão  MVC  (Model-View-
+Controller),  com  o  uso  de  tecnologias  como  HTML5,  CSS3  e  JavaScript,  auxiliadas  pela  biblioteca
+AdminLTE para a construção de uma interface de usuário responsiva e intuitiva. O banco de dados, por sua
+vez,  será  o  SQL  Server,  através  do  SQL  Server  Management  Studio  (SSMS),  que  fornecerá  uma  base  de
+dados robusta e segura para o armazenamento das informações da plataforma. Para garantir um
+desenvolvimento  colaborativo  e  um  controle  eficaz  das  versões  do  projeto,  será  utilizado  o  Git  como
+plataforma  de  controle  de  versão,  com  o  repositório  centralizado  no  GitHub.  Isso  permitirá  que  o
+desenvolvimento trabalhe de forma colaborativa, gerenciando alterações e contribuições de forma
+organizada e transparente.
+2.1 Requisitos Funcionais
+A seguir, são apresentados os Requisitos Funcionais (RFs) da plataforma BrainFlow. Eles
+descrevem as funcionalidades que o sistema deve executar para atender às necessidades dos usuários e do
+negócio.  Os  requisitos  estão  organizados  em  formato  de  tabela  para  facilitar  a  consulta  e  o  rastreamento
+durante o desenvolvimento.
+2.1.1 Módulo 1: Usuários e Autenticação
+Identificação Nome Descrição Importância
+RF01 Cadastro de Usuário O sistema deve permitir que Obrigatório
+07/10/25, 20:24
+Page 7 of 44
+(Comum) um novo usuário se cadastrefornecendo nome, e-mail esenha.
+RF02 Cadastro de Usuário(Afiliado) O sistema deve oferecer umformulário de cadastroespecífico para afiliados, queinclua dados pessoais e dadosde pessoa jurídica(CNPJ/MEI, razão social).
+Obrigatório
+RF03 Login de Usuário O sistema deve permitir queusuários registrados façamlogin com e-mail e senha.
+Obrigatório
+RF04 Recuperação de Senha O sistema deve permitir queum usuário solicite arecuperação de senha,enviando um link pararedefinir a senha para o e-mail cadastrado.
+Obrigatório
+RF05 Aprovação de Afiliados(Admin) O sistema deve fornecer umatela administrativa onde oadministrador possavisualizar, aprovar oureprovar cadastros deafiliados.
+Obrigatório
+RF06 Gestão de Perfis deUsuário O sistema deve permitir queos usuários visualizem eeditem suas informações deperfil.
+Obrigatório
+2.1.2 Módulo 2: Gerenciamento de Cursos e Conteúdo
+Identificação Nome Descrição Importância
+RF07 Cadastro e Edição deCursos (Afiliado) O sistema deve permitir queum afiliado aprovado crie eedite um curso, fornecendotítulo, descrição, valor,imagem e status.
+Obrigatório
+RF08  Organização emMódulos e Aulas(Afiliado)
+O sistema deve permitir que oafiliado organize o conteúdodo curso em uma estruturahierárquica de módulos eaulas.
+Obrigatório
+RF09 Adição de Aulas(Afiliado) O sistema deve permitir que oafiliado adicione aulas a ummódulo, especificando otítulo, a descrição e o link dovídeo.
+Obrigatório
+RF10 Visualização de Cursos(Comum) O sistema deve exibir oscursos disponíveis em uma Obrigatório
+07/10/25, 20:24
+Page 8 of 44
+tela principal, com a opção defiltrar e buscar.
+RF11 Visualização Detalhadado Curso (Comum) O sistema deve exibir a páginadetalhada de um curso,mostrando a estrutura demódulos e aulas. Apenas aulasgratuitas devem ser acessíveispara usuários não-pagantes.
+Obrigatório
+RF12 Rastreamento deProgresso do Aluno O sistema deve rastrear eexibir o progresso de cadaaluno em um curso, marcandoas aulas como concluídas.
+Desejável
+2.1.3 Módulo 3: Fluxo de Pagamentos e Comissões
+Identificação Nome Descrição Importância
+RF13 Processo de Compra(Comum) O sistema deve permitir que umusuário adicione um curso aocarrinho e inicie o processo decheckout.
+Obrigatório
+RF14 Integração com PayPal O sistema deve se integrar coma API do PayPal para processarpagamentos.
+Obrigatório
+RF15 Cálculo de Comissão O sistema deve calcularautomaticamente a comissão daplataforma e o valor a serrepassado ao afiliado.
+Obrigatório
+RF16 Repasse de Comissões(Admin) O sistema deve fornecer umainterface para o administradorvisualizar as comissõespendentes e processar o repasseaos afiliados.
+Obrigatório
+2.1.4 Módulo 4: Painéis e Áreas Administrativas
+07/10/25, 20:24
+Page 9 of 44
+Identificação Nome Descrição Importância
+RF17 Painel de Afiliado O sistema deve fornecer umpainel para o afiliado visualizarsuas vendas e comissões.
+Obrigatório
+RF18 Painel deAdministração (Admin) O sistema deve fornecer umpainel central para oadministrador gerenciarusuários, cursos e visualizarindicadores.
+Obrigatório
+RF19 Fórum para Discussões O sistema deve incluir umfórum onde os usuários possaminteragir uns com os outros.
+Desejável
+2.2 Requisitos Não Funcionais
+A  seguir,  são  apresentados  os  Requisitos  Não  Funcionais  (RNFs)  da  plataforma  BrainFlow.  Eles
+definem as características do sistema que não estão diretamente ligadas às funcionalidades, como
+desempenho, segurança e usabilidade.
+Identificação Descrição
+RNF01 O sistema deve garantir a segurança dos dados,utilizando técnicas de criptografia e autenticaçãorobusta para proteger os dados.
+RNF02 O sistema deve ser responsivo, compatível comdiferentes dispositivos e navegadores.
+RNF03 O sistema deve ser escalável, suportando umaumento no número de usuários e de dados semcomprometer o desempenho.
+RNF04 O sistema deve ser intuitivo, com uma interfaceamigável que atenda às necessidades dos usuários.
+RNF05 O sistema deve ser robusto e resistente a falhas,garantindo a integridade dos dados e acontinuidade das operações.
+RNF06 O sistema deve ser facilmente mantido eatualizado, com código limpo e bem documentado.
+RNF07 O sistema deve garantir a proteção de dados e aprivacidade do usuário, em conformidade com asleis e regulamentações aplicáveis.
+07/10/25, 20:24
+Page 10 of 44

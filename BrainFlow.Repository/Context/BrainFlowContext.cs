@@ -21,6 +21,8 @@ public partial class BrainFlowContext : DbContext
 
     public virtual DbSet<AulaMOD> Aulas { get; set; }
 
+    public virtual DbSet<AulaAnexoMOD> AulaAnexos { get; set; }
+
     public virtual DbSet<BankflowTransacaoMOD> BankflowTransacaos { get; set; }
 
     public virtual DbSet<BankflowTransacaoTipoMOD> BankflowTransacaoTipos { get; set; }
@@ -74,7 +76,7 @@ public partial class BrainFlowContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("DT_APROVACAO");
             entity.Property(e => e.DtSolicitacao)
-                .HasDefaultValueSql("(getdate())")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasComment("Data em que o usuário solicitou a afiliação.")
                 .HasColumnType("datetime")
                 .HasColumnName("DT_SOLICITACAO");
@@ -89,6 +91,7 @@ public partial class BrainFlowContext : DbContext
                 .HasComment("CPF do afiliado, para fins de pagamento e fiscais.")
                 .HasColumnName("NR_CPF");
             entity.Property(e => e.SnAprovado)
+                .HasDefaultValue(false)
                 .HasComment("Flag que indica se a solicitação de afiliação foi aprovada (1) pelo admin.")
                 .HasColumnName("SN_APROVADO");
             entity.Property(e => e.SnAtivo)
@@ -173,7 +176,7 @@ public partial class BrainFlowContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("DT_ALTERACAO");
             entity.Property(e => e.DtCadastro)
-                .HasDefaultValueSql("(getdate())")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasComment("Data de criação do registro da aula.")
                 .HasColumnType("datetime")
                 .HasColumnName("DT_CADASTRO");
@@ -190,6 +193,7 @@ public partial class BrainFlowContext : DbContext
                 .HasComment("Flag que indica se a aula está ativa (1) ou inativa (0).")
                 .HasColumnName("SN_ATIVO");
             entity.Property(e => e.SnAulaGratuita)
+                .HasDefaultValue(false)
                 .HasComment("Flag que indica se a aula pode ser visualizada gratuitamente (1) por não-alunos.")
                 .HasColumnName("SN_AULA_GRATUITA");
             entity.Property(e => e.TxCaminhoVideo)
@@ -232,7 +236,7 @@ public partial class BrainFlowContext : DbContext
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("DC_VALOR_TRANSACAO");
             entity.Property(e => e.DtTransacao)
-                .HasDefaultValueSql("(getdate())")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasComment("Data e hora em que a transação ocorreu.")
                 .HasColumnType("datetime")
                 .HasColumnName("DT_TRANSACAO");
@@ -297,7 +301,7 @@ public partial class BrainFlowContext : DbContext
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("DC_VALOR_BRUTO_VENDA");
             entity.Property(e => e.DtCalculo)
-                .HasDefaultValueSql("(getdate())")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasComment("Data em que a comissão foi calculada e registrada.")
                 .HasColumnType("datetime")
                 .HasColumnName("DT_CALCULO");
@@ -306,6 +310,7 @@ public partial class BrainFlowContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("DT_REPASSE");
             entity.Property(e => e.SnRepassado)
+                .HasDefaultValue(false)
                 .HasComment("Flag que indica se a comissão já foi repassada (1) ao afiliado.")
                 .HasColumnName("SN_REPASSADO");
 
@@ -329,8 +334,8 @@ public partial class BrainFlowContext : DbContext
             entity.Property(e => e.CdCurso)
                 .HasComment("Código único do curso. PK.")
                 .HasColumnName("CD_CURSO");
-            entity.Property(e => e.CdAfiliado)
-                .HasComment("FK para a tabela AFILIADO, indicando o autor do curso.")
+            entity.Property(e => e.DtCadastro)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnName("CD_AFILIADO");
             entity.Property(e => e.DcValor)
                 .HasComment("Valor de venda do curso. 0 para cursos gratuitos.")
@@ -345,7 +350,7 @@ public partial class BrainFlowContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("DT_AVALIACAO_ADMIN");
             entity.Property(e => e.DtCadastro)
-                .HasDefaultValueSql("(getdate())")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasComment("Data de criação do registro do curso.")
                 .HasColumnType("datetime")
                 .HasColumnName("DT_CADASTRO");
@@ -355,6 +360,7 @@ public partial class BrainFlowContext : DbContext
                 .HasComment("Nome do curso.")
                 .HasColumnName("NO_CURSO");
             entity.Property(e => e.SnAprovado)
+                .HasDefaultValue(false)
                 .HasComment("Flag que indica se o curso foi aprovado (1) pelo admin para publicação.")
                 .HasColumnName("SN_APROVADO");
             entity.Property(e => e.SnAtivo)
@@ -394,7 +400,7 @@ public partial class BrainFlowContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("DT_ALTERACAO");
             entity.Property(e => e.DtCadastro)
-                .HasDefaultValueSql("(getdate())")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasComment("Data de criação do registro do módulo.")
                 .HasColumnType("datetime")
                 .HasColumnName("DT_CADASTRO");
@@ -426,7 +432,7 @@ public partial class BrainFlowContext : DbContext
         {
             entity.HasKey(e => e.CdPedido);
 
-            entity.ToTable("pagamentos", tb => tb.HasComment("Armazena os cabeçalhos dos pedidos de compra de cursos."));
+            entity.ToTable("PEDIDO", tb => tb.HasComment("Armazena os cabeçalhos dos pedidos de compra de cursos."));
 
             entity.Property(e => e.CdPedido)
                 .HasComment("Código único do pedido. PK.")
@@ -443,11 +449,12 @@ public partial class BrainFlowContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("DT_FINALIZACAO");
             entity.Property(e => e.DtPedido)
-                .HasDefaultValueSql("(getdate())")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasComment("Data em que o pedido foi criado.")
                 .HasColumnType("datetime")
                 .HasColumnName("DT_PEDIDO");
             entity.Property(e => e.SnFinalizado)
+                .HasDefaultValue(false)
                 .HasComment("Flag que indica se o pedido foi finalizado (1) (pagamento confirmado).")
                 .HasColumnName("SN_FINALIZADO");
 
@@ -505,7 +512,7 @@ public partial class BrainFlowContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("DT_ALTERACAO");
             entity.Property(e => e.DtCadastro)
-                .HasDefaultValueSql("(getdate())")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasComment("Data de criação do registro.")
                 .HasColumnType("datetime")
                 .HasColumnName("DT_CADASTRO");
@@ -539,7 +546,7 @@ public partial class BrainFlowContext : DbContext
         {
             entity.HasKey(e => e.CdUsuarioAula);
 
-            entity.ToTable("progresso", tb => tb.HasComment("Tabela de associação que registra o progresso de um usuário em um curso."));
+            entity.ToTable("USUARIO_AULA", tb => tb.HasComment("Tabela de associação que registra o progresso de um usuário em um curso."));
 
             entity.Property(e => e.CdUsuarioAula)
                 .HasComment("Código único do registro de progresso. PK.")
@@ -555,6 +562,7 @@ public partial class BrainFlowContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("DT_CONCLUSAO");
             entity.Property(e => e.SnConcluida)
+                .HasDefaultValue(false)
                 .HasComment("Flag que indica se o usuário concluiu (1) a aula.")
                 .HasColumnName("SN_CONCLUIDA");
 
@@ -613,6 +621,39 @@ public partial class BrainFlowContext : DbContext
 
         modelBuilder.Entity<UsuarioTipoMOD>(entity =>
         {
+        modelBuilder.Entity<AulaAnexoMOD>(entity =>
+        {
+            entity.HasKey(e => e.CdAulaAnexo);
+
+            entity.ToTable("AULA_ANEXO", tb => tb.HasComment("Armazena anexos (materiais) associados a uma aula."));
+
+            entity.Property(e => e.CdAulaAnexo)
+                .HasComment("Chave primária do anexo. PK.")
+                .HasColumnName("CD_AULA_ANEXO");
+            entity.Property(e => e.CdAula)
+                .HasComment("FK para a tabela AULA.")
+                .HasColumnName("CD_AULA");
+            entity.Property(e => e.NoArquivoOriginal)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasComment("Nome original do arquivo enviado.")
+                .HasColumnName("NO_ARQUIVO_ORIGINAL");
+            entity.Property(e => e.TxCaminhoArquivo)
+                .HasMaxLength(500)
+                .IsUnicode(false)
+                .HasComment("Caminho onde o arquivo foi armazenado.")
+                .HasColumnName("TX_CAMINHO_ARQUIVO");
+            entity.Property(e => e.DtUpload)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .HasComment("Data/hora do upload.")
+                .HasColumnType("datetime")
+                .HasColumnName("DT_UPLOAD");
+
+            entity.HasOne(d => d.CdAulaNavigation).WithMany(p => p.AulaAnexos)
+                .HasForeignKey(d => d.CdAula)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ANEXO_AULA");
+        });
             entity.HasKey(e => e.CdTipoUsuario);
 
             entity.ToTable("USUARIO_TIPO");
