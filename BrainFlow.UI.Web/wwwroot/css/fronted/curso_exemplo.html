@@ -10,18 +10,21 @@
 
 <body>
     <!-- Header -->
-    <header class="nav">
-        <div class="wrap">
-            <div class="brand">
-      <img src="C:\Users\Mais que Café\Documents\Ederson Luan\TCC\TCCBrain\BrainFlow.UI.Web\wwwroot\img\logo_branco.png" width="128" height="128">            </div>
-            <nav class="menu">
-                <a href="index.html">Home</a>
-                <a href="cursos.html">Cursos</a>
-                <a href="index.html">Login</a>
-                <a class="signup" href="cadastro.html">Cadastro</a>
-            </nav>
-        </div>
-    </header>
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">
+      <img src="logo_branco.png" width="128" height="128" alt="Brain Flow">
+    </div>
+    <nav class="menu">
+      <a href="home.html">Home</a>
+      <a href="cursos.html">Cursos</a>
+      <a href="index.html">Login</a>
+      <a class="signup" href="cadastro.html">Cadastro</a>
+    </nav>
+  </div>
+</header>
+
+
 
     <!-- Conteúdo -->
     <main class="page">
@@ -50,6 +53,7 @@
                     <div class="lesson-actions">
                         <button class="btn dark" id="prevBtn">← Aula anterior</button>
                         <button class="btn dark" id="nextBtn">Próxima aula →</button>
+                        <button class="btn primary" id="completeBtn">Marcar como concluída</button>
                     </div>
                 </div>
 
@@ -227,7 +231,10 @@
     document.getElementById('courseTitle').textContent = course.title;
     renderSyllabus();
     loadLesson(getCurrent() || flatLessons[0].id);
-    document.getElementById('completeBtn').addEventListener('click', completeCurrent);
+    
+    const completeBtn = document.getElementById('completeBtn');
+    if (completeBtn) completeBtn.addEventListener('click', completeCurrent);
+    
     document.getElementById('nextBtn').addEventListener('click', ()=> go(+1));
     document.getElementById('prevBtn').addEventListener('click', ()=> go(-1));
   });

@@ -144,6 +144,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Mais que Café/Documents/Ederson Luan/TCC/TCCBrain/BrainFlow.UI.Web/Views/Perfil/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyZmlsXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Mais que Café/Documents/Ederson Luan/TCC/TCCBrain/BrainFlow.UI.Web/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -162,6 +166,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Mais que Café/Documents/Ederson Luan/TCC/TCCBrain/BrainFlow.UI.Web/Views/Shared/_PartialMessage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsTWVzc2FnZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mais que Café/Documents/Ederson Luan/TCC/TCCBrain/BrainFlow.UI.Web/Views/Shared/_PartialNavbar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsTmF2YmFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Mais que Café/Documents/Ederson Luan/TCC/TCCBrain/BrainFlow.UI.Web/Views/Shared/_PartialScripts.cshtml]

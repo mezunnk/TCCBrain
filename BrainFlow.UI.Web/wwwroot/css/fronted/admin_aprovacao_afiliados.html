@@ -1,29 +1,66 @@
-<!DOCTYPE html><html lang="pt-br"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Aprovação de Afiliados — Admin</title>
-<link rel="stylesheet" href="/css/site.css"><link rel="stylesheet" href="/css/custom.css">
-</head><body>
-<header class="navbar navbar-dark bg-dark"><div class="container"><a class="navbar-brand" href="/">BrainFlow — Admin</a></div></header>
-<main class="container py-4">
-<div class="d-flex align-items-center justify-content-between mb-3">
-<h1 class="m-0">Solicitações de Afiliado</h1>
-<div class="input-group" style="max-width:360px">
-<span class="input-group-text">Buscar</span>
-<input class="form-control" placeholder="nome, e-mail ou CNPJ">
-</div>
-</div>
-<div class="table-responsive">
-<table class="table table-striped align-middle">
-<thead><tr><th>Nome</th><th>E-mail</th><th>CNPJ</th><th>Razão Social</th><th>Data</th><th>Status</th><th>Ações</th></tr></thead>
-<tbody>
-<tr>
-<td>Maria Silva</td><td>maria@ex.com</td><td>12.345.678/0001-90</td><td>Studio Silva ME</td>
-<td>03/10/2025</td><td><span class="badge bg-warning">Pendente</span></td>
-<td class="d-flex gap-2"><button class="btn btn-success btn-sm">Aprovar</button><button class="btn btn-outline-danger btn-sm">Reprovar</button></td>
-</tr>
-</tbody>
-</table>
-</div>
-</main>
-<footer class="py-4 bg-dark text-center text-white-50"><small>© BrainFlow</small></footer>
-</body></html>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Aprovação de Afiliados — Admin</title>
+    <link rel="stylesheet" href="/css/site.css">
+    <link rel="stylesheet" href="/css/custom.css">
+</head>
+
+<body>
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">
+      <img src="logo_branco.png" width="128" height="128" alt="Brain Flow">
+    </div>
+    <nav class="menu">
+      <a href="home.html">Home</a>
+      <a href="cursos.html">Cursos</a>
+      <a href="index.html">Login</a>
+      <a class="signup" href="cadastro.html">Cadastro</a>
+    </nav>
+  </div>
+</header>
+    <!-- Main content -->
+    <main class="container py-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <h1 class="m-0">Solicitações de Afiliado</h1>
+            <div class="input-group" style="max-width:360px">
+                <span class="input-group-text">Buscar</span>
+                <input class="form-control" placeholder="nome, e-mail ou CNPJ">
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>CNPJ</th>
+                        <th>Razão Social</th>
+                        <th>Data</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Maria Silva</td>
+                        <td>maria@ex.com</td>
+                        <td>12.345.678/0001-90</td>
+                        <td>Studio Silva ME</td>
+                        <td>03/10/2025</td>
+                        <td><span class="badge bg-warning">Pendente</span></td>
+                        <td class="d-flex gap-2"><button class="btn btn-success btn-sm">Aprovar</button><button
+                                class="btn btn-outline-danger btn-sm">Reprovar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <footer class="py-4 bg-dark text-center text-white-50"><small>© BrainFlow</small></footer>
+</body>
+
+</html>

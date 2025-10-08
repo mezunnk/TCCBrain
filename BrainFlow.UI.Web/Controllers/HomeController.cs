@@ -1,5 +1,4 @@
 using BrainFlow.UI.Web.ViewModels;
-using BrainFlow.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,12 +7,10 @@ namespace BrainFlow.UI.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ICursoREP _cursoRepository;
 
-        public HomeController(ILogger<HomeController> logger, ICursoREP cursoRepository)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _cursoRepository = cursoRepository;
         }
 
         public IActionResult Index()
@@ -21,15 +18,9 @@ namespace BrainFlow.UI.Web.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Cursos()
+        public IActionResult Cursos()
         {
-            var cursos = await _cursoRepository.GetAll();
-            var viewModel = new CursoIndexViewMOD
-            {
-                Cursos = cursos,
-                PesquisaNomeCurso = ""
-            };
-            return View(viewModel);
+            return View();
         }
 
         public IActionResult Privacy()

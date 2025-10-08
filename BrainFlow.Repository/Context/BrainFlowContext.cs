@@ -345,17 +345,16 @@ public partial class BrainFlowContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("DT_AVALIACAO_ADMIN");
             entity.Property(e => e.DtCadastro)
-                .HasDefaultValueSql("current_timestamp()")
+                .HasDefaultValueSql("(getdate())")
                 .HasComment("Data de criação do registro do curso.")
                 .HasColumnType("datetime")
                 .HasColumnName("DT_CADASTRO");
             entity.Property(e => e.NoCurso)
-                .HasMaxLength(150)
+                .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasComment("Nome do curso.")
                 .HasColumnName("NO_CURSO");
             entity.Property(e => e.SnAprovado)
-                .HasDefaultValue(false)
                 .HasComment("Flag que indica se o curso foi aprovado (1) pelo admin para publicação.")
                 .HasColumnName("SN_APROVADO");
             entity.Property(e => e.SnAtivo)
