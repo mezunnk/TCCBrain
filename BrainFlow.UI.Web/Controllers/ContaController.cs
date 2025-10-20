@@ -78,10 +78,6 @@ namespace BrainFlow.UI.Web.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            // Temporariamente comentado para teste do design
-            // Busca cursos para exibir na página de login
-            // var cursos = await _cursoREP.GetAll();
-            // ViewBag.Cursos = cursos.Take(6).ToList(); // Limita a 6 cursos
             ViewBag.Cursos = new List<BrainFlow.Data.Models.CursoMOD>(); // Lista vazia temporária
             return View();
         }
