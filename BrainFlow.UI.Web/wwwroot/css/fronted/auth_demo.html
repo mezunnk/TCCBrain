@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sistema de Autenticação Dinâmica - Brain Flow</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="nav">
+    <div class="wrap">
+        <div class="brand">
+            <img src="../../img/logo_branco.png" width="128" height="128" alt="Brain Flow">
+        </div>
+        <nav class="menu" id="dynamicMenu">
+            <!-- Menu será atualizado dinamicamente -->
+            <a href="/Home/Index">Home</a>
+            <a href="/Home/Cursos">Cursos</a>
+            <a href="/Conta/Login">Login</a>
+            <a href="/Conta/Cadastro" class="signup">Cadastro</a>
+        </nav>
+    </div>
+</header>
+
+<main class="page">
+    <div class="grid">
+        <div class="col-12">
+            <div class="card">
+                <h2>🚀 Sistema de Autenticação Dinâmica</h2>
+                
+                <div class="auth-status">
+                    <h3>Status da Autenticação:</h3>
+                    <div id="authInfo">
+                        <p><strong>Estado:</strong> <span id="authState">Verificando...</span></p>
+                        <p><strong>Usuário:</strong> <span id="userName">-</span></p>
+                        <p><strong>Email:</strong> <span id="userEmail">-</span></p>
+                        <p><strong>Tipo:</strong> <span id="userType">-</span></p>
+                        <p><strong>Última Verificação:</strong> <span id="lastCheck">-</span></p>
+                    </div>
+                </div>
+
+                <div class="test-controls">
+                    <h3>Testar Diferentes Estados:</h3>
+                    <div class="button-group">
+                        <button onclick="testAuth('guest')" class="btn btn-light">👥 Visitante</button>
+                        <button onclick="testAuth('user')" class="btn btn-primary">👤 Usuário</button>
+                        <button onclick="testAuth('affiliate')" class="btn btn-secondary">💼 Afiliado</button>
+                        <button onclick="testAuth('admin')" class="btn btn-success">⚙️ Admin</button>
+                        <button onclick="checkRealAuth()" class="btn btn-warning">🔄 Verificar Real</button>
+                    </div>
+                </div>
+
+                <div class="navigation-display">
+                    <h3>Menu Atual:</h3>
+                    <div id="menuPreview" class="menu-preview"></div>
+                </div>
+
+                <div class="implementation-info">
+                    <h3>📋 Como Funciona:</h3>
+                    <ol>
+                        <li><strong>Verificação Automática:</strong> JavaScript chama <code>/Conta/GetUserInfo</code></li>
+                        <li><strong>Atualização Dinâmica:</strong> Menu é atualizado baseado no tipo de usuário</li>
+                        <li><strong>Monitoramento:</strong> Verifica autenticação a cada 5 minutos</li>
+                        <li><strong>Logout Automático:</strong> Detecta quando sessão expira</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+// Sistema de Autenticação Dinâmica - Versão Simplificada
+const AuthSystem = {
+    isAuthenticated: false,
+    userInfo: null,
+
+    // Verificar autenticação real via API
+    async checkAuthentication() {
+        try {
+            const response = await fetch('/Conta/GetUserInfo');
+            const data = await response.json();
+            
+            this.isAuthenticated = data.IsAuthenticated;
+            this.userInfo = data.IsAuthenticated ? data : null;
+            
+            this.updateDisplay();
+            this.updateNavigation();
+            
+            return data;
+        } catch (error) {
+            console.log('Erro ao verificar autenticação:', error);
+            this.isAuthenticated = false;
+            this.userInfo = null;
+            this.updateDisplay();
+            this.updateNavigation();
+        }
+    },
+
+    // Atualizar navegação baseada no estado
+    updateNavigation() {
+        const menu = document.getElementById('dynamicMenu');
+        if (!menu) return;
+
+        if (this.isAuthenticated && this.userInfo) {
+            menu.innerHTML = this.getAuthenticatedMenu();
+        } else {
+            menu.innerHTML = this.getPublicMenu();
+        }
+
+        this.updateMenuPreview();
+    },
+
+    // Menu para usuários autenticados
+    getAuthenticatedMenu() {
+        const userType = this.userInfo.CdTipoUsuario;
+        let html = '<a href="/Home/Index">Home</a><a href="/Home/Cursos">Cursos</a>';
+
+        switch (userType) {
+            case 1: // Usuário
+                html += '<a href="/Perfil/Index">Perfil</a>';
+                break;
+            case 2: // Afiliado
+                html += '<a href="/Afiliado/Dashboard">Dashboard</a>';
+                html += '<a href="/Afiliado/MeusLinks">Meus Links</a>';
+                break;
+            case 3: // Admin
+                html += '<a href="/Admin/Index">Admin</a>';
+                break;
+        }
+
+        html += `<a href="#" onclick="AuthSystem.logout()" class="signup">Sair</a>`;
+        return html;
+    },
+
+    // Menu para usuários não autenticados
+    getPublicMenu() {
+        return `
+            <a href="/Home/Index">Home</a>
+            <a href="/Home/Cursos">Cursos</a>
+            <a href="/Conta/Login">Login</a>
+            <a href="/Conta/Cadastro" class="signup">Cadastro</a>
+        `;
+    },
+
+    // Atualizar exibição do status
+    updateDisplay() {
+        const elements = {
+            authState: document.getElementById('authState'),
+            userName: document.getElementById('userName'),
+            userEmail: document.getElementById('userEmail'),
+            userType: document.getElementById('userType'),
+            lastCheck: document.getElementById('lastCheck')
+        };
+
+        if (this.isAuthenticated && this.userInfo) {
+            elements.authState.textContent = '✅ Autenticado';
+            elements.authState.style.color = '#28a745';
+            elements.userName.textContent = this.userInfo.Nome || '-';
+            elements.userEmail.textContent = this.userInfo.Email || '-';
+            
+            const tipos = { 1: 'Usuário Comum', 2: 'Afiliado', 3: 'Administrador' };
+            elements.userType.textContent = tipos[this.userInfo.CdTipoUsuario] || 'Desconhecido';
+        } else {
+            elements.authState.textContent = '❌ Não Autenticado';
+            elements.authState.style.color = '#dc3545';
+            elements.userName.textContent = '-';
+            elements.userEmail.textContent = '-';
+            elements.userType.textContent = '-';
+        }
+
+        elements.lastCheck.textContent = new Date().toLocaleTimeString();
+    },
+
+    // Atualizar preview do menu
+    updateMenuPreview() {
+        const preview = document.getElementById('menuPreview');
+        const menu = document.getElementById('dynamicMenu');
+        if (preview && menu) {
+            preview.innerHTML = menu.innerHTML;
+        }
+    },
+
+    // Logout
+    async logout() {
+        try {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/Conta/Logout';
+            
+            // Adicionar token antiforgery se existir
+            const token = document.querySelector('input[name="__RequestVerificationToken"]');
+            if (token) {
+                const tokenInput = document.createElement('input');
+                tokenInput.type = 'hidden';
+                tokenInput.name = '__RequestVerificationToken';
+                tokenInput.value = token.value;
+                form.appendChild(tokenInput);
+            }
+
+            document.body.appendChild(form);
+            form.submit();
+        } catch (error) {
+            alert('Erro ao fazer logout: ' + error.message);
+        }
+    }
+};
+
+// Funções de teste
+function testAuth(type) {
+    const testData = {
+        guest: { isAuth: false, userInfo: null },
+        user: { isAuth: true, userInfo: { CdUsuario: 1, Nome: "João Silva", Email: "joao@teste.com", CdTipoUsuario: 1, IsAuthenticated: true }},
+        affiliate: { isAuth: true, userInfo: { CdUsuario: 2, Nome: "Maria Afiliada", Email: "maria@teste.com", CdTipoUsuario: 2, IsAuthenticated: true }},
+        admin: { isAuth: true, userInfo: { CdUsuario: 3, Nome: "Admin Sistema", Email: "admin@teste.com", CdTipoUsuario: 3, IsAuthenticated: true }}
+    };
+
+    const data = testData[type];
+    AuthSystem.isAuthenticated = data.isAuth;
+    AuthSystem.userInfo = data.userInfo;
+    AuthSystem.updateDisplay();
+    AuthSystem.updateNavigation();
+}
+
+function checkRealAuth() {
+    AuthSystem.checkAuthentication();
+}
+
+// Inicializar quando página carrega
+document.addEventListener('DOMContentLoaded', function() {
+    AuthSystem.checkAuthentication();
+    
+    // Verificar a cada 5 minutos
+    setInterval(() => AuthSystem.checkAuthentication(), 5 * 60 * 1000);
+});
+</script>
+
+<style>
+.auth-status {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 25px 0;
+    border-left: 5px solid var(--primary-color);
+}
+
+.auth-status h3 {
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+#authInfo p {
+    margin: 12px 0;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+#authInfo strong {
+    display: inline-block;
+    width: 140px;
+    color: var(--text-color);
+}
+
+.test-controls {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.test-controls h3 {
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.btn-light { background: #f8f9fa; color: #495057; }
+.btn-primary { background: var(--primary-color); color: white; }
+.btn-secondary { background: #6c757d; color: white; }
+.btn-success { background: #28a745; color: white; }
+.btn-warning { background: #ffc107; color: #212529; }
+
+.navigation-display {
+    background: #e9ecef;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 25px 0;
+}
+
+.navigation-display h3 {
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.menu-preview {
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+    font-family: monospace;
+    font-size: 14px;
+    overflow-x: auto;
+}
+
+.menu-preview a {
+    display: inline-block;
+    margin-right: 15px;
+    padding: 5px 10px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.menu-preview a.signup {
+    background: #28a745;
+}
+
+.implementation-info {
+    background: #d1ecf1;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 25px 0;
+    border: 1px solid #bee5eb;
+}
+
+.implementation-info h3 {
+    color: #0c5460;
+    margin-bottom: 15px;
+}
+
+.implementation-info ol {
+    margin: 0;
+    padding-left: 25px;
+}
+
+.implementation-info li {
+    margin: 12px 0;
+    line-height: 1.6;
+    color: #0c5460;
+}
+
+.implementation-info code {
+    background: #f8f9fa;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+    color: #e83e8c;
+}
+
+#authState {
+    font-weight: bold;
+    font-size: 18px;
+}
+</style>
+
+</body>
+</html>

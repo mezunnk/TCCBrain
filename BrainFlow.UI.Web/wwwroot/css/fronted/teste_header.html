@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Brain Flow – Teste de Header</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="nav">
+    <div class="wrap">
+      <div class="brand">
+        <img src="../../img/logo_branco.png" width="128" height="128" alt="Brain Flow">
+      </div>
+      <nav class="menu" id="menu">
+        <!-- Menu será preenchido via JavaScript baseado na autenticação -->
+        <a href="/Home/Index">Home</a>
+        <a href="/Home/Cursos">Cursos</a>
+        <a href="/Conta/Login">Login</a>
+        <a href="/Conta/Cadastro" class="signup">Cadastro</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="grid">
+      <h1>Teste de Headers Dinâmicos</h1>
+      
+      <div class="card">
+        <h2>Simular diferentes tipos de usuário:</h2>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px;">
+          <button class="btn primary" onclick="setHeader('guest')">Visitante</button>
+          <button class="btn primary" onclick="setHeader('user')">Usuário</button>
+          <button class="btn primary" onclick="setHeader('affiliate')">Afiliado</button>
+          <button class="btn primary" onclick="setHeader('admin')">Admin</button>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h3>Estado atual:</h3>
+        <p id="status">Carregando...</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>© Brain Flow</span>
+      <nav class="footer-nav">
+        <a href="sobre.html">Sobre</a>
+        <a href="suporte.html">Suporte</a>
+        <a href="termos.html">Termos</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    const headerConfigs = {
+      guest: {
+        name: 'Visitante (não logado)',
+        menu: `
+          <a href="home.html">Home</a>
+          <a href="cursos.html">Cursos</a>
+          <a href="index.html">Login</a>
+          <a class="signup" href="cadastro.html">Cadastro</a>
+        `
+      },
+      user: {
+        name: 'Usuário Comum (logado)',
+        menu: `
+          <a href="home.html">Home</a>
+          <a href="cursos.html">Cursos</a>
+          <a href="perfil_usuario.html">Perfil</a>
+          <a class="signup" href="index.html">Sair</a>
+        `
+      },
+      affiliate: {
+        name: 'Afiliado (logado)',
+        menu: `
+          <a href="home.html">Home</a>
+          <a href="afiliado_dashboard.html">Dashboard</a>
+          <a href="afiliado_pagina_config.html">Meus Links</a>
+          <a class="signup" href="index.html">Sair</a>
+        `
+      },
+      admin: {
+        name: 'Administrador (logado)',
+        menu: `
+          <a href="home.html">Home</a>
+          <a href="cursos.html">Cursos</a>
+          <a href="admin_dashboard.html">Admin</a>
+          <a class="signup" href="index.html">Sair</a>
+        `
+      }
+    };
+
+    function setHeader(userType) {
+      const config = headerConfigs[userType];
+      document.getElementById('menu').innerHTML = config.menu;
+      document.getElementById('status').textContent = `Header configurado para: ${config.name}`;
+      
+      // Salva o estado no localStorage para demonstração
+      localStorage.setItem('userType', userType);
+    }
+
+    // Inicializa com o estado salvo ou como visitante
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedType = localStorage.getItem('userType') || 'guest';
+      setHeader(savedType);
+    });
+  </script>
+</body>
+</html>

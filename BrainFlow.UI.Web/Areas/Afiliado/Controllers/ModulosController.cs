@@ -8,7 +8,7 @@ using System.Security.Claims; // Para User.FindFirstValue
 namespace BrainFlow.UI.Web.Areas.Afiliado.Controllers
 {
     [Area("Afiliado")]
-    [Authorize]
+    [Authorize(Policy = "AfiliadoOrAdmin")]
     public class ModulosController : Controller
     {
         #region Repositores

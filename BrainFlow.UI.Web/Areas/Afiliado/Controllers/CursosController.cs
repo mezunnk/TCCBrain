@@ -8,7 +8,7 @@ using System.Security.Claims;
 namespace BrainFlow.UI.Web.Areas.Afiliado.Controllers
 {
     [Area("Afiliado")]
-    [Authorize(Roles = "2")]
+    [Authorize(Policy = "AfiliadoOrAdmin")]
     public class CursosController : Controller
     {
         #region Repositories

@@ -36,11 +36,11 @@
       <section class="course-layout">
         <div class="player-area">
           <!-- Área do vídeo -->
-          <div class="video-frame">
-            <!--
-         
-              <iframe src="URL-DO-VIDEO" title="Aula atual" frameborder="0" allowfullscreen></iframe>
-            -->
+          <div class="video-frame" id="videoFrame">
+            <iframe id="videoIframe" src="" title="Aula atual" frameborder="0" allowfullscreen style="display: none;"></iframe>
+            <div id="noVideoMessage" style="display: flex; align-items: center; justify-content: center; height: 100%; background: var(--bg); color: var(--muted); font-size: 18px;">
+              Nenhum vídeo selecionado
+            </div>
           </div>
 
           <!-- Cabeçalho/descrição da aula atual -->
@@ -49,32 +49,17 @@
             <p class="desc" id="lessonDesc">Descrição breve da aula.</p>
           </div>
 
-          <!-- Ações da aula (deixe os botões; o back decide habilitar/ação) -->
+          <!-- Ações da aula -->
           <div class="lesson-actions">
-            <button class="btn dark" disabled>← Aula anterior</button>
-            <button class="btn dark" disabled>Próxima aula →</button>
+            <button class="btn dark" id="prevBtn">← Aula anterior</button>
+            <button class="btn dark" id="nextBtn">Próxima aula →</button>
+            <button class="btn primary" id="completeBtn">Marcar como concluída</button>
           </div>
         </div>
 
-        <!-- Sidebar: módulos e aulas (o back deve renderizar a lista) -->
+        <!-- Sidebar: módulos e aulas -->
         <aside class="syllabus" id="syllabus">
-          <!--
-    
-            <details class="module" open>
-              <summary>
-                <strong>NOME DO MÓDULO</strong>
-                <span class="badge">0/0</span>
-              </summary>
-              <ul class="lessons">
-                <li class="lesson">
-                  <a class="lesson-link" href="curso.html?course_id=ID&lesson_id=ID-DA-AULA">
-                    <span class="dot"></span>
-                    Título da aula
-                  </a>
-                </li>
-              </ul>
-            </details>
-          -->
+          <!-- conteúdo gerado via JS -->
         </aside>
       </section>
     </div>
@@ -84,11 +69,167 @@
     <div class="wrap footer-inner">
       <span>© Brain Flow</span>
       <nav class="footer-nav">
-        <a href="#">Sobre</a>
-        <a href="#">Suporte</a>
-        <a href="#">Termos</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="suporte.html">Suporte</a>
+        <a href="termos.html">Termos</a>
       </nav>
     </div>
   </footer>
+
+  <script>
+    // ---- Dados do curso (carregados via API) ----
+    let course = null;
+    
+    // Função para carregar dados do curso via API
+    async function loadCourseData() {
+      try {
+        // TODO: Implementar chamada para API real
+        // const response = await fetch(`/api/courses/${courseId}`);
+        // course = await response.json();
+        
+        // Por enquanto, dados vazios
+        course = {
+          id: null,
+          title: 'Carregando...',
+          modules: []
+        };
+      } catch (error) {
+        console.error('Erro ao carregar curso:', error);
+        course = {
+          id: null,
+          title: 'Erro ao carregar curso',
+          modules: []
+        };
+      }
+    }
+
+    // ---- Estado / progresso (localStorage só pra demo) ----
+    const keyProgress = `progress:${course.id}`;
+    const keyCurrent = `current:${course.id}`;
+    const getProgress = () => JSON.parse(localStorage.getItem(keyProgress) || '{}');
+    const setProgress = (obj) => localStorage.setItem(keyProgress, JSON.stringify(obj));
+    const setCurrent = (lessonId) => localStorage.setItem(keyCurrent, lessonId);
+    const getCurrent = () => localStorage.getItem(keyCurrent);
+
+    // Flatten das aulas pra navegar anterior/próxima
+    const flatLessons = course.modules.flatMap(m => m.lessons.map(l => ({...l, moduleId: m.id})));
+
+    // Render da sidebar/módulos
+    function renderSyllabus() {
+      const wrap = document.getElementById('syllabus');
+      const progress = getProgress();
+      wrap.innerHTML = course.modules.map(m => {
+        const count = m.lessons.length;
+        const done = m.lessons.filter(l => progress[l.id]).length;
+        return `
+          <details class="module" open>
+            <summary>
+              <strong>${m.title}</strong>
+              <span class="badge">${done}/${count}</span>
+            </summary>
+            <ul class="lessons">
+              ${m.lessons.map(l => `
+                <li class="lesson ${progress[l.id] ? 'done' : ''}">
+                  <button data-lesson="${l.id}" class="lesson-link">
+                    <span class="dot"></span>
+                    ${l.title}
+                  </button>
+                </li>
+              `).join('')}
+            </ul>
+          </details>
+        `;
+      }).join('');
+      wrap.querySelectorAll('.lesson-link').forEach(btn=>{
+        btn.addEventListener('click', ()=> loadLesson(btn.dataset.lesson));
+      });
+    }
+
+    // Carrega uma aula no player
+    function loadLesson(lessonId){
+      if (!course || !course.modules.length) return;
+      
+      const lesson = flatLessons.find(l => l.id === lessonId) || flatLessons[0];
+      if(!lesson) return;
+
+      document.getElementById('lessonTitle').textContent = lesson.title;
+      document.getElementById('lessonDesc').textContent = lesson.desc || '';
+      
+      const iframe = document.getElementById('videoIframe');
+      const noVideoMsg = document.getElementById('noVideoMessage');
+      
+      if (lesson.video) {
+        iframe.src = lesson.video;
+        iframe.style.display = 'block';
+        noVideoMsg.style.display = 'none';
+      } else {
+        iframe.style.display = 'none';
+        noVideoMsg.style.display = 'flex';
+      }
+
+      setCurrent(lesson.id);
+      renderSyllabus();
+      updateProgressPct();
+
+      // Habilita/Desabilita navegação
+      const idx = flatLessons.findIndex(l => l.id === lesson.id);
+      document.getElementById('prevBtn').disabled = idx <= 0;
+      document.getElementById('nextBtn').disabled = idx >= flatLessons.length-1;
+    }
+
+    // Marca como concluída
+    function completeCurrent(){
+      const cur = getCurrent() || flatLessons[0].id;
+      const prog = getProgress();
+      prog[cur] = true;
+      setProgress(prog);
+      renderSyllabus();
+      updateProgressPct();
+    }
+
+    // Avançar/voltar
+    function go(step){
+      const cur = getCurrent() || flatLessons[0].id;
+      const idx = flatLessons.findIndex(l => l.id === cur);
+      const target = flatLessons[idx + step];
+      if(target) loadLesson(target.id);
+    }
+
+    // Atualiza % de progresso
+    function updateProgressPct(){
+      const prog = getProgress();
+      const done = flatLessons.filter(l => prog[l.id]).length;
+      const pct = Math.round((done / flatLessons.length) * 100);
+      document.getElementById('progressPct').textContent = isNaN(pct) ? '0%' : `${pct}%`;
+    }
+
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', async ()=>{
+      await loadCourseData();
+      
+      if (course && course.modules.length > 0) {
+        document.getElementById('courseTitle').textContent = course.title;
+        renderSyllabus();
+        loadLesson(getCurrent() || flatLessons[0]?.id);
+        
+        const completeBtn = document.getElementById('completeBtn');
+        if (completeBtn) completeBtn.addEventListener('click', completeCurrent);
+        
+        document.getElementById('nextBtn').addEventListener('click', ()=> go(+1));
+        document.getElementById('prevBtn').addEventListener('click', ()=> go(-1));
+      } else {
+        // Sem dados do curso
+        document.getElementById('courseTitle').textContent = course?.title || 'Curso não encontrado';
+        document.getElementById('lessonTitle').textContent = 'Nenhuma aula disponível';
+        document.getElementById('lessonDesc').textContent = 'Este curso ainda não possui conteúdo.';
+        document.getElementById('progressPct').textContent = '0%';
+        
+        // Desabilita todos os controles
+        document.getElementById('prevBtn').disabled = true;
+        document.getElementById('nextBtn').disabled = true;
+        document.getElementById('completeBtn').disabled = true;
+      }
+    });
+  </script>
 </body>
 </html>

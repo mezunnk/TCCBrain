@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BrainFlow.UI.Web.Areas.Afiliado.Controllers
 {
     [Area("Afiliado")]
-    [Authorize(Roles = "2")]
+    [Authorize(Policy = "AfiliadoOrAdmin")]
     public class HomeController : Controller
     {
         #region Methods

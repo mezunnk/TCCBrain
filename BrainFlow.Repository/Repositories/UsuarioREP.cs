@@ -30,6 +30,19 @@ namespace BrainFlow.Repository.Repositories
         {
             return await _context.Usuarios.FirstOrDefaultAsync(u => u.TxEmail == email);
         }
+
+        /// <summary>
+        /// Verifica se um e-mail já existe no banco (Async)
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public async Task<UsuarioMOD> GetByEmailAsync(string email)
+        {
+            return await _context.Usuarios
+                .Include(u => u.CdTipoUsuarioNavigation)
+                .Include(u => u.UsuarioLogins)
+                .FirstOrDefaultAsync(u => u.TxEmail == email && u.SnAtivo == true);
+        }
         #endregion
 
         #region Add
@@ -43,6 +56,67 @@ namespace BrainFlow.Repository.Repositories
             await _context.Usuarios.AddAsync(usuario);
             await _context.SaveChangesAsync();
             return usuario;
+        }
+
+        /// <summary>
+        /// Adiciona um novo usuário (Async)
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <param name="senha"></param>
+        /// <returns></returns>
+        public async Task<UsuarioMOD> CreateAsync(UsuarioMOD usuario, string senha)
+        {
+            // Criar usuário
+            await _context.Usuarios.AddAsync(usuario);
+            await _context.SaveChangesAsync();
+
+            // Gerar hash da senha
+            var senhaHash = GerarHashSenha(senha);
+
+            // Criar registro de login com senha
+            var usuarioLogin = new UsuarioLoginMOD
+            {
+                CdUsuario = usuario.CdUsuario,
+                TxSenhaHash = senhaHash,
+                DtCadastro = DateTime.Now
+            };
+
+            await _context.UsuarioLogins.AddAsync(usuarioLogin);
+            await _context.SaveChangesAsync();
+
+            return usuario;
+        }
+
+        /// <summary>
+        /// Gera hash da senha
+        /// </summary>
+        /// <param name="senha"></param>
+        /// <returns></returns>
+        private string GerarHashSenha(string senha)
+        {
+            using (var sha256 = System.Security.Cryptography.SHA256.Create())
+            {
+                var hashedBytes = sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(senha + "BrainFlow_Salt_2024"));
+                return Convert.ToBase64String(hashedBytes);
+            }
+        }
+        #endregion
+
+        #region RegistrarLogin
+        /// <summary>
+        /// Registra um login do usuário
+        /// </summary>
+        /// <param name="cdUsuario"></param>
+        /// <returns></returns>
+        public async Task RegistrarLoginAsync(int cdUsuario)
+        {
+            // Para registro de login, vamos apenas atualizar a data de alteração
+            var usuario = await _context.Usuarios.FindAsync(cdUsuario);
+            if (usuario != null)
+            {
+                usuario.DtAlteracao = DateTime.Now;
+                await _context.SaveChangesAsync();
+            }
         }
         #endregion
 

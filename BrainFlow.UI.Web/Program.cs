@@ -19,14 +19,26 @@ builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("Emai
 DependencyContainer.RegisterContainers(builder.Services);
 
 // Add Cookie Authentication
-builder.Services.AddAuthentication("Identity.Login")
-    .AddCookie("Identity.Login", options =>
+builder.Services.AddAuthentication("BrainFlow.Cookie")
+    .AddCookie("BrainFlow.Cookie", options =>
     {
-        options.Cookie.Name = "BrainFlow.Login";
+        options.Cookie.Name = "BrainFlow.Auth";
         options.LoginPath = "/Conta/Login";
+        options.LogoutPath = "/Conta/Logout";
         options.AccessDeniedPath = "/Conta/AcessoNegado"; 
-        options.ExpireTimeSpan = TimeSpan.FromHours(1);
+        options.ExpireTimeSpan = TimeSpan.FromHours(8);
+        options.SlidingExpiration = true;
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SameSite = SameSiteMode.Lax;
     });
+
+// Add Authorization Policies
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireClaim("TipoUsuario", "3"));
+    options.AddPolicy("AfiliadoOrAdmin", policy => policy.RequireClaim("TipoUsuario", "2", "3"));
+    options.AddPolicy("UsuarioLogado", policy => policy.RequireAuthenticatedUser());
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -48,6 +60,9 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Middleware personalizado para informações do usuário
+app.UseMiddleware<BrainFlow.UI.Web.Middleware.UserInfoMiddleware>();
 
 app.MapControllerRoute(
     name: "areas",

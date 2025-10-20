@@ -40,7 +40,10 @@
                 <div class="player-area">
                     <!-- Mock de vídeo: trocável por embed real (YouTube/Vimeo) -->
                     <div class="video-frame" id="videoFrame">
-                        <iframe id="videoIframe" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Aula atual" frameborder="0" allowfullscreen></iframe>
+                        <iframe id="videoIframe" src="" title="Aula atual" frameborder="0" allowfullscreen style="display: none;"></iframe>
+                        <div id="noVideoMessage" style="display: flex; align-items: center; justify-content: center; height: 100%; background: var(--bg); color: var(--muted); font-size: 18px;">
+                          Nenhum vídeo selecionado
+                        </div>
                     </div>
 
                     <!-- Título/descrição da aula atual -->
@@ -77,65 +80,31 @@
     </footer>
 
     <script>
-        // ---- Dados mockados (depois viram JSON da API) ----
-        const courseId = 'curso_ui_design_001';
-        const course = {
-            id: courseId,
-            title: 'UI Design do Zero',
-            modules: [{
-                id: 'm1',
-                title: 'Começando',
-                lessons: [{
-                    id: 'l1',
-                    title: 'Boas-vindas e visão geral',
-                    desc: 'Panorama do curso.',
-                    video: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
-                }, {
-                    id: 'l2',
-                    title: 'Configuração de ferramentas',
-                    desc: 'Instalação e setup.',
-                    video: 'https://www.youtube.com/embed/ysz5S6PUM-U'
-                }, ]
-            }, {
-                id: 'm2',
-                title: 'Fundamentos de UI',
-                lessons: [{
-                    id: 'l3',
-                    title: 'Tipografia',
-                    desc: 'Hierarquia e legibilidade.',
-                    video: 'https://www.youtube.com/embed/aqz-KE-bpKQ'
-                }, {
-                    id: 'l4',
-                    title: 'Cores e contraste',
-                    desc: 'Paletas e acessibilidade.',
-                    video: 'https://www.youtube.com/embed/5qap5aO4i9A'
-                }, {
-                    id: 'l5',
-                    title: 'Grid e espaçamento',
-                    desc: 'Ritmo visual.',
-                    video: 'https://www.youtube.com/embed/hHW1oY26kxQ'
-                }, ]
-            }, {
-                id: 'm3',
-                title: 'Projeto Guiado',
-                lessons: [{
-                    id: 'l6',
-                    title: 'Wireframe',
-                    desc: 'Estruturando telas.',
-                    video: 'https://www.youtube.com/embed/ScMzIvxBSi4'
-                }, {
-                    id: 'l7',
-                    title: 'Protótipo',
-                    desc: 'Fluxos navegáveis.',
-                    video: 'https://www.youtube.com/embed/jfKfPfyJRdk'
-                }, {
-                    id: 'l8',
-                    title: 'Handoff',
-                    desc: 'Do design para o dev.',
-                    video: 'https://www.youtube.com/embed/ysz5S6PUM-U'
-                }, ]
-            }]
-        };
+        // ---- Dados do curso (carregados via API) ----
+        let course = null;
+        
+        // Função para carregar dados do curso via API
+        async function loadCourseData() {
+          try {
+            // TODO: Implementar chamada para API real
+            // const response = await fetch(`/api/courses/${courseId}`);
+            // course = await response.json();
+            
+            // Por enquanto, dados vazios
+            course = {
+              id: null,
+              title: 'Carregando...',
+              modules: []
+            };
+          } catch (error) {
+            console.error('Erro ao carregar curso:', error);
+            course = {
+              id: null,
+              title: 'Erro ao carregar curso',
+              modules: []
+            };
+          }
+        }
 
         // ---- Estado / progresso (localStorage só pra demo) ----
         const keyProgress = `progress:${course.id}`;
@@ -183,12 +152,25 @@
 
   // Carrega uma aula no player
   function loadLesson(lessonId){
+    if (!course || !course.modules.length) return;
+    
     const lesson = flatLessons.find(l => l.id === lessonId) || flatLessons[0];
     if(!lesson) return;
 
     document.getElementById('lessonTitle').textContent = lesson.title;
-    document.getElementById('lessonDesc').textContent  = lesson.desc || '';
-    document.getElementById('videoIframe').src = lesson.video;
+    document.getElementById('lessonDesc').textContent = lesson.desc || '';
+    
+    const iframe = document.getElementById('videoIframe');
+    const noVideoMsg = document.getElementById('noVideoMessage');
+    
+    if (lesson.video) {
+      iframe.src = lesson.video;
+      iframe.style.display = 'block';
+      noVideoMsg.style.display = 'none';
+    } else {
+      iframe.style.display = 'none';
+      noVideoMsg.style.display = 'flex';
+    }
 
     setCurrent(lesson.id);
     renderSyllabus();
@@ -227,16 +209,31 @@
   }
 
   // Inicialização
-  document.addEventListener('DOMContentLoaded', ()=>{
-    document.getElementById('courseTitle').textContent = course.title;
-    renderSyllabus();
-    loadLesson(getCurrent() || flatLessons[0].id);
+  document.addEventListener('DOMContentLoaded', async ()=>{
+    await loadCourseData();
     
-    const completeBtn = document.getElementById('completeBtn');
-    if (completeBtn) completeBtn.addEventListener('click', completeCurrent);
-    
-    document.getElementById('nextBtn').addEventListener('click', ()=> go(+1));
-    document.getElementById('prevBtn').addEventListener('click', ()=> go(-1));
+    if (course && course.modules.length > 0) {
+      document.getElementById('courseTitle').textContent = course.title;
+      renderSyllabus();
+      loadLesson(getCurrent() || flatLessons[0]?.id);
+      
+      const completeBtn = document.getElementById('completeBtn');
+      if (completeBtn) completeBtn.addEventListener('click', completeCurrent);
+      
+      document.getElementById('nextBtn').addEventListener('click', ()=> go(+1));
+      document.getElementById('prevBtn').addEventListener('click', ()=> go(-1));
+    } else {
+      // Sem dados do curso
+      document.getElementById('courseTitle').textContent = course?.title || 'Curso não encontrado';
+      document.getElementById('lessonTitle').textContent = 'Nenhuma aula disponível';
+      document.getElementById('lessonDesc').textContent = 'Este curso ainda não possui conteúdo.';
+      document.getElementById('progressPct').textContent = '0%';
+      
+      // Desabilita todos os controles
+      document.getElementById('prevBtn').disabled = true;
+      document.getElementById('nextBtn').disabled = true;
+      document.getElementById('completeBtn').disabled = true;
+    }
   });
     </script>
 </body>
