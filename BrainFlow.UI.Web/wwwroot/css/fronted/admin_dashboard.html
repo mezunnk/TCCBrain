@@ -17,8 +17,8 @@
     <nav class="menu">
       <a href="home.html">Home</a>
       <a href="cursos.html">Cursos</a>
-      <a href="index.html">Login</a>
-      <a class="signup" href="cadastro.html">Cadastro</a>
+      <a href="admin_dashboard.html">Dashboard</a>
+      <a class="signup" href="index.html">Sair</a>
     </nav>
   </div>
 </header>
@@ -46,6 +46,22 @@
         <div class="admin-card">
           <div class="admin-label">Cursos ativos</div>
           <div class="admin-value" id="cursosAtivos">0</div>
+        </div>
+      </div>
+
+      <!-- Menu de ações administrativas -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 32px 0;">
+        <a href="admin_aprovacao_afiliados.html" class="card" style="text-decoration: none; color: inherit; transition: transform 0.2s ease;">
+          <h3 style="margin: 0 0 8px; color: var(--navy); font-size: 18px;">Aprovação de Afiliados</h3>
+          <p style="margin: 0; color: var(--muted); font-size: 14px;">Gerenciar solicitações pendentes</p>
+        </a>
+        <div class="card" style="opacity: 0.5;">
+          <h3 style="margin: 0 0 8px; color: var(--muted); font-size: 18px;">Gerenciar Cursos</h3>
+          <p style="margin: 0; color: var(--muted); font-size: 14px;">Em breve</p>
+        </div>
+        <div class="card" style="opacity: 0.5;">
+          <h3 style="margin: 0 0 8px; color: var(--muted); font-size: 18px;">Relatórios</h3>
+          <p style="margin: 0; color: var(--muted); font-size: 14px;">Em breve</p>
         </div>
       </div>
 

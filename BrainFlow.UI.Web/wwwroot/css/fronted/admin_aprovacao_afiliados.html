@@ -1,66 +1,129 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Aprovação de Afiliados — Admin</title>
-    <link rel="stylesheet" href="/css/site.css">
-    <link rel="stylesheet" href="/css/custom.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Brain Flow – Aprovação de Afiliados</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-<header class="nav">
-  <div class="wrap">
-    <div class="brand">
-    <img src="../../img/logo_branco.png" width="128" height="128" alt="Brain Flow">
+  <!-- Header -->
+  <header class="nav">
+    <div class="wrap">
+      <div class="brand">
+        <img src="../../img/logo_branco.png" width="128" height="128" alt="Brain Flow">
+      </div>
+      <nav class="menu">
+        <a href="home.html">Home</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="admin_dashboard.html">Admin</a>
+        <a class="signup" href="index.html">Sair</a>
+      </nav>
     </div>
-    <nav class="menu">
-      <a href="home.html">Home</a>
-      <a href="cursos.html">Cursos</a>
-      <a href="index.html">Login</a>
-      <a class="signup" href="cadastro.html">Cadastro</a>
-    </nav>
-  </div>
-</header>
-    <!-- Main content -->
-    <main class="container py-4">
-        <div class="d-flex align-items-center justify-content-between mb-3">
-            <h1 class="m-0">Solicitações de Afiliado</h1>
-            <div class="input-group" style="max-width:360px">
-                <span class="input-group-text">Buscar</span>
-                <input class="form-control" placeholder="nome, e-mail ou CNPJ">
-            </div>
+  </header>
+  <main class="page">
+    <div class="grid">
+      <h1 class="section-title">Aprovação de Afiliados</h1>
+      
+      <!-- Busca -->
+      <div class="form-row">
+        <input type="search" placeholder="Buscar por nome, e-mail ou CNPJ..." class="search" />
+      </div>
+
+      <!-- Tabela de solicitações -->
+      <div class="card">
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--line);">
+                <th style="padding: 12px; text-align: left; font-weight: 800; color: var(--ink);">Nome</th>
+                <th style="padding: 12px; text-align: left; font-weight: 800; color: var(--ink);">E-mail</th>
+                <th style="padding: 12px; text-align: left; font-weight: 800; color: var(--ink);">CNPJ</th>
+                <th style="padding: 12px; text-align: left; font-weight: 800; color: var(--ink);">Razão Social</th>
+                <th style="padding: 12px; text-align: left; font-weight: 800; color: var(--ink);">Data</th>
+                <th style="padding: 12px; text-align: left; font-weight: 800; color: var(--ink);">Status</th>
+                <th style="padding: 12px; text-align: left; font-weight: 800; color: var(--ink);">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid var(--line);">
+                <td style="padding: 12px; color: var(--text);">Maria Silva</td>
+                <td style="padding: 12px; color: var(--text);">maria@ex.com</td>
+                <td style="padding: 12px; color: var(--text);">12.345.678/0001-90</td>
+                <td style="padding: 12px; color: var(--text);">Studio Silva ME</td>
+                <td style="padding: 12px; color: var(--text);">03/10/2025</td>
+                <td style="padding: 12px;">
+                  <span style="background: var(--accent); color: #1a2a3f; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 800;">Pendente</span>
+                </td>
+                <td style="padding: 12px;">
+                  <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <button class="btn primary small">Aprovar</button>
+                    <button class="btn dark small">Reprovar</button>
+                  </div>
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--line);">
+                <td style="padding: 12px; color: var(--text);">João Santos</td>
+                <td style="padding: 12px; color: var(--text);">joao@exemplo.com</td>
+                <td style="padding: 12px; color: var(--text);">98.765.432/0001-10</td>
+                <td style="padding: 12px; color: var(--text);">Santos Digital LTDA</td>
+                <td style="padding: 12px; color: var(--text);">05/10/2025</td>
+                <td style="padding: 12px;">
+                  <span style="background: #34c759; color: white; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 800;">Aprovado</span>
+                </td>
+                <td style="padding: 12px;">
+                  <span style="color: var(--muted); font-size: 14px;">Aprovado em 06/10/2025</span>
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--line);">
+                <td style="padding: 12px; color: var(--text);">Ana Costa</td>
+                <td style="padding: 12px; color: var(--text);">ana@teste.com</td>
+                <td style="padding: 12px; color: var(--text);">11.222.333/0001-44</td>
+                <td style="padding: 12px; color: var(--text);">Costa Marketing</td>
+                <td style="padding: 12px; color: var(--text);">02/10/2025</td>
+                <td style="padding: 12px;">
+                  <span style="background: #ff3b30; color: white; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 800;">Reprovado</span>
+                </td>
+                <td style="padding: 12px;">
+                  <span style="color: var(--muted); font-size: 14px;">Documentos inválidos</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="table-responsive">
-            <table class="table table-striped align-middle">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>E-mail</th>
-                        <th>CNPJ</th>
-                        <th>Razão Social</th>
-                        <th>Data</th>
-                        <th>Status</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Maria Silva</td>
-                        <td>maria@ex.com</td>
-                        <td>12.345.678/0001-90</td>
-                        <td>Studio Silva ME</td>
-                        <td>03/10/2025</td>
-                        <td><span class="badge bg-warning">Pendente</span></td>
-                        <td class="d-flex gap-2"><button class="btn btn-success btn-sm">Aprovar</button><button
-                                class="btn btn-outline-danger btn-sm">Reprovar</button></td>
-                    </tr>
-                </tbody>
-            </table>
+      </div>
+
+      <!-- Estatísticas -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 32px;">
+        <div class="card" style="text-align: center;">
+          <h3 style="margin: 0 0 8px; color: var(--accent); font-size: 32px; font-weight: 800;">12</h3>
+          <p style="margin: 0; color: var(--muted);">Pendentes</p>
         </div>
-    </main>
-    <footer class="py-4 bg-dark text-center text-white-50"><small>© BrainFlow</small></footer>
+        <div class="card" style="text-align: center;">
+          <h3 style="margin: 0 0 8px; color: #34c759; font-size: 32px; font-weight: 800;">45</h3>
+          <p style="margin: 0; color: var(--muted);">Aprovados</p>
+        </div>
+        <div class="card" style="text-align: center;">
+          <h3 style="margin: 0 0 8px; color: #ff3b30; font-size: 32px; font-weight: 800;">3</h3>
+          <p style="margin: 0; color: var(--muted);">Reprovados</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>© Brain Flow</span>
+      <nav class="footer-nav">
+        <a href="sobre.html">Sobre</a>
+        <a href="suporte.html">Suporte</a>
+        <a href="termos.html">Termos</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="header-scroll.js"></script>
 </body>
 
 </html>
