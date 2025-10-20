@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add Connection String
-var connectionString = builder.Configuration.GetConnectionString("BrainFlowConnection");
+// var connectionString = builder.Configuration.GetConnectionString("BrainFlowConnection");
 
 // Add DbContext
-builder.Services.AddDbContext<BrainFlowContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+// builder.Services.AddDbContext<BrainFlowContext>(options =>
+//     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // Add e-mail settings
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));

@@ -1,5 +1,4 @@
 ﻿using BrainFlow.Data.Models;
-using BrainFlow.Repository.Interfaces;
 using BrainFlow.UI.Web.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
@@ -10,23 +9,6 @@ namespace BrainFlow.UI.Web.Controllers
 {
     public class ContaController : Controller
     {
-        #region Context
-        private readonly IUsuarioREP _usuarioREP;
-        private readonly IEmailService _emailService;
-        private readonly ICursoREP _cursoREP;
-        #endregion
-
-        #region Constructor
-        public ContaController(IUsuarioREP usuarioREP,
-            IEmailService emailService,
-            ICursoREP cursoREP)
-        {
-            _usuarioREP = usuarioREP;
-            _emailService = emailService;
-            _cursoREP = cursoREP;
-        }
-        #endregion
-
         #region Methods
 
         #region Cadastro
@@ -41,30 +23,8 @@ namespace BrainFlow.UI.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var usuarioExistente = await _usuarioREP.GetByEmail(viewModel.Email);
-                if (usuarioExistente != null)
-                {
-                    ModelState.AddModelError("Email", "Este e-mail já está em uso.");
-                    return View(viewModel);
-                }
-
-                var novoUsuario = new UsuarioMOD
-                {
-                    NoUsuario = viewModel.Nome,
-                    TxEmail = viewModel.Email,
-                    CdTipoUsuario = 3, // 3 = ID do tipo "Usuário Comum" (ajuste se for diferente)
-                    SnAtivo = true,
-                    DtCadastro = DateTime.Now
-                };
-
-                novoUsuario.UsuarioLogins.Add(new UsuarioLoginMOD
-                {
-                    TxSenhaHash = BCrypt.Net.BCrypt.HashPassword(viewModel.Senha),
-                    DtCadastro = DateTime.Now
-                });
-
-                await _usuarioREP.Add(novoUsuario);
-
+                // Simulação - sem banco de dados
+                TempData["Modal-Sucesso"] = "Conta criada com sucesso! Você pode fazer login agora.";
                 return RedirectToAction("Login", "Conta");
             }
             return View(viewModel);
@@ -78,7 +38,7 @@ namespace BrainFlow.UI.Web.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            ViewBag.Cursos = new List<BrainFlow.Data.Models.CursoMOD>(); // Lista vazia temporária
+            ViewBag.Cursos = new List<CursoMOD>(); // Lista vazia para demonstração
             return View();
         }
 
@@ -90,30 +50,27 @@ namespace BrainFlow.UI.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var usuario = await _usuarioREP.GetByEmailWithLogin(viewModel.Email);
-
-                // Verifica se o usuário existe e se a senha está correta
-                if (usuario != null && BCrypt.Net.BCrypt.Verify(viewModel.Senha, usuario.UsuarioLogins.First().TxSenhaHash))
+                // Simulação de login - aceita qualquer email/senha para demo
+                if (!string.IsNullOrEmpty(viewModel.Email) && !string.IsNullOrEmpty(viewModel.Senha))
                 {
                     // --- CRIA A AUTENTICAÇÃO (COOKIE) ---
                     var claims = new List<Claim>
                     {
-                        new Claim(ClaimTypes.NameIdentifier, usuario.CdUsuario.ToString()),
-                        new Claim(ClaimTypes.Name, usuario.NoUsuario),
-                        new Claim(ClaimTypes.Email, usuario.TxEmail),
-                        new Claim(ClaimTypes.Role, usuario.CdTipoUsuario.ToString())
+                        new Claim(ClaimTypes.NameIdentifier, "1"),
+                        new Claim(ClaimTypes.Name, "Usuário Demo"),
+                        new Claim(ClaimTypes.Email, viewModel.Email),
+                        new Claim(ClaimTypes.Role, "3") // Usuário comum
                     };
 
                     var claimsIdentity = new ClaimsIdentity(claims, "Identity.Login");
                     var authProperties = new AuthenticationProperties
                     {
-                        // Define se o cookie de login persiste após o navegador ser fechado
                         IsPersistent = viewModel.LembrarMe
                     };
 
                     await HttpContext.SignInAsync("Identity.Login", new ClaimsPrincipal(claimsIdentity), authProperties);
 
-                    return RedirectToAction("Index", "Home"); // Redireciona para a página principal após o login
+                    return RedirectToAction("Index", "Home");
                 }
 
                 ModelState.AddModelError("", "E-mail ou senha inválidos.");
@@ -142,8 +99,9 @@ namespace BrainFlow.UI.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> BuscarCursos(string termo)
         {
-            var cursos = await _cursoREP.GetAllFiltered(termo);
-            return PartialView("_CursosPartial", cursos.Take(6).ToList());
+            // Simulação de busca - retorna cursos mock filtrados
+            var cursos = new List<CursoMOD>(); // Simulação vazia para demo
+            return PartialView("_CursosPartial", cursos);
         }
         #endregion
 
@@ -165,32 +123,7 @@ namespace BrainFlow.UI.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var usuario = await _usuarioREP.GetByEmailWithLogin(viewModel.Email);
-                if (usuario != null)
-                {
-                    var loginInfo = usuario.UsuarioLogins.First();
-                    loginInfo.TxTokenRecuperacao = Guid.NewGuid().ToString();
-                    loginInfo.DtValidadeToken = DateTime.Now.AddHours(1);
-
-                    await _usuarioREP.Update(usuario);
-
-                    var link = Url.Action("RedefinirSenha", "Conta", new { token = loginInfo.TxTokenRecuperacao }, Request.Scheme);
-
-                    var emailContent = new Dictionary<string, string>
-                    {
-                       { "{LINK_BOTAO}", link }
-
-                    };
-
-                    await _emailService.SendEmailAsync(
-                        email: usuario.TxEmail,
-                        name: usuario.NoUsuario,
-                        subject: "BrainFlow | Redefinição de Senha",
-                        title: "Redefinição de Senha",
-                        message: "", 
-                        addData: emailContent
-                    );
-                }
+                // Simulação - sempre "envia" o email
                 TempData["Modal-Sucesso"] = "Se um usuário com este e-mail estiver cadastrado, um link para redefinição de senha foi enviado para a caixa de entrada.";
                 return RedirectToAction("Index","Home");
             }
@@ -211,13 +144,7 @@ namespace BrainFlow.UI.Web.Controllers
                 return RedirectToAction("Login");
             }
 
-            var usuario = await _usuarioREP.GetByToken(token);
-            if (usuario == null)
-            {
-                TempData["Modal-Erro"] = "Token inválido ou expirado.";
-                return RedirectToAction("Login");
-            }
-
+            // Simulação - aceita qualquer token
             var viewModel = new RedefinirSenhaViewMOD { Token = token };
             return View(viewModel);
         }
@@ -230,20 +157,7 @@ namespace BrainFlow.UI.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var usuario = await _usuarioREP.GetByToken(viewModel.Token);
-                if (usuario == null)
-                {
-                    TempData["Modal-Erro"] = "Token inválido ou expirado. Tente o processo novamente.";
-                    return RedirectToAction("Login");
-                }
-
-                var loginInfo = usuario.UsuarioLogins.First();
-                loginInfo.TxSenhaHash = BCrypt.Net.BCrypt.HashPassword(viewModel.NovaSenha);
-                loginInfo.TxTokenRecuperacao = null; // Invalida o token após o uso
-                loginInfo.DtValidadeToken = null;
-
-                await _usuarioREP.Update(usuario);
-
+                // Simulação - sempre aceita
                 TempData["Modal-Sucesso"] = "Sua senha foi redefinida com sucesso!";
                 return RedirectToAction("Login");
             }
@@ -267,13 +181,13 @@ namespace BrainFlow.UI.Web.Controllers
                 return Json(new { IsAuthenticated = false });
             }
 
-            var tipoUsuario = int.Parse(User.FindFirst("TipoUsuario")?.Value ?? "1");
+            var tipoUsuario = int.Parse(User.FindFirst("TipoUsuario")?.Value ?? "3");
             
             return Json(new
             {
                 IsAuthenticated = true,
-                CdUsuario = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0"),
-                Nome = User.FindFirst("NomeCompleto")?.Value ?? "",
+                CdUsuario = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "1"),
+                Nome = User.FindFirst("NomeCompleto")?.Value ?? "Usuário Demo",
                 Email = User.FindFirst(ClaimTypes.Email)?.Value ?? "",
                 CdTipoUsuario = tipoUsuario,
                 TipoUsuario = tipoUsuario switch

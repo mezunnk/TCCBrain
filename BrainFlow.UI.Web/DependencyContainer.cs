@@ -7,11 +7,12 @@ namespace BrainFlow.UI.Web
     {
         public static void RegisterContainers(IServiceCollection services)
         {
-            services.AddScoped<IUsuarioREP, UsuarioREP>();
-            services.AddScoped<IEmailService, EmailService>();
-            services.AddScoped<IAfiliadoREP, AfiliadoREP>();
-            services.AddScoped<ICursoREP, CursoREP>();
-            services.AddScoped<IModuloREP, ModuloREP>();
+            // Removidas todas as dependências de repositório para evitar conexão com banco
+            // services.AddScoped<IUsuarioREP, UsuarioREP>();
+            // services.AddScoped<IEmailService, EmailService>();
+            // services.AddScoped<IAfiliadoREP, AfiliadoREP>();
+            // services.AddScoped<ICursoREP, CursoREP>();
+            // services.AddScoped<IModuloREP, ModuloREP>();
         }
     }
 }

@@ -40,9 +40,9 @@
             <!-- Grid de cards com dados do backend -->
             <section style="margin-top:18px">
                 <div class="cards-grid" id="cursosGrid" aria-live="polite">
-                    @if (ViewBag.Cursos != null && ((List<BrainFlow.Data.Models.CursoMOD>)ViewBag.Cursos).Any())
+                    @if (ViewBag.Cursos != null && ((List<BrainFlow.UI.Web.Controllers.MockCursoMOD>)ViewBag.Cursos).Any())
                     {
-                        @foreach (var curso in (List<BrainFlow.Data.Models.CursoMOD>)ViewBag.Cursos)
+                        @foreach (var curso in (List<BrainFlow.UI.Web.Controllers.MockCursoMOD>)ViewBag.Cursos)
                         {
                             <article class="course-card">
                                 <div class="thumb" style="background-image:url('@curso.TxCaminhoImagem'); background-size:cover; background-position:center"></div>
@@ -77,5 +77,7 @@
             </nav>
         </div>
     </footer>
+
+    <script src="~/js/site.js"></script>
 </body>
 </html>

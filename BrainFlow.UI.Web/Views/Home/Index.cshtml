@@ -45,12 +45,30 @@
 
             <div class="hscroll" aria-label="Cursos em destaque">
                 <div class="hcards" id="destaques">
-                    <!-- Aqui serão renderizados os cursos em destaque do banco de dados -->
+                    @if (ViewBag.CursosDestaque != null && ((List<BrainFlow.UI.Web.Controllers.MockCursoMOD>)ViewBag.CursosDestaque).Any())
+                    {
+                        @foreach (var curso in (List<BrainFlow.UI.Web.Controllers.MockCursoMOD>)ViewBag.CursosDestaque)
+                        {
+                            <article class="course-card">
+                                <div class="thumb" style="background-image:url('@(string.IsNullOrEmpty(curso.TxCaminhoImagem) ? "/img/placeholder-course.jpg" : curso.TxCaminhoImagem)'); background-size:cover; background-position:center"></div>
+                                <div class="course-main">
+                                    <h3 class="title">@curso.NoCurso</h3>
+                                    <p class="desc">@(curso.TxDescricao.Length > 100 ? curso.TxDescricao.Substring(0, 100) + "..." : curso.TxDescricao)</p>
+                                    <div class="course-footer">
+                                        <span class="price">@(curso.DcValor == 0 ? "Gratuito" : $"R$ {curso.DcValor:N2}")</span>
+                                        <a class="btn small" href="@Url.Action("Detalhes", "Curso", new { id = curso.CdCurso })">Ver curso</a>
+                                    </div>
+                                </div>
+                            </article>
+                        }
+                    }
+                    else
+                    {
+                        <!-- Mensagem de estado vazio -->
+                        <p class="sub" style="margin-top:10px">Nenhum curso em destaque no momento.</p>
+                    }
                 </div>
             </div>
-
-            <!-- Mensagem de estado vazio (remover quando houver destaques) -->
-            <p class="sub" style="margin-top:10px">Nenhum curso em destaque no momento.</p>
 
             <!-- Banner simples -->
             <section class="promo">
@@ -66,11 +84,21 @@
             <!-- Categorias -->
             <h2 class="section-title">Categorias</h2>
             <div class="cat-grid" id="categorias">
-                <!-- Aqui serão renderizadas as categorias do banco de dados -->
+                @if (ViewBag.Categorias != null && ((List<string>)ViewBag.Categorias).Any())
+                {
+                    @foreach (var categoria in (List<string>)ViewBag.Categorias)
+                    {
+                        <a class="cat-card" href="@Url.Action("Cursos", "Home", new { categoria = categoria })">
+                            <span class="cat-name">@categoria</span>
+                        </a>
+                    }
+                }
+                else
+                {
+                    <!-- Mensagem de estado vazio -->
+                    <p class="sub" style="margin-top:10px">Categorias indisponíveis no momento.</p>
+                }
             </div>
-
-            <!-- Mensagem de estado vazio (remover quando houver categorias) -->
-            <p class="sub" style="margin-top:10px">Categorias indisponíveis no momento.</p>
         </div>
     </main>
 
@@ -84,5 +112,23 @@
             </nav>
         </div>
     </footer>
+
+    <script src="~/js/site.js"></script>
+    @if (TempData["Modal-Sucesso"] != null)
+    {
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast('@TempData["Modal-Sucesso"]', 'success');
+            });
+        </script>
+    }
+    @if (TempData["Modal-Erro"] != null)
+    {
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast('@TempData["Modal-Erro"]', 'error');
+            });
+        </script>
+    }
 </body>
 </html>
