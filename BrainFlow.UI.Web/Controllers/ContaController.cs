@@ -4,6 +4,7 @@ using BrainFlow.UI.Web.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using BCrypt.Net;
 
 namespace BrainFlow.UI.Web.Controllers
 {
@@ -252,6 +253,44 @@ namespace BrainFlow.UI.Web.Controllers
             }
 
             return View(viewModel);
+        }
+
+        #endregion
+
+        #region API para Autenticação Dinâmica
+        
+        /// <summary>
+        /// API para verificar informações do usuário autenticado (usado pelo JavaScript)
+        /// </summary>
+        /// <returns>JSON com dados do usuário</returns>
+        [HttpGet]
+        public IActionResult GetUserInfo()
+        {
+            if (User.Identity?.IsAuthenticated != true)
+            {
+                return Json(new { IsAuthenticated = false });
+            }
+
+            var tipoUsuario = int.Parse(User.FindFirst("TipoUsuario")?.Value ?? "1");
+            
+            return Json(new
+            {
+                IsAuthenticated = true,
+                CdUsuario = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0"),
+                Nome = User.FindFirst("NomeCompleto")?.Value ?? "",
+                Email = User.FindFirst(ClaimTypes.Email)?.Value ?? "",
+                CdTipoUsuario = tipoUsuario,
+                TipoUsuario = tipoUsuario switch
+                {
+                    1 => "Usuário",
+                    2 => "Afiliado", 
+                    3 => "Admin",
+                    _ => "Usuário"
+                },
+                IsComum = tipoUsuario == 1,
+                IsAfiliado = tipoUsuario == 2,
+                IsAdmin = tipoUsuario == 3
+            });
         }
 
         #endregion

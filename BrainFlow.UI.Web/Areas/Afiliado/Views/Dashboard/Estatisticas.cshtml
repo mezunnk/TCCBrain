@@ -1,0 +1,235 @@
+@{
+    ViewData["Title"] = "Estatísticas - Afiliado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="h2 mb-0">📈 Estatísticas Detalhadas</h1>
+                    <p class="text-muted">Análise completa dos seus cursos e módulos</p>
+                </div>
+                <a href="@Url.Action("Index", "Dashboard", new { area = "Afiliado" })" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left"></i> Voltar ao Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-triangle"></i> @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Estatísticas Principais -->
+    <div class="row mb-4">
+        <div class="col-md-4 mb-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body text-center">
+                    <i class="fas fa-graduation-cap fa-3x mb-3"></i>
+                    <h3>@ViewBag.TotalCursos</h3>
+                    <p class="mb-0">Total de Cursos Criados</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card bg-success text-white">
+                <div class="card-body text-center">
+                    <i class="fas fa-puzzle-piece fa-3x mb-3"></i>
+                    <h3>@ViewBag.CursosComModulos</h3>
+                    <p class="mb-0">Cursos com Módulos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card bg-info text-white">
+                <div class="card-body text-center">
+                    <i class="fas fa-calculator fa-3x mb-3"></i>
+                    <h3>@String.Format("{0:F1}", ViewBag.MediaModulosPorCurso)</h3>
+                    <p class="mb-0">Média Módulos/Curso</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráficos e Análises -->
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-chart-pie"></i> Distribuição de Cursos
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <div class="border rounded p-3 bg-light">
+                                <h4 class="text-success">@ViewBag.CursosAtivos</h4>
+                                <small class="text-muted">Ativos</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="border rounded p-3 bg-light">
+                                <h4 class="text-warning">@ViewBag.CursosInativos</h4>
+                                <small class="text-muted">Inativos</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Barra de progresso visual -->
+                    <div class="mt-3">
+                        @{
+                            var total = ViewBag.TotalCursos > 0 ? ViewBag.TotalCursos : 1;
+                            var percentualAtivos = (ViewBag.CursosAtivos * 100) / total;
+                            var percentualInativos = 100 - percentualAtivos;
+                        }
+                        <div class="progress" style="height: 25px;">
+                            <div class="progress-bar bg-success" style="width: @percentualAtivos%">
+                                @String.Format("{0:F1}%", percentualAtivos)
+                            </div>
+                            <div class="progress-bar bg-warning" style="width: @percentualInativos%">
+                                @String.Format("{0:F1}%", percentualInativos)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-tasks"></i> Performance do Conteúdo
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <div class="d-flex justify-content-between">
+                                <span>Cursos com Conteúdo:</span>
+                                <strong>@ViewBag.CursosComModulos de @ViewBag.TotalCursos</strong>
+                            </div>
+                            @{
+                                var percentualComConteudo = ViewBag.TotalCursos > 0 ? 
+                                    (ViewBag.CursosComModulos * 100) / ViewBag.TotalCursos : 0;
+                            }
+                            <div class="progress mt-2">
+                                <div class="progress-bar bg-info" style="width: @percentualComConteudo%"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="alert alert-light">
+                                <strong>Recomendação:</strong><br>
+                                @if (percentualComConteudo < 50)
+                                {
+                                    <span class="text-warning">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                        Adicione mais módulos aos seus cursos para melhorar a experiência dos alunos.
+                                    </span>
+                                }
+                                else if (percentualComConteudo < 80)
+                                {
+                                    <span class="text-info">
+                                        <i class="fas fa-info-circle"></i>
+                                        Bom progresso! Continue adicionando conteúdo aos cursos restantes.
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="text-success">
+                                        <i class="fas fa-check-circle"></i>
+                                        Excelente! A maioria dos seus cursos tem conteúdo estruturado.
+                                    </span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ações Recomendadas -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-lightbulb"></i> Ações Recomendadas
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-plus-circle text-primary"></i> Para Crescer:</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="fas fa-chevron-right text-muted"></i>
+                                    <a href="@Url.Action("Create", "Cursos", new { area = "Afiliado" })">Criar novo curso</a>
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-chevron-right text-muted"></i>
+                                    <a href="@Url.Action("Index", "Modulos", new { area = "Afiliado" })">Adicionar módulos aos cursos existentes</a>
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-chevron-right text-muted"></i>
+                                    Ativar cursos inativos se estiverem prontos
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-cog text-success"></i> Para Otimizar:</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="fas fa-chevron-right text-muted"></i>
+                                    Revisar cursos inativos e reativar se necessário
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-chevron-right text-muted"></i>
+                                    Organizar módulos de forma sequencial
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-chevron-right text-muted"></i>
+                                    Atualizar descrições e conteúdos antigos
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.progress {
+    border-radius: 10px;
+}
+
+.card {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: none;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.alert-light {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+}
+</style>

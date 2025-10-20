@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BrainFlow.UI.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0165807bb73a4d905dce0c5db67625076e086a91")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+82bb8fe4cfcd7e951ff18dd09d93817a25334eeb")]
 [assembly: System.Reflection.AssemblyProductAttribute("BrainFlow.UI.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BrainFlow.UI.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

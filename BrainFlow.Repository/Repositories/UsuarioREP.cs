@@ -2,6 +2,7 @@
 using BrainFlow.Repository.Context;
 using BrainFlow.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using BCrypt.Net;
 
 namespace BrainFlow.Repository.Repositories
 {
@@ -88,17 +89,14 @@ namespace BrainFlow.Repository.Repositories
         }
 
         /// <summary>
-        /// Gera hash da senha
+        /// Gera hash da senha usando BCrypt.Net-Next conforme especificado no TCC
         /// </summary>
         /// <param name="senha"></param>
         /// <returns></returns>
         private string GerarHashSenha(string senha)
         {
-            using (var sha256 = System.Security.Cryptography.SHA256.Create())
-            {
-                var hashedBytes = sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(senha + "BrainFlow_Salt_2024"));
-                return Convert.ToBase64String(hashedBytes);
-            }
+            // Usar BCrypt.Net-Next conforme requisitos técnicos do TCC
+            return BCrypt.Net.BCrypt.HashPassword(senha, workFactor: 12);
         }
         #endregion
 

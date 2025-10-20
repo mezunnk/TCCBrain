@@ -1,0 +1,166 @@
+@{
+    ViewData["Title"] = "Dashboard - Afiliado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Header do Dashboard -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="h2 mb-0">📊 Dashboard do Afiliado</h1>
+                    <p class="text-muted">Bem-vindo(a), <strong>@ViewBag.NomeUsuario</strong>!</p>
+                </div>
+                <div class="badge badge-success badge-lg">
+                    <i class="fas fa-user-tie"></i> Área do Afiliado
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-triangle"></i> @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Cards de Estatísticas -->
+    <div class="row mb-4">
+        <div class="col-md-4 mb-3">
+            <div class="card border-primary">
+                <div class="card-body text-center">
+                    <div class="card-icon mb-3">
+                        <i class="fas fa-graduation-cap fa-3x text-primary"></i>
+                    </div>
+                    <h3 class="card-title text-primary">@ViewBag.TotalCursos</h3>
+                    <p class="card-text">Total de Cursos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card border-success">
+                <div class="card-body text-center">
+                    <div class="card-icon mb-3">
+                        <i class="fas fa-check-circle fa-3x text-success"></i>
+                    </div>
+                    <h3 class="card-title text-success">@ViewBag.CursosAtivos</h3>
+                    <p class="card-text">Cursos Ativos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card border-warning">
+                <div class="card-body text-center">
+                    <div class="card-icon mb-3">
+                        <i class="fas fa-pause-circle fa-3x text-warning"></i>
+                    </div>
+                    <h3 class="card-title text-warning">@ViewBag.CursosInativos</h3>
+                    <p class="card-text">Cursos Inativos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu de Ações -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-tools"></i> Ações Rápidas
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <a href="@Url.Action("Index", "Cursos", new { area = "Afiliado" })" class="btn btn-primary btn-lg w-100">
+                                <i class="fas fa-book"></i><br>
+                                <small>Gerenciar Cursos</small>
+                            </a>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <a href="@Url.Action("Index", "Modulos", new { area = "Afiliado" })" class="btn btn-info btn-lg w-100">
+                                <i class="fas fa-puzzle-piece"></i><br>
+                                <small>Gerenciar Módulos</small>
+                            </a>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <a href="@Url.Action("Estatisticas", "Dashboard", new { area = "Afiliado" })" class="btn btn-success btn-lg w-100">
+                                <i class="fas fa-chart-bar"></i><br>
+                                <small>Ver Estatísticas</small>
+                            </a>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <a href="@Url.Action("Index", "Perfil", new { area = "" })" class="btn btn-secondary btn-lg w-100">
+                                <i class="fas fa-user-cog"></i><br>
+                                <small>Meu Perfil</small>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráfico ou informações adicionais -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-info-circle"></i> Informações do Sistema
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <h6><i class="fas fa-lightbulb"></i> Dicas para Afiliados:</h6>
+                        <ul class="mb-0">
+                            <li>Mantenha seus cursos sempre atualizados</li>
+                            <li>Organize os módulos de forma lógica e sequencial</li>
+                            <li>Use descrições claras e objetivas</li>
+                            <li>Monitore as estatísticas regularmente</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.card-icon {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-lg {
+    padding: 1rem;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.btn-lg:hover {
+    text-decoration: none;
+    transform: translateY(-2px);
+    transition: transform 0.2s;
+}
+
+.badge-lg {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+}
+</style>

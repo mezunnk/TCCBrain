@@ -2866,6 +2866,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "BCrypt.Net-Next": "4.0.3",
           "BrainFlow.Data": "1.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.9",
           "Pomelo.EntityFrameworkCore.MySql": "9.0.0"
