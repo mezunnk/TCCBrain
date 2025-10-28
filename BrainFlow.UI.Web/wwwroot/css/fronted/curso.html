@@ -26,49 +26,38 @@
   <!-- Conteúdo -->
   <main class="page">
     <div class="grid">
-      <!-- Cabeçalho do curso -->
       <section class="course-hero">
         <h1 class="title" id="courseTitle">Título do curso</h1>
         <p class="sub">Progresso: <span id="progressPct">—</span></p>
       </section>
-
-      <!-- Layout: player + sidebar -->
       <section class="course-layout">
         <div class="player-area">
-          <!-- Área do vídeo -->
           <div class="video-frame" id="videoFrame">
             <iframe id="videoIframe" src="" title="Aula atual" frameborder="0" allowfullscreen style="display: none;"></iframe>
             <div id="noVideoMessage" style="display: flex; align-items: center; justify-content: center; height: 100%; background: var(--bg); color: var(--muted); font-size: 18px;">
               Nenhum vídeo selecionado
             </div>
           </div>
-
-          <!-- Cabeçalho/descrição da aula atual -->
           <div class="lesson-header">
-            <h2 class="lesson-title" id="lessonTitle">Título da aula</h2>
-            <p class="desc" id="lessonDesc">Descrição breve da aula.</p>
-            <!-- Botões de avaliação centralizados e pequenos -->
-            <div class="avaliacao-botoes-wrap">
-              <button class="like-btn" aria-label="Curtir">
-                <img src="wwwwroot/img/coracao.svg" alt="Curtir" width="22" height="22" style="display:block;">
-              </button>
-              <button class="save-btn" aria-label="Salvar">
-                <img src="/img/salvar.svg" alt="Salvar" width="22" height="22" style="display:block;">
-              </button>
+            <div class="lesson-header-top">
+              <h2 class="lesson-title" id="lessonTitle">Título da aula</h2>
+              <div class="avaliacao-botoes-wrap">
+                <button class="like-btn" aria-label="Curtir">
+                  <img src="/img/coracao.svg" alt="Curtir" width="20" height="20">
+                </button>
+                <button class="save-btn" aria-label="Salvar">
+                  <img src="/img/salvar.svg" alt="Salvar" width="20" height="20">
+                </button>
+              </div>
             </div>
+            <p class="desc" id="lessonDesc">Descrição breve da aula.</p>
           </div>
-
-          <!-- Navegação e conclusão -->
-          <div class="lesson-actions-nav">
+          <div class="lesson-actions-row">
             <button class="btn dark" id="prevBtn">Aula anterior</button>
+            <button class="btn primary" id="completeBtn">Marcar como concluída</button>
             <button class="btn dark" id="nextBtn">Próxima aula</button>
           </div>
-          <div class="lesson-actions-complete">
-            <button class="btn primary" id="completeBtn">Marcar como concluída</button>
-          </div>
         </div>
-
-        <!-- Sidebar: módulos e aulas -->
         <aside class="syllabus" id="syllabus">
           <!-- conteúdo gerado via JS -->
         </aside>
