@@ -47,12 +47,23 @@
           <div class="lesson-header">
             <h2 class="lesson-title" id="lessonTitle">Título da aula</h2>
             <p class="desc" id="lessonDesc">Descrição breve da aula.</p>
+            <!-- Botões de avaliação centralizados e pequenos -->
+            <div class="avaliacao-botoes-wrap">
+              <button class="like-btn" aria-label="Curtir">
+                <img src="wwwwroot/img/coracao.svg" alt="Curtir" width="22" height="22" style="display:block;">
+              </button>
+              <button class="save-btn" aria-label="Salvar">
+                <img src="/img/salvar.svg" alt="Salvar" width="22" height="22" style="display:block;">
+              </button>
+            </div>
           </div>
 
-          <!-- Ações da aula -->
-          <div class="lesson-actions">
-            <button class="btn dark" id="prevBtn">← Aula anterior</button>
-            <button class="btn dark" id="nextBtn">Próxima aula →</button>
+          <!-- Navegação e conclusão -->
+          <div class="lesson-actions-nav">
+            <button class="btn dark" id="prevBtn">Aula anterior</button>
+            <button class="btn dark" id="nextBtn">Próxima aula</button>
+          </div>
+          <div class="lesson-actions-complete">
             <button class="btn primary" id="completeBtn">Marcar como concluída</button>
           </div>
         </div>
@@ -75,161 +86,188 @@
       </nav>
     </div>
   </footer>
-
+  <style>
+    .icon-like { display:inline-block; width:18px; height:18px; background:url('img/like.svg') center/contain no-repeat; vertical-align:middle; margin-right:8px; }
+    .icon-fav { display:inline-block; width:18px; height:18px; background:url('img/fav.svg') center/contain no-repeat; vertical-align:middle; margin-right:8px; }
+  </style>
   <script>
-    // ---- Dados do curso (carregados via API) ----
-    let course = null;
-    
-    // Função para carregar dados do curso via API
-    async function loadCourseData() {
-      try {
-        // TODO: Implementar chamada para API real
-        // const response = await fetch(`/api/courses/${courseId}`);
-        // course = await response.json();
-        
-        // Por enquanto, dados vazios
-        course = {
-          id: null,
-          title: 'Carregando...',
-          modules: []
-        };
-      } catch (error) {
-        console.error('Erro ao carregar curso:', error);
-        course = {
-          id: null,
-          title: 'Erro ao carregar curso',
-          modules: []
-        };
-      }
+  let course = null;
+  let flatLessons = [];
+
+  async function loadCourseData() {
+    try {
+      // Simulação de dados (substitui pela tua API depois)
+      course = {
+        id: "curso1",
+        title: "Curso de Exemplo",
+        modules: [
+          {
+            id: "mod1",
+            title: "Módulo 1",
+            lessons: [
+              { id: "l1", title: "Introdução", desc: "Bem-vindo!", video: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+              { id: "l2", title: "Parte 2", desc: "Continuação." }
+            ]
+          }
+        ]
+      };
+    } catch (error) {
+      console.error("Erro ao carregar curso:", error);
+      course = { id: null, title: "Erro ao carregar curso", modules: [] };
     }
+  }
 
-    // ---- Estado / progresso (localStorage só pra demo) ----
-    const keyProgress = `progress:${course.id}`;
-    const keyCurrent = `current:${course.id}`;
-    const getProgress = () => JSON.parse(localStorage.getItem(keyProgress) || '{}');
-    const setProgress = (obj) => localStorage.setItem(keyProgress, JSON.stringify(obj));
-    const setCurrent = (lessonId) => localStorage.setItem(keyCurrent, lessonId);
-    const getCurrent = () => localStorage.getItem(keyCurrent);
+  // Funções de progresso dependem do ID do curso
+  function getProgressKey() { return `progress:${course.id}`; }
+  function getCurrentKey() { return `current:${course.id}`; }
 
-    // Flatten das aulas pra navegar anterior/próxima
-    const flatLessons = course.modules.flatMap(m => m.lessons.map(l => ({...l, moduleId: m.id})));
+  const getProgress = () => JSON.parse(localStorage.getItem(getProgressKey()) || "{}");
+  const setProgress = (obj) => localStorage.setItem(getProgressKey(), JSON.stringify(obj));
+  const setCurrent = (lessonId) => localStorage.setItem(getCurrentKey(), lessonId);
+  const getCurrent = () => localStorage.getItem(getCurrentKey());
 
-    // Render da sidebar/módulos
-    function renderSyllabus() {
-      const wrap = document.getElementById('syllabus');
-      const progress = getProgress();
-      wrap.innerHTML = course.modules.map(m => {
-        const count = m.lessons.length;
-        const done = m.lessons.filter(l => progress[l.id]).length;
-        return `
-          <details class="module" open>
-            <summary>
-              <strong>${m.title}</strong>
-              <span class="badge">${done}/${count}</span>
-            </summary>
-            <ul class="lessons">
-              ${m.lessons.map(l => `
-                <li class="lesson ${progress[l.id] ? 'done' : ''}">
-                  <button data-lesson="${l.id}" class="lesson-link">
-                    <span class="dot"></span>
-                    ${l.title}
-                  </button>
-                </li>
-              `).join('')}
-            </ul>
-          </details>
-        `;
-      }).join('');
-      wrap.querySelectorAll('.lesson-link').forEach(btn=>{
-        btn.addEventListener('click', ()=> loadLesson(btn.dataset.lesson));
-      });
-    }
-
-    // Carrega uma aula no player
-    function loadLesson(lessonId){
-      if (!course || !course.modules.length) return;
-      
-      const lesson = flatLessons.find(l => l.id === lessonId) || flatLessons[0];
-      if(!lesson) return;
-
-      document.getElementById('lessonTitle').textContent = lesson.title;
-      document.getElementById('lessonDesc').textContent = lesson.desc || '';
-      
-      const iframe = document.getElementById('videoIframe');
-      const noVideoMsg = document.getElementById('noVideoMessage');
-      
-      if (lesson.video) {
-        iframe.src = lesson.video;
-        iframe.style.display = 'block';
-        noVideoMsg.style.display = 'none';
-      } else {
-        iframe.style.display = 'none';
-        noVideoMsg.style.display = 'flex';
-      }
-
-      setCurrent(lesson.id);
-      renderSyllabus();
-      updateProgressPct();
-
-      // Habilita/Desabilita navegação
-      const idx = flatLessons.findIndex(l => l.id === lesson.id);
-      document.getElementById('prevBtn').disabled = idx <= 0;
-      document.getElementById('nextBtn').disabled = idx >= flatLessons.length-1;
-    }
-
-    // Marca como concluída
-    function completeCurrent(){
-      const cur = getCurrent() || flatLessons[0].id;
-      const prog = getProgress();
-      prog[cur] = true;
-      setProgress(prog);
-      renderSyllabus();
-      updateProgressPct();
-    }
-
-    // Avançar/voltar
-    function go(step){
-      const cur = getCurrent() || flatLessons[0].id;
-      const idx = flatLessons.findIndex(l => l.id === cur);
-      const target = flatLessons[idx + step];
-      if(target) loadLesson(target.id);
-    }
-
-    // Atualiza % de progresso
-    function updateProgressPct(){
-      const prog = getProgress();
-      const done = flatLessons.filter(l => prog[l.id]).length;
-      const pct = Math.round((done / flatLessons.length) * 100);
-      document.getElementById('progressPct').textContent = isNaN(pct) ? '0%' : `${pct}%`;
-    }
-
-    // Inicialização
-    document.addEventListener('DOMContentLoaded', async ()=>{
-      await loadCourseData();
-      
-      if (course && course.modules.length > 0) {
-        document.getElementById('courseTitle').textContent = course.title;
-        renderSyllabus();
-        loadLesson(getCurrent() || flatLessons[0]?.id);
-        
-        const completeBtn = document.getElementById('completeBtn');
-        if (completeBtn) completeBtn.addEventListener('click', completeCurrent);
-        
-        document.getElementById('nextBtn').addEventListener('click', ()=> go(+1));
-        document.getElementById('prevBtn').addEventListener('click', ()=> go(-1));
-      } else {
-        // Sem dados do curso
-        document.getElementById('courseTitle').textContent = course?.title || 'Curso não encontrado';
-        document.getElementById('lessonTitle').textContent = 'Nenhuma aula disponível';
-        document.getElementById('lessonDesc').textContent = 'Este curso ainda não possui conteúdo.';
-        document.getElementById('progressPct').textContent = '0%';
-        
-        // Desabilita todos os controles
-        document.getElementById('prevBtn').disabled = true;
-        document.getElementById('nextBtn').disabled = true;
-        document.getElementById('completeBtn').disabled = true;
-      }
+  function renderSyllabus() {
+    const wrap = document.getElementById("syllabus");
+    const progress = getProgress();
+    wrap.innerHTML = course.modules.map(m => {
+      const count = m.lessons.length;
+      const done = m.lessons.filter(l => progress[l.id]).length;
+      return `
+        <details class="module" open>
+          <summary>
+            <strong>${m.title}</strong>
+            <span class="badge">${done}/${count}</span>
+          </summary>
+          <ul class="lessons">
+            ${m.lessons.map(l => `
+              <li class="lesson ${progress[l.id] ? 'done' : ''}">
+                <button data-lesson="${l.id}" class="lesson-link">
+                  <span class="dot"></span>${l.title}
+                </button>
+              </li>
+            `).join('')}
+          </ul>
+        </details>
+      `;
+    }).join('');
+    wrap.querySelectorAll(".lesson-link").forEach(btn => {
+      btn.addEventListener("click", () => loadLesson(btn.dataset.lesson));
     });
-  </script>
+  }
+
+  function loadLesson(lessonId) {
+    const lesson = flatLessons.find(l => l.id === lessonId) || flatLessons[0];
+    if (!lesson) return;
+    document.getElementById("lessonTitle").textContent = lesson.title;
+    document.getElementById("lessonDesc").textContent = lesson.desc || "";
+
+    const iframe = document.getElementById("videoIframe");
+    const noVideo = document.getElementById("noVideoMessage");
+    if (lesson.video) {
+      iframe.src = lesson.video;
+      iframe.style.display = "block";
+      noVideo.style.display = "none";
+    } else {
+      iframe.style.display = "none";
+      noVideo.style.display = "flex";
+    }
+
+    setCurrent(lesson.id);
+    renderSyllabus();
+    updateProgressPct();
+
+    const idx = flatLessons.findIndex(l => l.id === lesson.id);
+    document.getElementById("prevBtn").disabled = idx <= 0;
+    document.getElementById("nextBtn").disabled = idx >= flatLessons.length - 1;
+  }
+
+  function completeCurrent() {
+    const cur = getCurrent() || flatLessons[0].id;
+    const prog = getProgress();
+    prog[cur] = true;
+    setProgress(prog);
+    renderSyllabus();
+    updateProgressPct();
+  }
+
+  function go(step) {
+    const cur = getCurrent() || flatLessons[0].id;
+    const idx = flatLessons.findIndex(l => l.id === cur);
+    const target = flatLessons[idx + step];
+    if (target) loadLesson(target.id);
+  }
+
+  function updateProgressPct() {
+    const prog = getProgress();
+    const done = flatLessons.filter(l => prog[l.id]).length;
+    const pct = Math.round((done / flatLessons.length) * 100);
+    document.getElementById("progressPct").textContent = `${isNaN(pct) ? 0 : pct}%`;
+  }
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    await loadCourseData();
+    flatLessons = course.modules.flatMap(m => m.lessons.map(l => ({ ...l, moduleId: m.id })));
+
+    document.getElementById("courseTitle").textContent = course.title;
+    renderSyllabus();
+    loadLesson(getCurrent() || flatLessons[0]?.id);
+
+    document.getElementById("completeBtn").addEventListener("click", completeCurrent);
+    document.getElementById("nextBtn").addEventListener("click", () => go(1));
+    document.getElementById("prevBtn").addEventListener("click", () => go(-1));
+  });
+</script>
+
 </body>
+<style>
+  .avaliacao-botoes-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin: 16px 0 0 0;
+  }
+  .like-btn, .save-btn {
+    background: #fff;
+    border: 2px solid #e0245e;
+    border-radius: 8px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #0001;
+    width: 36px;
+    height: 36px;
+    transition: box-shadow 0.2s;
+  }
+  .save-btn {
+    border-color: #0f2741;
+  }
+  .like-btn:active, .save-btn:active {
+    box-shadow: 0 2px 12px #e0245e22;
+  }
+  .lesson-actions-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+    gap: 0;
+  }
+  .lesson-actions-nav .btn {
+    min-width: 120px;
+    padding: 10px 24px;
+    font-size: 1em;
+  }
+  .lesson-actions-complete {
+    display: flex;
+    justify-content: center;
+    margin-top: 18px;
+  }
+  .lesson-actions-complete .btn {
+    min-width: 180px;
+    padding: 12px 28px;
+    font-size: 1em;
+  }
+</style>
+
+</html>
 </html>

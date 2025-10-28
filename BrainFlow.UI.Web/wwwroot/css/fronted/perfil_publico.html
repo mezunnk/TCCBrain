@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Perfil Público – Brain Flow</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .profile-public-card {
+      max-width: 700px;
+      margin: 32px auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      padding: 32px 28px 24px 28px;
+    }
+    .profile-public-header {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-bottom: 18px;
+    }
+    .profile-public-photo {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 6px solid #f0b41b;
+      background: #f0b41b;
+      box-shadow: 0 0 0 2px #fff;
+      display: block;
+    }
+    .profile-public-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .profile-public-name {
+      font-size: 2.1em;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #0f2741;
+    }
+    .profile-public-status {
+      font-size: 1em;
+      margin-bottom: 8px;
+      display: inline-block;
+      background: #f0b41b;
+      color: #fff;
+      border-radius: 8px;
+      padding: 4px 14px;
+      font-weight: 600;
+    }
+    .profile-public-bio {
+      font-size: 1.08em;
+      color: #6b7a90;
+      margin-bottom: 10px;
+    }
+    .profile-public-actions {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .profile-public-followers {
+      margin-bottom: 18px;
+      color: #1f2b3a;
+      font-size: 1.08em;
+      font-weight: 500;
+    }
+    .profile-public-followers .followers-list {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .profile-public-followers .follower-photo {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 2px solid #f0b41b;
+      background: #fff;
+    }
+    .profile-public-courses {
+      margin-top: 32px;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+  </style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">
+      <img src="logo_branco.png" width="128" height="128" alt="Brain Flow">
+    </div>
+    <nav class="menu">
+      <a href="home.html">Home</a>
+      <a href="cursos.html">Cursos</a>
+      <a href="index.html">Login</a>
+      <a class="signup" href="cadastro.html">Cadastro</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+  <div class="grid">
+    <section class="profile-public-card">
+      <div class="profile-public-header">
+        <div>
+          <!-- Foto do usuário (dinâmico) -->
+          <img class="profile-public-photo" src="img/user-placeholder.png" alt="Foto do usuário">
+        </div>
+        <div class="profile-public-info">
+          <!-- Nome do usuário (dinâmico) -->
+          <h1 class="profile-public-name">Usuário não encontrado</h1>
+          <!-- Status do usuário (dinâmico) -->
+          <span class="profile-public-status">Status não disponível</span>
+          <!-- Mini bio/resumo (dinâmico) -->
+          <p class="profile-public-bio">Este usuário ainda não preencheu seu perfil.</p>
+          <!-- Seguidores (dinâmico) -->
+          <div class="profile-public-followers">
+            <span>Seguidores: <strong>0</strong></span>
+            <div class="followers-list">
+              <span style="color:#aaa; font-size:0.95em;">Nenhum seguidor ainda.</span>
+            </div>
+          </div>
+          <!-- Redes sociais (dinâmico) -->
+          <div class="profile-public-social" style="margin:10px 0 18px 0;">
+            <span style="color:#6b7a90; font-size:1em;">Redes sociais:</span>
+            <a href="#" class="social-link" title="Instagram"><img src="img/instagram.png" alt="Instagram" style="width:24px;vertical-align:middle;margin:0 4px;"></a>
+            <a href="#" class="social-link" title="YouTube"><img src="img/youtube.png" alt="YouTube" style="width:24px;vertical-align:middle;margin:0 4px;"></a>
+            <a href="#" class="social-link" title="LinkedIn"><img src="img/linkedin.png" alt="LinkedIn" style="width:24px;vertical-align:middle;margin:0 4px;"></a>
+
+          </div>
+          <!-- Estatísticas -->
+          <div class="profile-public-stats" style="margin-bottom:18px;display:flex;gap:24px;flex-wrap:wrap;">
+            <div><strong>Alunos:</strong> 0</div>
+            <div><strong>Cursos:</strong> 0</div>
+            <div><strong>Avaliações:</strong> 0</div>
+            <div><strong>Média:</strong> <span style="color:#f0b41b;">—</span></div>
+          </div>
+          <!-- Avaliações-->
+          <div class="profile-public-reviews" style="margin-bottom:18px;">
+            <span style="color:#6b7a90; font-size:1em;">Avaliações dos alunos:</span>
+            <div style="margin-top:6px; color:#aaa;">Nenhuma avaliação ainda.</div>
+          </div>
+        </div>
+      </div>
+      <div class="profile-public-actions">
+  <!-- Botões de ação (dinâmico) -->
+  <a class="btn primary" href="#" style="pointer-events:none;opacity:0.6">Seguir</a>
+  <a class="btn secondary" href="#" style="pointer-events:none;opacity:0.6">Enviar mensagem</a>
+  <a class="btn" href="#" style="background:#e74c3c;color:#fff;pointer-events:none;opacity:0.6">Denunciar</a>
+  <a class="btn" href="#" style="background:#6b7a90;color:#fff;pointer-events:none;opacity:0.6">Bloquear</a>
+      </div>
+    </section>
+
+    <section class="profile-public-courses">
+      <h2 class="section-title">Cursos criados</h2>
+      <div class="cards-grid">
+        <!-- Cards dos cursos criados pelo usuário (dinâmico) -->
+        <div style="grid-column:1/-1; text-align:center; color:#aaa; padding:32px 0; font-size:1.1em;">
+          Nenhum curso publicado ainda.
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span>© Brain Flow</span>
+    <nav class="footer-nav">
+      <a href="sobre.html">Sobre</a>
+      <a href="suporte.html">Suporte</a>
+      <a href="termos.html">Termos</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
