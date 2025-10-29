@@ -54,6 +54,26 @@ body{
   box-shadow: 0 2px 20px rgba(15, 39, 65, 0.15);
   backdrop-filter: blur(10px);
 }
+.user-profile-header {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 16px;
+  background: #f0b41b;
+  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.user-header-photo {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid #fff;
+  background: #f0b41b;
+  display: block;
+}
 
 .nav.scrolled .brand {
   font-size: 20px;
