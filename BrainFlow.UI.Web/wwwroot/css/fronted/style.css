@@ -104,6 +104,16 @@ body{
 .menu a{color:#fff; text-decoration:none; font-weight:600; transition: all 0.3s ease}
 .menu a:hover{color:#fff; transform: scale(1.01)}
 
+/* Evita que links visitados fiquem roxos */
+.menu a:visited {
+  color: #fff;
+}
+
+/* Se quiser para todos os links do site: */
+a:visited {
+  color: inherit;
+}
+
 .menu .signup{
   margin-left:auto;
   display:inline-flex;
@@ -156,7 +166,8 @@ textarea,
   line-height:1.2;
 }
 textarea{min-height:120px; padding:10px 12px; resize:vertical}
-input::placeholder, .search::placeholder, textarea::placeholder{color:#9aa7b7}
+input::placeholder,
+textarea::placeholder{color:#9aa7b7}
 
 input:focus, select:focus, textarea:focus, .search:focus{
   outline:none;
