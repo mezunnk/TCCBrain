@@ -11,13 +11,17 @@
 <header class="nav">
   <div class="wrap">
     <div class="brand">
-  <img src="../../img/logo_branco.png" width="128" height="128" alt="Brain Flow">
+  <img src="/img/logo_branco.png" width="128" height="128" alt="Brain Flow">
     </div>
     <nav class="menu">
       <a href="home.html">Home</a>
       <a href="cursos.html">Cursos</a>
       <a href="index.html">Login</a>
       <a class="signup" href="cadastro.html">Cadastro</a>
+      <!-- Imagem de perfil do usuário -->
+      <span class="user-profile-header">
+        <img src="/img/user-placeholder.png" alt="Perfil" class="user-header-photo">
+      </span>
     </nav>
   </div>
 </header>
@@ -76,8 +80,28 @@
     </div>
   </footer>
   <style>
-    .icon-like { display:inline-block; width:18px; height:18px; background:url('img/like.svg') center/contain no-repeat; vertical-align:middle; margin-right:8px; }
-    .icon-fav { display:inline-block; width:18px; height:18px; background:url('img/fav.svg') center/contain no-repeat; vertical-align:middle; margin-right:8px; }
+  .user-profile-header {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 16px;
+  background: #f0b41b;
+  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  .user-header-photo {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid #fff;
+  background: #f0b41b;
+  display: block;
+  }
+  .icon-like { display:inline-block; width:18px; height:18px; background:url('/img/like.svg') center/contain no-repeat; vertical-align:middle; margin-right:8px; }
+  .icon-fav { display:inline-block; width:18px; height:18px; background:url('/img/fav.svg') center/contain no-repeat; vertical-align:middle; margin-right:8px; }
   </style>
   <script>
   let course = null;
@@ -206,6 +230,49 @@
     document.getElementById("prevBtn").addEventListener("click", () => go(-1));
   });
 </script>
+
+<script>
+    // Exemplo preparado para integração futura
+    async function getUsuarioAutenticado() {
+      // Quando integrar, troque por chamada real ao backend
+      // Exemplo: const response = await fetch('/api/usuario');
+      // const usuario = await response.json();
+      // return usuario;
+      return {
+        autenticado: false, // Troque para true para simular login
+        nome: null, // Preencher com nome real
+        foto: null // Preencher com caminho real da foto
+      };
+    }
+
+    async function atualizarHeaderUsuario() {
+      const menu = document.querySelector('.menu');
+      if (!menu) return;
+      const usuario = await getUsuarioAutenticado();
+      if (usuario.autenticado) {
+        menu.innerHTML = `
+          <a href="home.html">Home</a>
+          <a href="cursos.html">Cursos</a>
+          <a href="#" class="signup" onclick="logout()">Sair</a>
+          <span class="user-profile-header">
+            <img src="${usuario.foto || '/img/user-placeholder.png'}" alt="Perfil" class="user-header-photo">
+          </span>
+        `;
+      } else {
+        menu.innerHTML = `
+          <a href="home.html">Home</a>
+          <a href="cursos.html">Cursos</a>
+          <a href="index.html">Login</a>
+          <a class="signup" href="cadastro.html">Cadastro</a>
+        `;
+      }
+    }
+    function logout() {
+      alert('Logout simulado!');
+      // Integre com backend futuramente
+    }
+    atualizarHeaderUsuario();
+  </script>
 
 </body>
 <style>
