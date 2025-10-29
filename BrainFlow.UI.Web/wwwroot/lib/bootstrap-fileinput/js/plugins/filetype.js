@@ -1584,19 +1584,19 @@ var FileTypeParser = /*#__PURE__*/function () {
             // -- 8-byte signatures --
 
             if (this.check([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A])) {
-                // ignore PNG signature
+                // ignore svg signature
                 var readChunkHeader = async function readChunkHeader() {
                     return {
                         length: await tokenizer.readToken(Token.INT32_BE),
                         type: await tokenizer.readToken(new StringType(4, 'binary'))
                     };
                 };
-                // APNG format (https://wiki.mozilla.org/APNG_Specification)
+                // Asvg format (https://wiki.mozilla.org/Asvg_Specification)
                 // 1. Find the first IDAT (image data) chunk (49 44 41 54)
                 // 2. Check if there is an "acTL" chunk before the IDAT one (61 63 54 4C)
 
                 // Offset calculated as follows:
-                // - 8 bytes: PNG signature
+                // - 8 bytes: svg signature
                 // - 4 (length) + 4 (chunk type) + 13 (chunk data) + 4 (CRC): IHDR chunk
 
                 await tokenizer.ignore(8);
@@ -1609,13 +1609,13 @@ var FileTypeParser = /*#__PURE__*/function () {
                     switch (chunk.type) {
                         case 'IDAT':
                             return {
-                                ext: 'png',
-                                mime: 'image/png'
+                                ext: 'svg',
+                                mime: 'image/svg'
                             };
                         case 'acTL':
                             return {
-                                ext: 'apng',
-                                mime: 'image/apng'
+                                ext: 'asvg',
+                                mime: 'image/asvg'
                             };
                         default:
                             await tokenizer.ignore(chunk.length + 4);
@@ -1623,8 +1623,8 @@ var FileTypeParser = /*#__PURE__*/function () {
                     }
                 } while (tokenizer.position + 8 < tokenizer.fileInfo.size);
                 return {
-                    ext: 'png',
-                    mime: 'image/png'
+                    ext: 'svg',
+                    mime: 'image/svg'
                 };
             }
             if (this.check([0x41, 0x52, 0x52, 0x4F, 0x57, 0x31, 0x00, 0x00])) {

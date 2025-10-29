@@ -51,9 +51,9 @@
                 };
                 reader.readAsDataURL(file);
             } else {
-                var currentImagePath = '@(string.IsNullOrEmpty(Model.Curso.TxCaminhoImagem) ? "/images/default_course.png" : Model.Curso.TxCaminhoImagem)';
+                var currentImagePath = '@(string.IsNullOrEmpty(Model.Curso.TxCaminhoImagem) ? "/images/default_course.svg" : Model.Curso.TxCaminhoImagem)';
                 $('#imagemPreview').attr('src', currentImagePath);
-                if (currentImagePath === "/images/default_course.png") {
+                if (currentImagePath === "/images/default_course.svg") {
                     $('#btnRemoverImagem').hide();
                 }
             }
@@ -79,7 +79,7 @@
                 },
                 success: function (response) {
                     if (response.success) {
-                        $('#imagemPreview').attr('src', '/images/default_course.png');
+                        $('#imagemPreview').attr('src', '/images/default_course.svg');
                         $('#TxCaminhoImagem').val('');
                         $('#btnRemoverImagem').hide();
                         $('#imagemUpload').val('');

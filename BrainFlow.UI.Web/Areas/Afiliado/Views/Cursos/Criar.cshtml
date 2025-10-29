@@ -51,7 +51,7 @@
                         <label class="form-label text-gray-medium">Preview da Imagem</label>
                         <div class="border p-2 rounded text-center">
                             <img id="imagemPreview"
-                                 src="/images/default_course.png"
+                                 src="/images/default_course.svg"
                                  alt="Preview da Imagem do Curso" class="img-fluid rounded" style="max-height: 100px; object-fit: cover;">
                             <button type="button" class="btn btn-sm btn-outline-danger mt-2 d-none" id="btnRemoverImagem">
                                 <i class="fas fa-times-circle me-1"></i> Remover Imagem
@@ -64,7 +64,7 @@
                             <input type="file" class="form-control" id="imagemUpload" name="ImagemUpload" accept="image/*">
                             <label class="input-group-text text-gray-medium" for="imagemUpload"><i class="fas fa-upload me-2"></i>Upload</label>
                         </div>
-                        <small class="form-text text-muted">Formatos: JPG, PNG. Tamanho máximo: 2MB. Recomendado: 1200x675px.</small>
+                        <small class="form-text text-muted">Formatos: JPG, svg. Tamanho máximo: 2MB. Recomendado: 1200x675px.</small>
                         @Html.ValidationMessageFor(m => m.ImagemUpload, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                     reader.readAsDataURL(file);
                 } else {
                     // Se nenhum arquivo for selecionado, volta para a imagem padrão
-                    $('#imagemPreview').attr('src', '/images/default_course.png');
+                    $('#imagemPreview').attr('src', '/images/default_course.svg');
                     $('#btnRemoverImagem').addClass('d-none'); // Esconde sempre
                 }
             });
@@ -109,7 +109,7 @@
             // ele apenas limpa o preview e o input de arquivo.
             $('#btnRemoverImagem').on('click', function (e) {
                 e.preventDefault();
-                $('#imagemPreview').attr('src', '/images/default_course.png');
+                $('#imagemPreview').attr('src', '/images/default_course.svg');
                 $('#imagemUpload').val(''); // Limpa o input file
                 $('#btnRemoverImagem').addClass('d-none');
             });

@@ -1238,15 +1238,15 @@ class FileTypeParser {
         // -- 8-byte signatures --
 
         if (this.check([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A])) {
-            // APNG format (https://wiki.mozilla.org/APNG_Specification)
+            // Asvg format (https://wiki.mozilla.org/Asvg_Specification)
             // 1. Find the first IDAT (image data) chunk (49 44 41 54)
             // 2. Check if there is an "acTL" chunk before the IDAT one (61 63 54 4C)
 
             // Offset calculated as follows:
-            // - 8 bytes: PNG signature
+            // - 8 bytes: svg signature
             // - 4 (length) + 4 (chunk type) + 13 (chunk data) + 4 (CRC): IHDR chunk
 
-            await tokenizer.ignore(8); // ignore PNG signature
+            await tokenizer.ignore(8); // ignore svg signature
 
             async function readChunkHeader() {
                 return {
@@ -1264,13 +1264,13 @@ class FileTypeParser {
                 switch (chunk.type) {
                     case 'IDAT':
                         return {
-                            ext: 'png',
-                            mime: 'image/png',
+                            ext: 'svg',
+                            mime: 'image/svg',
                         };
                     case 'acTL':
                         return {
-                            ext: 'apng',
-                            mime: 'image/apng',
+                            ext: 'asvg',
+                            mime: 'image/asvg',
                         };
                     default:
                         await tokenizer.ignore(chunk.length + 4); // Ignore chunk-data + CRC
@@ -1278,8 +1278,8 @@ class FileTypeParser {
             } while (tokenizer.position + 8 < tokenizer.fileInfo.size);
 
             return {
-                ext: 'png',
-                mime: 'image/png',
+                ext: 'svg',
+                mime: 'image/svg',
             };
         }
 

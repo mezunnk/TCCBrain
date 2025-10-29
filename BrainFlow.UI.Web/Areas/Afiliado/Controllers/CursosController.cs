@@ -102,12 +102,12 @@ namespace BrainFlow.UI.Web.Areas.Afiliado.Controllers
 
             if (viewModel.ImagemUpload != null && viewModel.ImagemUpload.Length > 0)
             {
-                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".svg" };
                 var fileExtension = Path.GetExtension(viewModel.ImagemUpload.FileName).ToLower();
 
                 if (!allowedExtensions.Contains(fileExtension))
                 {
-                    ModelState.AddModelError("ImagemUpload", "Apenas imagens JPG, JPEG e PNG são permitidas.");
+                    ModelState.AddModelError("ImagemUpload", "Apenas imagens JPG, JPEG e svg são permitidas.");
                     TempData["MensagemErro"] = "Formato de imagem inválido.";
 
                     viewModel.Modulos = new List<ModuloMOD>(); 
@@ -167,12 +167,12 @@ namespace BrainFlow.UI.Web.Areas.Afiliado.Controllers
 
             if (viewModel.ImagemUpload != null && viewModel.ImagemUpload.Length > 0)
             {
-                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".svg" };
                 var fileExtension = Path.GetExtension(viewModel.ImagemUpload.FileName).ToLower();
 
                 if (!allowedExtensions.Contains(fileExtension))
                 {
-                    ModelState.AddModelError("ImagemUpload", "Apenas imagens JPG, JPEG e PNG são permitidas.");
+                    ModelState.AddModelError("ImagemUpload", "Apenas imagens JPG, JPEG e svg são permitidas.");
                     viewModel.Modulos = await _moduloREP.GetByCursoId(viewModel.Curso.CdCurso);
                     TempData["MensagemErro"] = "Formato de imagem inválido.";
                     return View("Detalhes", viewModel);

@@ -31,7 +31,7 @@
                 <label class="form-label text-gray-medium">Preview da Imagem</label>
                 <div class="border p-2 rounded text-center">
                     <img id="imagemPreview"
-                         src="@(string.IsNullOrEmpty(Model.Curso.TxCaminhoImagem) ? "/images/default_course.png" : Model.Curso.TxCaminhoImagem)"
+                         src="@(string.IsNullOrEmpty(Model.Curso.TxCaminhoImagem) ? "/images/default_course.svg" : Model.Curso.TxCaminhoImagem)"
                          alt="Preview da Imagem do Curso" class="img-fluid rounded" style="max-height: 100px; object-fit: cover;">
                     @if (!string.IsNullOrEmpty(Model.Curso.TxCaminhoImagem))
                     {
@@ -47,7 +47,7 @@
                     <input type="file" class="form-control" id="imagemUpload" name="ImagemUpload" accept="image/*">
                     <label class="input-group-text text-gray-medium" for="imagemUpload"><i class="fas fa-upload me-2"></i>Upload</label>
                 </div>
-                <small class="form-text text-muted">Formatos: JPG, PNG. Tamanho máximo: 2MB. Recomendado: 1200x675px.</small>
+                <small class="form-text text-muted">Formatos: JPG, svg. Tamanho máximo: 2MB. Recomendado: 1200x675px.</small>
                 @Html.ValidationMessageFor(m => m.ImagemUpload, "", new { @class = "text-danger" })
             </div>
         </div>

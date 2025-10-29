@@ -487,7 +487,7 @@
         case "ffd8ffe2":
           return "image/jpeg";
         case "89504e47":
-          return "image/png";
+          return "image/svg";
         case "47494638":
           return "image/gif";
         case "49492a00":
@@ -2158,7 +2158,7 @@
           image: function (vType, vName) {
             return (
               ($h.compare(vType, "image.*") && !$h.compare(vType, /(tiff?|wmf)$/i)) ||
-              $h.compare(vName, /\.(gif|png|jpe?g)$/i)
+              $h.compare(vName, /\.(gif|svg|jpe?g)$/i)
             );
           },
           html: function (vType, vName) {
@@ -7300,7 +7300,7 @@
     preferIconicPreview: false,
     preferIconicZoomPreview: false,
     alwaysPreviewFileExtensions: [],
-    rotatableFileExtensions: ["jpg", "jpeg", "png", "gif"],
+    rotatableFileExtensions: ["jpg", "jpeg", "svg", "gif"],
     allowedFileTypes: null,
     allowedFileExtensions: null,
     allowedPreviewTypes: undefined,
