@@ -14,6 +14,9 @@
       box-shadow: 0 2px 16px rgba(0,0,0,0.07);
       padding: 32px 28px 24px 28px;
     }
+      .profile-public-card {
+        transition: box-shadow 0.2s;
+      }
     .profile-public-header {
       display: flex;
       align-items: center;
@@ -55,11 +58,44 @@
       color: #6b7a90;
       margin-bottom: 10px;
     }
-    .profile-public-actions {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
+      .profile-public-actions {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 18px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .btn {
+        padding: 10px 22px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 1em;
+        border: none;
+        background: #f0b41b;
+        color: #fff;
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        text-decoration: none;
+        display: inline-block;
+      }
+      .btn.primary {
+        background: #f0b41b;
+        color: #fff;
+      }
+      .btn.secondary {
+        background: #3b5bdb;
+        color: #fff;
+      }
+      .btn:hover {
+        background: #ffd34d;
+        color: #0f2741;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.09);
+      }
+      .btn[disabled], .btn.disabled {
+        opacity: 0.6;
+        pointer-events: none;
+      }
     .profile-public-followers {
       margin-bottom: 18px;
       color: #1f2b3a;
@@ -86,7 +122,25 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 18px;
+        margin-top: 18px;
     }
+      .section-title {
+        text-align: center;
+        font-size: 1.6em;
+        font-weight: 700;
+        color: #0f2741;
+        margin-bottom: 12px;
+      }
+      @media (max-width: 800px) {
+        .profile-public-header {
+          flex-direction: column;
+          align-items: center;
+          gap: 18px;
+        }
+        .profile-public-card {
+          padding: 18px 8px 16px 8px;
+        }
+      }
   </style>
 </head>
 <body>
@@ -109,30 +163,29 @@
     <section class="profile-public-card">
       <div class="profile-public-header">
         <div>
-          <!-- Foto do usuário (dinâmico) -->
+          <!-- Foto do usuário -->
           <img class="profile-public-photo" src="img/user-placeholder.png" alt="Foto do usuário">
         </div>
         <div class="profile-public-info">
-          <!-- Nome do usuário (dinâmico) -->
+          <!-- Nome do usuário -->
           <h1 class="profile-public-name">Usuário não encontrado</h1>
-          <!-- Status do usuário (dinâmico) -->
+          <!-- Status do usuário -->
           <span class="profile-public-status">Status não disponível</span>
-          <!-- Mini bio/resumo (dinâmico) -->
+          <!-- Mini bio/resumo -->
           <p class="profile-public-bio">Este usuário ainda não preencheu seu perfil.</p>
-          <!-- Seguidores (dinâmico) -->
+          <!-- Seguidores -->
           <div class="profile-public-followers">
             <span>Seguidores: <strong>0</strong></span>
             <div class="followers-list">
               <span style="color:#aaa; font-size:0.95em;">Nenhum seguidor ainda.</span>
             </div>
           </div>
-          <!-- Redes sociais (dinâmico) -->
+          <!-- Redes sociais -->
           <div class="profile-public-social" style="margin:10px 0 18px 0;">
             <span style="color:#6b7a90; font-size:1em;">Redes sociais:</span>
             <a href="#" class="social-link" title="Instagram"><img src="img/instagram.png" alt="Instagram" style="width:24px;vertical-align:middle;margin:0 4px;"></a>
             <a href="#" class="social-link" title="YouTube"><img src="img/youtube.png" alt="YouTube" style="width:24px;vertical-align:middle;margin:0 4px;"></a>
             <a href="#" class="social-link" title="LinkedIn"><img src="img/linkedin.png" alt="LinkedIn" style="width:24px;vertical-align:middle;margin:0 4px;"></a>
-
           </div>
           <!-- Estatísticas -->
           <div class="profile-public-stats" style="margin-bottom:18px;display:flex;gap:24px;flex-wrap:wrap;">
@@ -141,7 +194,7 @@
             <div><strong>Avaliações:</strong> 0</div>
             <div><strong>Média:</strong> <span style="color:#f0b41b;">—</span></div>
           </div>
-          <!-- Avaliações-->
+          <!-- Avaliações -->
           <div class="profile-public-reviews" style="margin-bottom:18px;">
             <span style="color:#6b7a90; font-size:1em;">Avaliações dos alunos:</span>
             <div style="margin-top:6px; color:#aaa;">Nenhuma avaliação ainda.</div>
@@ -149,18 +202,18 @@
         </div>
       </div>
       <div class="profile-public-actions">
-  <!-- Botões de ação (dinâmico) -->
-  <a class="btn primary" href="#" style="pointer-events:none;opacity:0.6">Seguir</a>
-  <a class="btn secondary" href="#" style="pointer-events:none;opacity:0.6">Enviar mensagem</a>
-  <a class="btn" href="#" style="background:#e74c3c;color:#fff;pointer-events:none;opacity:0.6">Denunciar</a>
-  <a class="btn" href="#" style="background:#6b7a90;color:#fff;pointer-events:none;opacity:0.6">Bloquear</a>
+        <!-- Botões -->
+        <a class="btn primary" href="#">Seguir</a>
+        <a class="btn secondary" href="#">Enviar mensagem</a>
+        <a class="btn" style="background:#e74c3c;" href="#">Denunciar</a>
+        <a class="btn" style="background:#6b7a90;" href="#">Bloquear</a>
       </div>
     </section>
 
     <section class="profile-public-courses">
       <h2 class="section-title">Cursos criados</h2>
       <div class="cards-grid">
-        <!-- Cards dos cursos criados pelo usuário (dinâmico) -->
+        <!-- Cards do curso -->
         <div style="grid-column:1/-1; text-align:center; color:#aaa; padding:32px 0; font-size:1.1em;">
           Nenhum curso publicado ainda.
         </div>
