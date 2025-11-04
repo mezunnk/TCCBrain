@@ -164,6 +164,6 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 ---
 
 <div align="center">
-  <p><strong>Desenvolvido com dedicação para democratizar a educação</strong></p>
-  <p>Se este projeto te ajudou, deixe uma star!</p>
+  <p><strong>em desenvolvimento para o TCC!</strong></p>
+
 </div>
