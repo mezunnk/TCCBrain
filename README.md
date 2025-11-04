@@ -1,7 +1,7 @@
 # Brain Flow - Plataforma de Cursos Online
 
 <div align="center">
-  <img src="BrainFlow.UI.Web/wwwroot/img/logo_branco.png" alt="Brain Flow Logo" width="200"/>
+  <img src="BrainFlow.UI.Web/wwwroot/img/logo_branco.svg" alt="Brain Flow Logo" width="200"/>
   
   **Plataforma educacional moderna para criação e distribuição de cursos online**
   
@@ -156,26 +156,6 @@ BrainFlow/
 - **`/afiliado/dashboard`** - Dashboard do afiliado
 - **`/afiliado/{id}`** - Página pública do afiliado
 
----
-
-
-
-
-## Status do Projeto
-
-| Módulo | Status | Implementação |
-|--------|--------|---------------|
-| Autenticação | Completo | 100% |
-| Models/Entidades | Completo | 100% |
-| Interface Web | Completo | 95% |
-| Sistema Afiliados | Interface Completa | 80% |
-| Sistema de Pagamentos | Estrutura Criada | 40% |
-| Controllers de Negócio | Em Desenvolvimento | 60% |
-| Upload de Conteúdo | Planejado | 0% |
-| Mobile | Planejado | 0% |
-
----
-
 ## Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
@@ -184,6 +164,6 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 ---
 
 <div align="center">
-  <p><strong>Desenvolvido com dedicação para democratizar a educação</strong></p>
-  <p>Se este projeto te ajudou, deixe uma star!</p>
+  <p><strong>em desenvolvimento para o TCC!</strong></p>
+
 </div>
