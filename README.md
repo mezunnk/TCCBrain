@@ -156,26 +156,6 @@ BrainFlow/
 - **`/afiliado/dashboard`** - Dashboard do afiliado
 - **`/afiliado/{id}`** - Página pública do afiliado
 
----
-
-
-
-
-## Status do Projeto
-
-| Módulo | Status | Implementação |
-|--------|--------|---------------|
-| Autenticação | Completo | 100% |
-| Models/Entidades | Completo | 100% |
-| Interface Web | Completo | 95% |
-| Sistema Afiliados | Interface Completa | 80% |
-| Sistema de Pagamentos | Estrutura Criada | 40% |
-| Controllers de Negócio | Em Desenvolvimento | 60% |
-| Upload de Conteúdo | Planejado | 0% |
-| Mobile | Planejado | 0% |
-
----
-
 ## Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
