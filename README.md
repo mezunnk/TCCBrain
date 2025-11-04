@@ -1,7 +1,7 @@
 # Brain Flow - Plataforma de Cursos Online
 
 <div align="center">
-  <img src="BrainFlow.UI.Web/wwwroot/img/logo_branco.png" alt="Brain Flow Logo" width="200"/>
+  <img src="BrainFlow.UI.Web/wwwroot/img/logo_branco.svg" alt="Brain Flow Logo" width="200"/>
   
   **Plataforma educacional moderna para criação e distribuição de cursos online**
   
