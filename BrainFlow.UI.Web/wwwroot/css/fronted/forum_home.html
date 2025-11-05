@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Fórum — BrainFlow</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap">
+      <div class="brand">
+        <img src="../../img/logo_branco.svg" width="128" height="128" alt="Brain Flow">
+      </div>
+      <nav class="menu">
+        <a href="home.html">Home</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="perfil_usuario.html">Perfil</a>
+        <a class="signup" href="index.html">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="grid" style="max-width:900px;margin:32px auto;">
+      <div class="card" style="margin-bottom:32px;">
+        <h1 style="margin-bottom:8px;">Fórum BrainFlow</h1>
+        <p class="sub">Veja os tópicos recentes, tire dúvidas e compartilhe conhecimento.</p>
+        <a href="criar_topico.html" class="btn primary" style="margin-bottom:8px;">Novo Tópico</a>
+      </div>
+
+      <!-- Lista de tópicos -->
+      <div>
+        <!-- Exemplo de tópico, repita dinamicamente -->
+        <a href="forum_topico.html?id=1" class="card forum-topic-list" style="display:block;margin-bottom:18px;padding:18px 24px;text-decoration:none;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <span class="forum-topic-title" style="font-size:1.2em;font-weight:700;color:var(--navy-700);">[Python] Erro ao instalar pacote</span>
+              <div class="forum-topic-meta" style="font-size:0.98em;color:var(--muted);margin-top:2px;">
+                por <span style="font-weight:600;">Maria</span> • 03/10/2025 • 5 respostas
+              </div>
+            </div>
+            <span class="forum-topic-status" style="background:#f0b41b;color:#fff;border-radius:8px;padding:4px 12px;font-weight:600;">Aberto</span>
+          </div>
+        </a>
+        <a href="forum_topico.html?id=2" class="card forum-topic-list" style="display:block;margin-bottom:18px;padding:18px 24px;text-decoration:none;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <span class="forum-topic-title" style="font-size:1.2em;font-weight:700;color:var(--navy-700);">[JavaScript] Como usar fetch?</span>
+              <div class="forum-topic-meta" style="font-size:0.98em;color:var(--muted);margin-top:2px;">
+                por <span style="font-weight:600;">Carlos</span> • 02/10/2025 • 2 respostas
+              </div>
+            </div>
+            <span class="forum-topic-status" style="background:#3b5bdb;color:#fff;border-radius:8px;padding:4px 12px;font-weight:600;">Resolvido</span>
+          </div>
+        </a>
+        <!-- ... outros tópicos ... -->
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <small>© BrainFlow</small>
+    </div>
+  </footer>
+</body>
+</html>
