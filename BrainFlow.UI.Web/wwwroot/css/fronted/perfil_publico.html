@@ -5,6 +5,103 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Perfil Público – Brain Flow</title>
   <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">
+      <img src="logo_branco.svg" width="128" height="128" alt="Brain Flow">
+    </div>
+    <nav class="menu">
+      <a href="home.html">Home</a>
+      <a href="cursos.html">Cursos</a>
+      <a href="index.html">Login</a>
+      <a class="signup" href="cadastro.html">Cadastro</a>
+    </nav>
+  </div>
+</header>
+
+<body>
+
+<main class="page">
+  <div class="grid">
+    <section class="profile-public-card">
+      <div class="profile-public-header">
+        <div>
+          <!-- Foto do usuário -->
+          <img class="profile-public-photo" src="profiel_picture.svg" alt="Foto do usuário">
+        </div>
+        <div class="profile-public-info">
+          <!-- Nome do usuário -->
+          <h1 class="profile-public-name">Usuário não encontrado</h1>
+          <!-- Status do usuário -->
+          <span class="profile-public-status">Status não disponível</span>
+          <!-- Mini bio/resumo -->
+          <p class="profile-public-bio">Este usuário ainda não preencheu seu perfil.</p>
+          <!-- Seguidores -->
+          <div class="profile-public-followers">
+            <span>Seguidores: <strong>0</strong></span>
+            <div class="followers-list">
+              <span style="color:#aaa; font-size:0.95em;">Nenhum seguidor ainda.</span>
+            </div>
+          </div>
+          <!-- Redes sociais -->
+          <div class="profile-public-social" style="margin:10px 0 18px 0;">
+            <span style="color:#6b7a90; font-size:1em;">Redes sociais:</span>
+            <a href="#" class="social-link" title="Instagram"><img src="../wwwroot/img/instagram.svg" alt="Instagram" style="width:24px;vertical-align:middle;margin:0 4px;"></a>
+            <a href="#" class="social-link" title="YouTube"><img src="../wwwroot/img/youtube.svg" alt="YouTube" style="width:24px;vertical-align:middle;margin:0 4px;"></a>
+            <a href="#" class="social-link" title="LinkedIn"><img src="../wwwroot/img/linkedin.svg" alt="LinkedIn" style="width:24px;vertical-align:middle;margin:0 4px;"></a>
+          </div>
+          <!-- Estatísticas -->
+          <div class="profile-public-stats" style="margin-bottom:18px;display:flex;gap:24px;flex-wrap:wrap;">
+            <div><strong>Alunos:</strong> 0</div>
+            <div><strong>Cursos:</strong> 0</div>
+            <div><strong>Avaliações:</strong> 0</div>
+            <div><strong>Média:</strong> <span style="color:#f0b41b;">—</span></div>
+          </div>
+          <!-- Avaliações -->
+          <div class="profile-public-reviews" style="margin-bottom:18px;">
+            <span style="color:#6b7a90; font-size:1em;">Avaliações dos alunos:</span>
+            <div style="margin-top:6px; color:#aaa;">Nenhuma avaliação ainda.</div>
+          </div>
+        </div>
+      </div>
+      <div class="profile-public-actions">
+        <!-- Botões -->
+        <a class="btn primary" href="#">Seguir</a>
+        <a class="btn secondary" href="#">Enviar mensagem</a>
+        <a class="btn" style="background:#e74c3c;" href="#">Denunciar</a>
+        <a class="btn" style="background:#6b7a90;" href="#">Bloquear</a>
+      </div>
+    </section>
+
+    <section class="profile-public-courses">
+      <h2 class="section-title">Cursos criados</h2>
+      <div class="cards-grid">
+        <!-- Cards do curso -->
+        <div style="grid-column:1/-1; text-align:center; color:#aaa; padding:32px 0; font-size:1.1em;">
+          Nenhum curso publicado ainda.
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span>© Brain Flow</span>
+    <nav class="footer-nav">
+      <a href="sobre.html">Sobre</a>
+      <a href="suporte.html">Suporte</a>
+      <a href="termos.html">Termos</a>
+    </nav>
+  </div>
+</footer>
+</body>
+
   <style>
     .profile-public-card {
       max-width: 700px;
@@ -142,95 +239,4 @@
         }
       }
   </style>
-</head>
-<body>
-<header class="nav">
-  <div class="wrap">
-    <div class="brand">
-      <img src="logo_branco.svg" width="128" height="128" alt="Brain Flow">
-    </div>
-    <nav class="menu">
-      <a href="home.html">Home</a>
-      <a href="cursos.html">Cursos</a>
-      <a href="index.html">Login</a>
-      <a class="signup" href="cadastro.html">Cadastro</a>
-    </nav>
-  </div>
-</header>
-
-<main class="page">
-  <div class="grid">
-    <section class="profile-public-card">
-      <div class="profile-public-header">
-        <div>
-          <!-- Foto do usuário -->
-          <img class="profile-public-photo" src="profiel_picture.svg" alt="Foto do usuário">
-        </div>
-        <div class="profile-public-info">
-          <!-- Nome do usuário -->
-          <h1 class="profile-public-name">Usuário não encontrado</h1>
-          <!-- Status do usuário -->
-          <span class="profile-public-status">Status não disponível</span>
-          <!-- Mini bio/resumo -->
-          <p class="profile-public-bio">Este usuário ainda não preencheu seu perfil.</p>
-          <!-- Seguidores -->
-          <div class="profile-public-followers">
-            <span>Seguidores: <strong>0</strong></span>
-            <div class="followers-list">
-              <span style="color:#aaa; font-size:0.95em;">Nenhum seguidor ainda.</span>
-            </div>
-          </div>
-          <!-- Redes sociais -->
-          <div class="profile-public-social" style="margin:10px 0 18px 0;">
-            <span style="color:#6b7a90; font-size:1em;">Redes sociais:</span>
-            <a href="#" class="social-link" title="Instagram"><img src="img/instagram.svg" alt="Instagram" style="width:24px;vertical-align:middle;margin:0 4px;"></a>
-            <a href="#" class="social-link" title="YouTube"><img src="img/youtube.svg" alt="YouTube" style="width:24px;vertical-align:middle;margin:0 4px;"></a>
-            <a href="#" class="social-link" title="LinkedIn"><img src="img/linkedin.svg" alt="LinkedIn" style="width:24px;vertical-align:middle;margin:0 4px;"></a>
-          </div>
-          <!-- Estatísticas -->
-          <div class="profile-public-stats" style="margin-bottom:18px;display:flex;gap:24px;flex-wrap:wrap;">
-            <div><strong>Alunos:</strong> 0</div>
-            <div><strong>Cursos:</strong> 0</div>
-            <div><strong>Avaliações:</strong> 0</div>
-            <div><strong>Média:</strong> <span style="color:#f0b41b;">—</span></div>
-          </div>
-          <!-- Avaliações -->
-          <div class="profile-public-reviews" style="margin-bottom:18px;">
-            <span style="color:#6b7a90; font-size:1em;">Avaliações dos alunos:</span>
-            <div style="margin-top:6px; color:#aaa;">Nenhuma avaliação ainda.</div>
-          </div>
-        </div>
-      </div>
-      <div class="profile-public-actions">
-        <!-- Botões -->
-        <a class="btn primary" href="#">Seguir</a>
-        <a class="btn secondary" href="#">Enviar mensagem</a>
-        <a class="btn" style="background:#e74c3c;" href="#">Denunciar</a>
-        <a class="btn" style="background:#6b7a90;" href="#">Bloquear</a>
-      </div>
-    </section>
-
-    <section class="profile-public-courses">
-      <h2 class="section-title">Cursos criados</h2>
-      <div class="cards-grid">
-        <!-- Cards do curso -->
-        <div style="grid-column:1/-1; text-align:center; color:#aaa; padding:32px 0; font-size:1.1em;">
-          Nenhum curso publicado ainda.
-        </div>
-      </div>
-    </section>
-  </div>
-</main>
-
-<footer class="footer">
-  <div class="wrap footer-inner">
-    <span>© Brain Flow</span>
-    <nav class="footer-nav">
-      <a href="sobre.html">Sobre</a>
-      <a href="suporte.html">Suporte</a>
-      <a href="termos.html">Termos</a>
-    </nav>
-  </div>
-</footer>
-</body>
 </html>
